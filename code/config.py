@@ -10,10 +10,11 @@ parser.add_argument('--batch_size', default=256, type=int, help='Batch size')
 parser.add_argument('--nof_samples', default=3611900, type=int, help='Number of samples')
 parser.add_argument('--learning_rate', default=0.01, type=float, help='learning rate')
 parser.add_argument('--input_dimension', default=2, type=int, help='input dimension')
-parser.add_argument('--embedding_dimension', default=128, type=int, help='embedding dimension')
+parser.add_argument('--embed_dim', default=128, type=int, help='embedding dimension')
+parser.add_argument('--long_lat_embed_dim', default=2, type=int, help='longtitude and latitude embedding dimension')
 
 # Data
-parser.add_argument('--num', default=3, type=int, help='Data number')
+parser.add_argument('--num', default=10, type=int, help='Data number')
 parser.add_argument('--reverse_num', default=1000, type=int, help='Reverse Data number')
 parser.add_argument('--dis_node_num', default=1000, type=int, help='Distance Data number')
 parser.add_argument('--output_dimen', default=256, type=int, help='Output dimension')

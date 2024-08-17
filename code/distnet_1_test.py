@@ -29,7 +29,7 @@ sdm = sdm/maxLength
 print('node number: ', sdm.shape[1])
 
 #%% use pickle to load node2vec_embed
-with open('data/chengdu_data/node2vec_embed.pkl', 'rb') as f:
+with open('data/node2vec_embed.pkl', 'rb') as f:
     embed = pickle.load(f)
     f.close()
 

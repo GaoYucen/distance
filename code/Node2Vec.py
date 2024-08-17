@@ -36,10 +36,10 @@ from gensim.models import KeyedVectors
 # model = node2vec.fit(window=10, min_count=1, batch_words=4)
 #
 # # 保存模型
-# model.wv.save_word2vec_format('data/chengdu_data/node2vec.emb')
+# model.wv.save_word2vec_format('data/node2vec.emb')
 
 #%% 加载模型
-model = KeyedVectors.load_word2vec_format('data/chengdu_data/node2vec.emb')
+model = KeyedVectors.load_word2vec_format('data/node2vec.emb')
 
 #%%
 # 对G.nodes进行排序，得到所有点的按序嵌入
@@ -54,6 +54,6 @@ for node in node_list:
 # 保存嵌入结果
 import pickle
 
-with open('data/chengdu_data/node2vec_embed.pkl', 'wb') as f:
+with open('data/node2vec_embed.pkl', 'wb') as f:
     pickle.dump(embeddings, f)
     f.close()

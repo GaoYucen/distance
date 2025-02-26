@@ -2,10 +2,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+from config import get_config
+params, _ = get_config()
 
 # 定义一个性能更好的深度学习模型
 class ImprovedMultiLayerPerceptron(nn.Module):
-    def __init__(self, n_input, n_hidden_1, n_hidden_2, n_hidden_3, n_output):
+    def __init__(self, n_input, n_hidden_1, n_hidden_2, n_hidden_3, n_output,r = params.r ,s = 0):
         super(ImprovedMultiLayerPerceptron, self).__init__()
         self.fc1 = nn.Linear(n_input, n_hidden_1)
         self.bn1 = nn.BatchNorm1d(n_hidden_1)
@@ -15,6 +17,10 @@ class ImprovedMultiLayerPerceptron(nn.Module):
         self.bn3 = nn.BatchNorm1d(n_hidden_3)
         self.fc4 = nn.Linear(n_hidden_3, n_output)
         self.dropout = nn.Dropout(0.2)
+        self.output_dim = n_output
+        if params.type == 2:
+            self.s = n_output//2 - r
+            self.r = r
 
     def forward(self, x1, x2):
         x = torch.cat((x1, x2), dim=1)
@@ -24,8 +30,20 @@ class ImprovedMultiLayerPerceptron(nn.Module):
         x = self.dropout(x)
         x = F.relu(self.bn3(self.fc3(x)))
         x = self.dropout(x)
-        x = self.fc4(x)
-        return x
+        out_layer = self.fc4(x)
+        output_layer = out_layer
+        # tilde_L1
+        if params.type == 2:
+            s = min(self.s, self.output_dim // 2)
+            part1 = torch.abs(out_layer[:, int(self.output_dim / 2):int(self.output_dim / 2) + s] - out_layer[:, 0:s])
+            mean_part1 = torch.mean(part1, -1, keepdims=True) * s
+            part2 = torch.abs(out_layer[:, int(self.output_dim / 2) + s:] - out_layer[:, s:int(self.output_dim / 2)])
+            mean_part2 = torch.mean(part2, -1, keepdims=True) * self.r
+            output_layer = (mean_part1 + mean_part2) / (self.output_dim // 2)
+        # L1
+        if params.type == 3:
+            output_layer  = torch.mean(torch.abs(out_layer[:, self.output_dim/2:] - out_layer[:, 0:self.output_dim/2]), -1, keepdims=True)
+        return output_layer
 
 #获得地表节点的序号
 def haversine(lat1, lon1, lat2, lon2):

@@ -8,10 +8,13 @@ parser.add_argument('--embed_dim', default=128, type=int, help='embedding dimens
 parser.add_argument('--long_lat_embed_dim', default=2, type=int, help='longtitude and latitude embedding dimension')
 
 # Model
+parser.add_argument('--type', default=1, type=int, help='type')
 parser.add_argument('--batch_size', default=256, type=int, help='Batch size')
 parser.add_argument('--num_epoch', default=10, type=int, help='Number of epochs')
 parser.add_argument('--learning_rate', default=0.001, type=float, help='learning rate')
 parser.add_argument('--selected_ratio', default=0.1, type=float, help='selected ratio')
+parser.add_argument('--r', default=2, type=int, help='r')
+parser.add_argument('--output_n', default=50, type=int, help='output')
 
 # Data
 parser.add_argument('--num', default=10, type=int, help='Data number')

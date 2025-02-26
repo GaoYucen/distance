@@ -42,7 +42,7 @@ class ImprovedMultiLayerPerceptron(nn.Module):
             output_layer = (mean_part1 + mean_part2) / (self.output_dim // 2)
         # L1
         if params.type == 3:
-            output_layer  = torch.mean(torch.abs(out_layer[:, self.output_dim/2:] - out_layer[:, 0:self.output_dim/2]), -1, keepdims=True)
+            output_layer  = torch.mean(torch.abs(out_layer[:, self.output_dim//2:] - out_layer[:, 0:self.output_dim//2]), -1, keepdims=True)
         return output_layer
 
 #获得地表节点的序号

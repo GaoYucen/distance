@@ -183,7 +183,7 @@ def test_model(eval_loader, config, maxLength):
 
     # 存储指标结果，type不同，文件不同
     if config.type == 1:
-        result_file = "log/distnet_base_results_sample.txt"
+        result_file = "log/distnet_base_1_results_sample.txt"
     elif config.type == 2:
         result_file = "log/distnet_base_tilde_L1_results_sample.txt"
     elif config.type == 3:

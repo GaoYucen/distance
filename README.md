@@ -57,3 +57,5 @@
 - node2vec_haversine_embed.pkl: Node2Vec学习到的节点嵌入，使用haversine距离，保存为pkl文件
 
 ###### log: 记录实验结果
+
+![mean_relative_error_comparison](figure/mean_relative_error_comparison.png)

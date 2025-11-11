@@ -1,7 +1,0 @@
-mean square error: 181502.69
-mean absolute error: 325.25543
-max absolute error: 7637.9414
-min absolute error: 0.0
-mean relative error: 0.06591159
-max relative error: 55.20397
-min relative error: 0.0

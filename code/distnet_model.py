@@ -3,46 +3,57 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from config import get_config
-params, _ = get_config()
+config, _ = get_config()
 
 # 定义一个性能更好的深度学习模型
 class ImprovedMultiLayerPerceptron(nn.Module):
-    def __init__(self, n_input, n_hidden_1, n_hidden_2, n_hidden_3, n_output,r = params.r ,s = 0):
+    def __init__(self, n_input, n_hidden_1, n_hidden_2, n_hidden_3, n_output, r = config.r ,s = 0):
         super(ImprovedMultiLayerPerceptron, self).__init__()
         self.fc1 = nn.Linear(n_input, n_hidden_1)
         self.bn1 = nn.BatchNorm1d(n_hidden_1)
+        self.dropout1 = nn.Dropout(0.2)
+
         self.fc2 = nn.Linear(n_hidden_1, n_hidden_2)
         self.bn2 = nn.BatchNorm1d(n_hidden_2)
-        self.fc3 = nn.Linear(n_hidden_2, n_hidden_3)
-        self.bn3 = nn.BatchNorm1d(n_hidden_3)
-        self.fc4 = nn.Linear(n_hidden_3, n_output)
-        self.dropout = nn.Dropout(0.2)
+        self.dropout2 = nn.Dropout(0.2)
+
+        self.fc3 = nn.Linear(n_hidden_2, n_output)
+        self.bn3 = nn.BatchNorm1d(n_output)
+        self.fc4 = nn.Linear(n_hidden_2, 1)
+        self.act = nn.ReLU()
         self.output_dim = n_output
-        if params.type == 2:
+        if config.type == 2:
             self.s = n_output//2 - r
             self.r = r
 
     def forward(self, x1, x2):
         x = torch.cat((x1, x2), dim=1)
-        x = F.relu(self.bn1(self.fc1(x)))
-        x = self.dropout(x)
-        x = F.relu(self.bn2(self.fc2(x)))
-        x = self.dropout(x)
-        x = F.relu(self.bn3(self.fc3(x)))
-        x = self.dropout(x)
-        out_layer = self.fc4(x)
-        output_layer = out_layer
-        # tilde_L1
-        if params.type == 2:
-            s = min(self.s, self.output_dim // 2)
-            part1 = torch.abs(out_layer[:, int(self.output_dim / 2):int(self.output_dim / 2) + s] - out_layer[:, 0:s])
-            mean_part1 = torch.mean(part1, -1, keepdims=True) * s
-            part2 = torch.abs(out_layer[:, int(self.output_dim / 2) + s:] - out_layer[:, s:int(self.output_dim / 2)])
-            mean_part2 = torch.mean(part2, -1, keepdims=True) * self.r
-            output_layer = (mean_part1 + mean_part2) / (self.output_dim // 2)
-        # L1
-        if params.type == 3:
-            output_layer  = torch.mean(torch.abs(out_layer[:, self.output_dim//2:] - out_layer[:, 0:self.output_dim//2]), -1, keepdims=True)
+
+        x = self.act(self.bn1(self.fc1(x)))
+        # x = self.dropout1(x)
+
+        x = self.act(self.bn2(self.fc2(x)))
+        # x = self.dropout2(x)
+
+        # 最后一层不用激活函数
+        if config.type == 1:
+            output_layer = self.fc4(x)
+        else:
+            out_layer = self.act(self.bn3(self.fc3(x)))
+            # tilde_L1
+            if config.type == 2:
+                s = min(self.s, self.output_dim // 2)
+                part1 = torch.abs(out_layer[:, int(self.output_dim / 2):int(self.output_dim / 2) + s] -
+                                  out_layer[:, 0:s])
+                mean_part1 = torch.mean(part1, -1, keepdims=True) * s
+
+                part2 = out_layer[:, int(self.output_dim / 2) + s:] - out_layer[:, s:int(self.output_dim / 2)]
+                mean_part2 = torch.mean(part2, -1, keepdims=True) * self.r
+
+                output_layer = (mean_part1 + mean_part2) / (self.output_dim // 2)
+            # L1
+            if config.type == 3:
+                output_layer  = torch.mean(torch.abs(out_layer[:, self.output_dim//2:] - out_layer[:, 0:self.output_dim//2]), -1, keepdims=True)
         return output_layer
 
 #获得地表节点的序号

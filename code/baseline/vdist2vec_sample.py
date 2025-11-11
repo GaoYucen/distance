@@ -128,7 +128,7 @@ def build_and_run():
     print("min relative error:", minre)
 
     # 存储结果到log/vdist2vec_sample.txt
-    result_file = "log/vdist2vec_sample.txt"
+    result_file = "log/vdist2vec_results_sample.txt"
     with open(result_file, "w") as f:
         f.write(f"Eval sample size: {eval_sample_size}\n")
         f.write(f"mean square error: {mse:.2f}\n")

@@ -384,7 +384,7 @@ def main():
     save_embeddings(model, "param/baseline/chengdu_node_embeddings.npy")
 
     # 保存评估结果
-    with open("log/rne_sample.txt", "w") as f:
+    with open("log/RNE_results_sample.txt", "w") as f:
         f.write(f"Mean Square Error: {mse:.5f}\n")
         f.write(f"Mean Absolute Error: {global_abs:.5f}\n")
         f.write(f"Max Absolute Error: {max_abs:.5f}\n")

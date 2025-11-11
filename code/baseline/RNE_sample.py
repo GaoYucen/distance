@@ -385,13 +385,13 @@ def main():
 
     # 保存评估结果
     with open("log/RNE_results_sample.txt", "w") as f:
-        f.write(f"Mean Square Error: {mse:.5f}\n")
-        f.write(f"Mean Absolute Error: {global_abs:.5f}\n")
-        f.write(f"Max Absolute Error: {max_abs:.5f}\n")
-        f.write(f"Min Absolute Error: {min_abs:.5f}\n")
-        f.write(f"Mean Relative Error: {global_rel:.8f}\n")
-        f.write(f"Max Relative Error: {max_rel:.5f}\n")
-        f.write(f"Min Relative Error: {min_rel:.5f}\n")
+        f.write(f"mean square error: {mse:.5f}\n")
+        f.write(f"mean absolute error: {global_abs:.5f}\n")
+        f.write(f"max absolute error: {max_abs:.5f}\n")
+        f.write(f"min absolute error: {min_abs:.5f}\n")
+        f.write(f"mean relative error: {global_rel:.8f}\n")
+        f.write(f"max relative error: {max_rel:.5f}\n")
+        f.write(f"min relative error: {min_rel:.5f}\n")
 
     print("\nRNE training and evaluation completed!")
 

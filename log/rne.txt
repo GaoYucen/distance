@@ -1,0 +1,119 @@
+Evaluating model...
+Evaluating on 10000 samples (out of 10000 requested)
+
+Evaluation on 10000 random samples:
+Mean Square Error: 63010.7805
+Average Absolute Error: 186.4862
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0696
+Average Relative Error: 0.03522367 (3.52%)
+Max Relative Error: 9.96655 (996.65%)
+Min Relative Error: 0.00000 (0.00%)
+
+--- Evaluation for distances <= 1 km ---
+Evaluating on 365 samples (out of 10000 requested)
+
+Evaluation on 365 random samples:
+Mean Square Error: 329472.4350
+Average Absolute Error: 494.3476
+Max Absolute Error: 3448.4253
+Min Absolute Error: 12.8308
+Average Relative Error: 1.11192064 (111.19%)
+Max Relative Error: 18.62627 (1862.63%)
+Min Relative Error: 0.01555 (1.56%)
+
+--- Evaluation for distances <= 5 km ---
+Evaluating on 9141 samples (out of 10000 requested)
+
+Evaluation on 9141 random samples:
+Mean Square Error: 78807.9302
+Average Absolute Error: 207.7959
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0015
+Average Relative Error: 0.11270134 (11.27%)
+Max Relative Error: 18.62627 (1862.63%)
+Min Relative Error: 0.00000 (0.00%)
+
+--- Evaluation for distances <= 10 km ---
+Evaluating on 10000 samples (out of 10000 requested)
+
+Evaluation on 10000 random samples:
+Mean Square Error: 63261.6854
+Average Absolute Error: 187.7361
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0715
+Average Relative Error: 0.05385432 (5.39%)
+Max Relative Error: 17.95128 (1795.13%)
+Min Relative Error: 0.00001 (0.00%)
+
+--- Evaluation for distances <= 20 km ---
+Evaluating on 10000 samples (out of 10000 requested)
+
+Evaluation on 10000 random samples:
+Mean Square Error: 61778.8902
+Average Absolute Error: 185.1566
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0696
+Average Relative Error: 0.03555055 (3.56%)
+Max Relative Error: 9.96655 (996.65%)
+Min Relative Error: 0.00001 (0.00%)
+
+--- Evaluation for distances <= 50 km ---
+Evaluating on 10000 samples (out of 10000 requested)
+
+Evaluation on 10000 random samples:
+Mean Square Error: 63010.7805
+Average Absolute Error: 186.4862
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0696
+Average Relative Error: 0.03522367 (3.52%)
+Max Relative Error: 9.96655 (996.65%)
+Min Relative Error: 0.00000 (0.00%)
+
+--- Evaluation for distances <= 100 km ---
+Evaluating on 10000 samples (out of 10000 requested)
+
+Evaluation on 10000 random samples:
+Mean Square Error: 63010.7805
+Average Absolute Error: 186.4862
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0696
+Average Relative Error: 0.03522367 (3.52%)
+Max Relative Error: 9.96655 (996.65%)
+Min Relative Error: 0.00000 (0.00%)
+
+--- Evaluation for distances <= 200 km ---
+Evaluating on 10000 samples (out of 10000 requested)
+
+Evaluation on 10000 random samples:
+Mean Square Error: 63010.7805
+Average Absolute Error: 186.4862
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0696
+Average Relative Error: 0.03522367 (3.52%)
+Max Relative Error: 9.96655 (996.65%)
+Min Relative Error: 0.00000 (0.00%)
+
+--- Evaluation for distances <= 500 km ---
+Evaluating on 10000 samples (out of 10000 requested)
+
+Evaluation on 10000 random samples:
+Mean Square Error: 63010.7805
+Average Absolute Error: 186.4862
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0696
+Average Relative Error: 0.03522367 (3.52%)
+Max Relative Error: 9.96655 (996.65%)
+Min Relative Error: 0.00000 (0.00%)
+
+--- Evaluation for distances <= 1000 km ---
+Evaluating on 10000 samples (out of 10000 requested)
+
+Evaluation on 10000 random samples:
+Mean Square Error: 63010.7805
+Average Absolute Error: 186.4862
+Max Absolute Error: 3448.4253
+Min Absolute Error: 0.0696
+Average Relative Error: 0.03522367 (3.52%)
+Max Relative Error: 9.96655 (996.65%)
+Min Relative Error: 0.00000 (0.00%)

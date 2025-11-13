@@ -1,12 +1,11 @@
 ###### environment
-- python 3.12.3
-- pytorch 2.8.0+cu128
+- python 3.11
+- pytorch 2.4.0+cu124
 - numpy
 - pandas
 - scikit-learn
 - networkx
 - tqdm
-- pickle
 - matplotlib
 
 ###### 模型创新点

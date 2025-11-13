@@ -58,67 +58,45 @@ def load_and_preprocess_data(config):
     :param config: Configuration parameters
     :return: train_loader, valid_loader
     """
-    # Load shortest distance matrix
-    file_name = "data/chengdu_directed_shortest_distance_matrix.npy"
-    sdm = np.load(file_name)
+    # 直接加载预处理数据
+    sdm = np.load("data/pre/preprocessed_sdm.npy")
+    embed = np.load("data/pre/preprocessed_embed.npy")
+    node_long_lat = np.load("data/pre/preprocessed_node_long_lat.npy")
+    node_long_lat_origin = np.load("data/pre/preprocessed_node_long_lat_origin.npy")  # 新增加载
+    indices = np.load("data/pre/preprocessed_indices.npy", allow_pickle=True)
+    LM_indices = np.load("data/pre/preprocessed_LM_indices.npy", allow_pickle=True)
 
     # Print city information
     print("chengdu with " + str(sdm.shape[1]) + " nodes")
 
-    # Load dist2vec embeddings
-    with open("param/dist2vec_embed.pkl", 'rb') as f:
-        embed = pickle.load(f)
-
-    # Load node coordinates
-    node_long_lat = pd.read_csv("data/chengdu_node-mod.txt", header=0, sep=',')
-    node_long_lat_origin = np.array(node_long_lat)[:, 1:3]
-    node_long_lat = np.array(node_long_lat)[:, 1:3]
-
-    # Normalize data
-    maxLength = np.max(sdm)
-    sdm = sdm / maxLength
-
-    embed = np.array(list(embed.values()))
-    embed = (embed - embed.min()) / (embed.max() - embed.min())
-
-    node_long_lat[:, 0] = (node_long_lat[:, 0] - node_long_lat[:, 0].min()) / (
-                node_long_lat[:, 0].max() - node_long_lat[:, 0].min())
-    node_long_lat[:, 1] = (node_long_lat[:, 1] - node_long_lat[:, 1].min()) / (
-                node_long_lat[:, 1].max() - node_long_lat[:, 1].min())
-
-    # Create index pairs for non-zero distances
-    indices = []
-    for i in range(sdm.shape[0]):
-        for j in range(sdm.shape[1]):
-            if sdm[i][j] != 0.0:
-                indices.append((i, j))
+    # 转换为list，便于后续采样和索引
+    indices = indices.tolist()
+    LM_indices = LM_indices.tolist()
 
     # Set random seed for reproducibility
     np.random.seed(42)
-    indices = np.array(indices)
     perm = np.random.permutation(len(indices))
     train_size = int(len(indices) * 0.9)
-    train_indices = indices[perm[:train_size]]
-    valid_indices = indices[perm[train_size:]]
+    train_indices = [indices[i] for i in perm[:train_size]]
+    valid_indices = [indices[i] for i in perm[train_size:]]
 
-    # Select landmarks
-    num_landmarks = max(int(sdm.shape[0] * 0.01), 20)
-    landmark_indices = farthest_selection(node_long_lat_origin, num_landmarks)
-
-    # Create landmark pairs
-    LM_indices = []
-    for i in range(len(landmark_indices)):
-        for j in range(len(landmark_indices)):
-            if sdm[landmark_indices[i]][landmark_indices[j]] != 0:
-                LM_indices.append((landmark_indices[i], landmark_indices[j]))
+    # 删除以下重复地标采样和地标对生成代码
+    # num_landmarks = max(int(sdm.shape[0] * 0.01), 20)
+    # landmark_indices = farthest_selection(node_long_lat_origin, num_landmarks)
+    # LM_indices = []
+    # for i in range(len(landmark_indices)):
+    #     for j in range(len(landmark_indices)):
+    #         if sdm[landmark_indices[i]][landmark_indices[j]] != 0:
+    #             LM_indices.append((landmark_indices[i], landmark_indices[j]))
 
     # Create datasets
     train_dataset = DistanceDataset(train_indices, embed, node_long_lat, sdm, LM_indices)
-    valid_dataset = DistanceDataset(valid_indices, embed, node_long_lat, sdm)
+    valid_dataset = DistanceDataset(valid_indices, embed, node_long_lat, sdm, LM_indices=[])  # 验证集不加地标对
 
     # Data loaders（不再采样，全部用）
     batch_size = config.batch_size
     import os
+    # num_workers用8个
     num_workers = min(8, os.cpu_count() or 1)
     train_loader = DataLoader(
         train_dataset,
@@ -190,6 +168,7 @@ def train_model(train_loader, valid_loader, config):
         epoch_start_time = time.time()
         model.train()
         train_loss = 0
+        total_train_samples = 0
         for batch_x1, batch_x2, batch_y in train_loader:
             batch_x1 = batch_x1.to(device, non_blocking=True)
             batch_x2 = batch_x2.to(device, non_blocking=True)
@@ -207,8 +186,9 @@ def train_model(train_loader, valid_loader, config):
                 loss = criterion(outputs, batch_y.unsqueeze(-1))
                 loss.backward()
                 optimizer.step()
-            train_loss += loss.item()
-        train_loss /= len(train_loader)
+            train_loss += loss.item() * batch_x1.size(0)  # 优化累加方式
+            total_train_samples += batch_x1.size(0)
+        train_loss /= total_train_samples
 
         # Identify high-error samples
         # model.eval()
@@ -262,6 +242,7 @@ def train_model(train_loader, valid_loader, config):
         # Validation phase
         model.eval()
         valid_loss = 0
+        total_valid_samples = 0
         with torch.no_grad():
             for batch_x1, batch_x2, batch_y in valid_loader:
                 batch_x1 = batch_x1.to(device, non_blocking=True)
@@ -274,8 +255,9 @@ def train_model(train_loader, valid_loader, config):
                 else:
                     outputs = model(batch_x1, batch_x2)
                     loss = criterion(outputs, batch_y.unsqueeze(-1))
-                valid_loss += loss.item()
-        valid_loss /= len(valid_loader)
+                valid_loss += loss.item() * batch_x1.size(0)  # 优化累加方式
+                total_valid_samples += batch_x1.size(0)
+        valid_loss /= total_valid_samples
 
         epoch_end_time = time.time()
         epoch_duration = epoch_end_time - epoch_start_time

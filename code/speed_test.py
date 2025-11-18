@@ -165,34 +165,42 @@ class ContractionHierarchy:
         in_neighbors = list(self.G_ch.predecessors(u))
         out_neighbors = list(self.G_ch.successors(u))
         for v in in_neighbors:
+            if self.rank[v] <= self.rank[u]: continue
             weight_vu = self.G_ch[v][u].get('weight', 1)
             for w in out_neighbors:
+                if self.rank[w] <= self.rank[u]: continue
                 if v == w: continue
                 weight_uw = self.G_ch[u][w].get('weight', 1)
                 total_weight = weight_vu + weight_uw
                 dist = self.limited_dijkstra(self.G_ch, v, w, skip_node=u, cutoff=total_weight)
                 has_witness = (dist <= total_weight)
-                if not has_witness:
+                if not has_witness and not self.G_ch.has_edge(v, w):
                     self.G_ch.add_edge(v, w, weight=total_weight, middle=u)
-        self.G_ch.remove_node(u)
+        # Do not remove the node
     def limited_dijkstra(self, G, source, target, skip_node, weight='weight', cutoff=None):
-        if source == target: return 0
-        dist = {node: float('inf') for node in G.nodes()}
+        contracted_rank = self.rank[skip_node]
+        if self.rank.get(source, -1) <= contracted_rank or self.rank.get(target, -1) <= contracted_rank:
+            return float('inf')
+        dist = {}
+        for node in G.nodes():
+            if self.rank[node] > contracted_rank:
+                dist[node] = float('inf')
+        if source not in dist:
+            return float('inf')
         dist[source] = 0
         pq = [(0, source)]
         while pq:
             d, u = heappop(pq)
-            if d > dist[u]: continue
+            if d > dist.get(u, float('inf')): continue
             if u == target:
                 return d
             if cutoff is not None and d > cutoff:
                 continue
-            if u == skip_node:
-                continue
             for v in G.successors(u):
+                if self.rank.get(v, -1) <= contracted_rank: continue
                 data = G[u][v]
                 alt = d + data.get(weight, 1)
-                if alt < dist[v]:
+                if alt < dist.get(v, float('inf')):
                     dist[v] = alt
                     heappush(pq, (alt, v))
         return float('inf')
@@ -225,10 +233,10 @@ class ContractionHierarchy:
                 d, u = heappop(pq_b)
                 if d > dist_b[u]: continue
                 if d >= mu: continue
-                for v in self.G_down.successors(u):
-                    data = self.G_down[u][v]
+                for v in self.G_down.predecessors(u):
+                    data = self.G_down[v][u]
                     weight = data.get('weight', 1)
-                    if self.rank[u] > self.rank[v]:
+                    if self.rank[u] < self.rank[v]:
                         alt = dist_b[u] + weight
                         if alt < dist_b[v]:
                             dist_b[v] = alt

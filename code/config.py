@@ -8,25 +8,15 @@ parser.add_argument('--embed_dim', default=128, type=int, help='embedding dimens
 parser.add_argument('--long_lat_embed_dim', default=2, type=int, help='longtitude and latitude embedding dimension')
 
 # Model
-parser.add_argument('--type', default=1, type=int, help='type')
-parser.add_argument('--batch_size', default=256, type=int, help='Batch size')
-parser.add_argument('--num_epoch', default=10, type=int, help='Number of epochs')
+parser.add_argument('--type', default=2, type=int, help='type')
+parser.add_argument('--batch_size', default=1024, type=int, help='Batch size')
+parser.add_argument('--num_epoch', default=20, type=int, help='Number of epochs')
 parser.add_argument('--learning_rate', default=0.001, type=float, help='learning rate')
-parser.add_argument('--selected_ratio', default=0.1, type=float, help='selected ratio')
+parser.add_argument('--selected_ratio', default=1, type=float, help='selected ratio')
 parser.add_argument('--r', default=2, type=int, help='r')
-parser.add_argument('--output_n', default=50, type=int, help='output')
+parser.add_argument('--n_output', default=64, type=int, help='output')
 
-# Data
-parser.add_argument('--num', default=10, type=int, help='Data number')
-parser.add_argument('--reverse_num', default=1000, type=int, help='Reverse Data number')
-parser.add_argument('--dis_node_num', default=1000, type=int, help='Distance Data number')
-parser.add_argument('--output_dimen', default=256, type=int, help='Output dimension')
-parser.add_argument('--tildeL1_ratio', default=0.99, type=int, help='tildeL1 ratio')
-parser.add_argument('--g_training_epochs', default=10, type=int, help='epochs of global training')
-
-# NO Direct
-parser.add_argument('--nodirect', default=False, type=bool, help='Whether to use no direct graph')
-parser.add_argument('--sim', default=False, type=bool, help='Sim or not')
+# City
 parser.add_argument('--city', default='no', type=str, help='city name')
 
 

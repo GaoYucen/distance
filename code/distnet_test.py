@@ -10,6 +10,8 @@ from distnet_model import ImprovedMultiLayerPerceptron
 from distnet_model import farthest_selection
 from config import get_config
 
+from sklearn.model_selection import train_test_split
+
 class DistanceDataset(Dataset):
     def __init__(self, indices, embed, node_long_lat, sdm, LM_indices=None):
         self.indices = indices
@@ -36,21 +38,21 @@ def load_and_preprocess_data(config):
     """
     Load and preprocess data for testing
     :param config: Configuration parameters
-    :return: test_loader
+    :return: test_loader, maxLength
     """
     # Load shortest distance matrix
-    file_name = "../data/chengdu_directed_shortest_distance_matrix.npy"
+    file_name = "data/chengdu_directed_shortest_distance_matrix.npy"
     sdm = np.load(file_name)
 
     # Print city information
     print("chengdu with " + str(sdm.shape[1]) + " nodes")
 
     # Load node2vec embeddings
-    with open("../param/dist2vec_embed.pkl", 'rb') as f:
+    with open("param/dist2vec_embed.pkl", 'rb') as f:
         embed = pickle.load(f)
 
     # Load node coordinates
-    node_long_lat = pd.read_csv("../data/chengdu_node-mod.txt", header=0, sep=',')
+    node_long_lat = pd.read_csv("data/chengdu_node-mod.txt", header=0, sep=',')
     node_long_lat_origin = np.array(node_long_lat)[:, 1:3]
     node_long_lat = np.array(node_long_lat)[:, 1:3]
 
@@ -73,33 +75,40 @@ def load_and_preprocess_data(config):
             if sdm[i][j] != 0.0:
                 indices.append((i, j))
 
-    # Select landmarks
-    num_landmarks = max(int(sdm.shape[0] * 0.01), 20)
-    landmark_indices = farthest_selection(node_long_lat_origin, num_landmarks)
-
-    # Create landmark pairs
-    LM_indices = []
-    for i in range(len(landmark_indices)):
-        for j in range(len(landmark_indices)):
-            if sdm[landmark_indices[i]][landmark_indices[j]] != 0:
-                LM_indices.append((landmark_indices[i], landmark_indices[j]))
+    # 划分90%训练集，10%测试集（与SARN/RNE一致）
+    np.random.seed(42)
+    indices = np.array(indices)
+    perm = np.random.permutation(len(indices))
+    train_size = int(len(indices) * 0.9)
+    # train_indices = indices[perm[:train_size]]
+    test_indices = indices[perm[train_size:]]
 
     # Create dataset
-    test_dataset = DistanceDataset(indices, embed, node_long_lat, sdm, LM_indices)
+    test_dataset = DistanceDataset(test_indices, embed, node_long_lat, sdm)
 
-    # Create test loader
+    # Create test loader（不再采样子集，全部用）
     batch_size = config.batch_size
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=batch_size,
+        shuffle=False
+    )
 
-    return test_loader
+    return test_loader, maxLength
 
 
-def test_model(test_loader, config):
+def test_model(test_loader, config, maxLength):
     """
-    Test the pre-trained model
+    Test the pre-trained model and compute required metrics
     :param test_loader: Test data loader
     :param config: Configuration parameters
+    :param maxLength: scalar used to denormalize distances
     """
+    # 设置设备
+    # device = torch.device(
+    #     'cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
+    # print(f'Using device: {device}')
+
     device = torch.device('cpu')
 
     # Model initialization
@@ -110,29 +119,93 @@ def test_model(test_loader, config):
     hidden_dim1 = 512
     hidden_dim2 = 256
     hidden_dim3 = 64
-    output_dim = get_config()
+    output_dim = config.n_output
     model = ImprovedMultiLayerPerceptron(input_dim * 2, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
 
     # Load pre-trained model
-    model.load_state_dict(torch.load("../param/distnet_best_chengdu_tilde_L1.ckpt", map_location=device))
+    if config.type == 1:
+        model.load_state_dict(torch.load("param/distnet_best_chengdu_1.ckpt", map_location=device))
+    elif config.type == 2:
+        model.load_state_dict(torch.load("param/distnet_best_chengdu_tilde_L1_no_landmark.ckpt", map_location=device))
+        # model.load_state_dict(torch.load("param/distnet_best_chengdu_tilde_L1.ckpt", map_location=device))
+    elif config.type == 3:
+        model.load_state_dict(torch.load("param/distnet_best_chengdu_L1.ckpt", map_location=device))
+
     model.eval()  # Set model to evaluation mode
 
-    criterion = torch.nn.MSELoss()
+    # Collect predictions and truths (denormalized)
+    all_preds = []
+    all_trues = []
 
-    # Evaluate on test data
-    test_loss = 0
     with torch.no_grad():
         for batch_x1, batch_x2, batch_y in test_loader:
-            batch_x1, batch_x2, batch_y = batch_x1.to(device), batch_x2.to(device), batch_y.to(device)
+            # 打印部分样本，检查归一化和反归一化
+            print("batch_y (normalized):", batch_y[:5])
             outputs = model(batch_x1, batch_x2)
-            loss = criterion(outputs, batch_y.unsqueeze(-1))
-            test_loss += loss.item()
+            outputs_np = outputs.cpu().numpy().squeeze()
+            trues_np = batch_y.cpu().numpy()
+            # denormalize
+            outputs_np = outputs_np * maxLength
+            trues_np = trues_np * maxLength
+            print("outputs (denormalized):", outputs_np[:5])
+            print("trues (denormalized):", trues_np[:5])
+            # ensure shapes
+            if outputs_np.ndim == 0:
+                outputs_np = np.array([outputs_np])
+            if trues_np.ndim == 0:
+                trues_np = np.array([trues_np])
 
-    test_loss /= len(test_loader)
-    print(f'Test Loss: {test_loss:.4f}')
+            all_preds.append(outputs_np.reshape(-1))
+            all_trues.append(trues_np.reshape(-1))
+
+    if len(all_preds) == 0:
+        print("No test predictions.")
+        return
+
+    preds = np.concatenate(all_preds)
+    trues = np.concatenate(all_trues)
+
+    abs_err = np.abs(preds - trues)
+    mse = np.mean((preds - trues) ** 2)
+    mae = np.mean(abs_err)
+    max_abs = np.max(abs_err)
+    min_abs = np.min(abs_err)
+
+    # relative errors: define as 0 where true == 0 to avoid inf
+    with np.errstate(divide='ignore', invalid='ignore'):
+        rel = np.where(trues > 0, abs_err / trues, 0.0)
+
+    mean_rel = np.mean(rel)
+    max_rel = np.max(rel)
+    min_rel = np.min(rel)
+
+    print(f"mean square error: {mse:.2f}")
+    print(f"mean absolute error: {mae:.5f}")
+    print(f"max absolute error: {max_abs:.4f}")
+    print(f"min absolute error: {min_abs:.1f}")
+    print(f"mean relative error: {mean_rel:.8f}")
+    print(f"max relative error: {max_rel:.8f}")
+    print(f"min relative error: {min_rel:.1f}")
+
+    # 存储指标结果，type不同，文件不同
+    if config.type == 1:
+        result_file = "log/distnet_1_results.txt"
+    elif config.type == 2:
+        result_file = "log/distnet_tilde_L1_results.txt"
+    elif config.type == 3:
+        result_file = "log/distnet_L1_results.txt"
+    
+    with open(result_file, 'w') as f:
+        f.write(f"mean square error: {mse:.2f}\n")
+        f.write(f"mean absolute error: {mae:.5f}\n")
+        f.write(f"max absolute error: {max_abs:.4f}\n")
+        f.write(f"min absolute error: {min_abs:.1f}\n")
+        f.write(f"mean relative error: {mean_rel:.8f}\n")
+        f.write(f"max relative error: {max_rel:.8f}\n")
+        f.write(f"min relative error: {min_rel:.1f}\n")
 
 
 if __name__ == "__main__":
     config, _ = get_config()
-    test_loader = load_and_preprocess_data(config)
-    test_model(test_loader, config)
+    test_loader, maxLength = load_and_preprocess_data(config)
+    test_model(test_loader, config, maxLength)

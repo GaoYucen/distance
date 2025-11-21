@@ -8,7 +8,7 @@
   - Node2Vec.py：计算Node2Vec计算得到的路网节点嵌入
   - Node2Vec_haversine.py: 计算Node2Vec计算得到的路网节点嵌入，使用haversine距离
 - config.py：模型参数
-- dist_model.py：定义MLP模型
+- dist_model.py：定义MLP模型，使用type选择output_layer
 - distnet_train.py：
   - load_and_preprocess_data(): obtain the train_loader & valid_loader
     - 加载distance_matrix矩阵，归一化
@@ -18,6 +18,7 @@
     - 为了加速，仅选择selected_ratio比例的数据进行训练
     - 对高误差节点对进行fine-tune
     - 保存验证集上效果最好的model
+- distnet_test.py: 测试
 
 ###### data
 - chengdu_node-mod.txt: 修正过的节点数据

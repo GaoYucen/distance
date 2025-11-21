@@ -1,3 +1,14 @@
+"""
+本文件为Distnet模型的最完整代码，包含数据预处理、模型训练、微调以及验证等完整流程。
+Distnet用于路网距离估计，结合节点嵌入和地理坐标信息，通过神经网络进行距离预测。
+用到的技术包括：
+1. tilde-L1正则化以提升模型针对有向图的适应性；
+2. landmark地标节点增强训练以提升模型性能；
+3. fine-tune微调高误差样本以提升整体精度；
+4. dist2vec+经纬度节点嵌入以提供丰富的节点特征信息；
+5. 每个epoch随机采样训练数据以加快训练速度。
+"""
+
 import numpy as np
 import pandas as pd
 import pickle
@@ -55,7 +66,7 @@ def load_and_preprocess_data(config):
     # Print city information
     print("chengdu with " + str(sdm.shape[1]) + " nodes")
 
-    # Load node2vec embeddings
+    # Load dist2vec embeddings
     with open("param/dist2vec_embed.pkl", 'rb') as f:
         embed = pickle.load(f)
 
@@ -85,7 +96,11 @@ def load_and_preprocess_data(config):
 
     # Set random seed for reproducibility
     np.random.seed(42)
-    np.random.shuffle(indices)
+    indices = np.array(indices)
+    perm = np.random.permutation(len(indices))
+    train_size = int(len(indices) * 0.9)
+    train_indices = indices[perm[:train_size]]
+    valid_indices = indices[perm[train_size:]]
 
     # Select landmarks
     num_landmarks = max(int(sdm.shape[0] * 0.01), 20)
@@ -98,34 +113,21 @@ def load_and_preprocess_data(config):
             if sdm[landmark_indices[i]][landmark_indices[j]] != 0:
                 LM_indices.append((landmark_indices[i], landmark_indices[j]))
 
-    # Split data into train/valid/test sets
-    train_indices, temp_indices = train_test_split(indices, test_size=0.2, random_state=42)
-    valid_indices, _ = train_test_split(temp_indices, test_size=0.5, random_state=42)
-
     # Create datasets
     train_dataset = DistanceDataset(train_indices, embed, node_long_lat, sdm, LM_indices)
     valid_dataset = DistanceDataset(valid_indices, embed, node_long_lat, sdm)
 
-    # Create data loaders with 10% sampling
+    # Data loaders（不再采样，全部用）
     batch_size = config.batch_size
-    train_size = len(train_dataset)
-    valid_size = len(valid_dataset)
-    train_subset_size = int(train_size * config.selected_ratio)
-    valid_subset_size = int(valid_size * config.selected_ratio)
-
-    # Use fixed validation subset
-    np.random.seed(42)
-    valid_subset_indices = np.random.choice(valid_size, valid_subset_size, replace=False)
-
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
-        sampler=SubsetRandomSampler(np.random.choice(train_size, train_subset_size, replace=False))
+        shuffle=True
     )
     valid_loader = DataLoader(
         valid_dataset,
         batch_size=batch_size,
-        sampler=SubsetRandomSampler(valid_subset_indices)
+        shuffle=False
     )
 
     return train_loader, valid_loader
@@ -138,6 +140,10 @@ def train_model(train_loader, valid_loader, config):
     :param valid_loader: Validation data loader
     :param config: Configuration parameters
     """
+    # 设置设备
+    device = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
+    # print(f'Using device: {device}')
+
     device = torch.device('cpu')
 
     # Model initialization
@@ -148,13 +154,15 @@ def train_model(train_loader, valid_loader, config):
     hidden_dim1 = 512
     hidden_dim2 = 256
     hidden_dim3 = 64
-    output_dim = 1
+    output_dim = config.n_output
     model = ImprovedMultiLayerPerceptron(input_dim * 2, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
 
     # Training parameters
     num_epochs = config.num_epoch
     learning_rate = config.learning_rate
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    # if config.type == 2:
+    #     optimizer = optim.Adam(model.parameters(), lr=config.learning_rate, weight_decay=0.01)
     criterion = nn.MSELoss()
 
     # Get dataset from loader
@@ -171,21 +179,10 @@ def train_model(train_loader, valid_loader, config):
 
     # Training loop
     for epoch in range(num_epochs):
-        # Create new train loader with random subset for each epoch
-        train_size = len(train_dataset)
-        train_subset_size = int(train_size * config.selected_ratio)
-        # use the targeted random num generator
-        train_indices = rng.choice(train_size, train_subset_size, replace=False)
-        epoch_train_loader = DataLoader(
-            train_dataset,
-            batch_size=batch_size,
-            sampler=SubsetRandomSampler(train_indices)
-        )
-
         # Training phase
         model.train()
         train_loss = 0
-        for batch_x1, batch_x2, batch_y in epoch_train_loader:
+        for batch_x1, batch_x2, batch_y in tqdm(train_loader):
             # Forward pass
             batch_x1, batch_x2, batch_y = batch_x1.to(device), batch_x2.to(device), batch_y.to(device)
             outputs = model(batch_x1, batch_x2)
@@ -197,13 +194,13 @@ def train_model(train_loader, valid_loader, config):
             optimizer.step()
             train_loss += loss.item()
 
-        train_loss /= len(epoch_train_loader)
+        train_loss /= len(train_loader)
 
         # Identify high-error samples
         model.eval()
         loss_list = []
         with torch.no_grad():
-            for batch_x1, batch_x2, batch_y in epoch_train_loader:
+            for batch_x1, batch_x2, batch_y in train_loader:
                 batch_x1, batch_x2, batch_y = batch_x1.to(device), batch_x2.to(device), batch_y.to(device)
                 outputs = model(batch_x1, batch_x2)
                 loss = criterion(outputs, batch_y.unsqueeze(-1))
@@ -247,22 +244,62 @@ def train_model(train_loader, valid_loader, config):
 
         # Print progress
         print(
-            f'Epoch: {epoch + 1}/{num_epochs}, Train Loss: {train_loss:.4f}, Fine-tune Loss: {fine_tune_loss:.4f}, Valid Loss: {valid_loss:.4f}')
+            f'Epoch: {epoch + 1}/{num_epochs}, Train Loss: {train_loss:.8f}, Fine-tune Loss: {fine_tune_loss:.8f}, Valid Loss: {valid_loss:.8f}')
 
         # Model checkpointing and early stopping
         if valid_loss < min_loss:
             min_loss = valid_loss
-            torch.save(model.state_dict(), "param/distnet_best_chengdu_tilde_L1.ckpt")
+            if config.type == 1:
+                torch.save(model.state_dict(), "param/distnet_best_chengdu_1.ckpt")
+            elif config.type == 2:
+                torch.save(model.state_dict(), "param/distnet_best_chengdu_tilde_L1.ckpt")
+            elif config.type == 3:
+                torch.save(model.state_dict(), "param/distnet_best_chengdu_L1.ckpt")
             print('Model saved.')
             early_stop = 0
         else:
             early_stop += 1
-            if early_stop > 10:
+            if early_stop > 5:
                 break
 
     print("Optimization Finished!")
     end_time = time.time()
     print("Training time: ", end_time - start_time)
+
+    # 评估模型并保存结果
+    model.eval()
+    y_true = []
+    y_pred = []
+    with torch.no_grad():
+        for batch_x1, batch_x2, batch_y in valid_loader:
+            batch_x1, batch_x2 = batch_x1.to(device), batch_x2.to(device)
+            outputs = model(batch_x1, batch_x2).cpu().numpy().flatten()
+            y_pred.extend(outputs)
+            y_true.extend(batch_y.numpy().flatten())
+
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
+    mse = np.mean((y_true - y_pred) ** 2)
+    abs_errors = np.abs(y_true - y_pred)
+    global_abs = np.mean(abs_errors)
+    max_abs = np.max(abs_errors)
+    min_abs = np.min(abs_errors)
+    rel_errors = abs_errors / (y_true + 1e-8)
+    global_rel = np.mean(rel_errors)
+    max_rel = np.max(rel_errors)
+    min_rel = np.min(rel_errors)
+
+    # 保存评估结果
+    with open("log/distnet.txt", "w") as f:
+        f.write(f"Mean Square Error: {mse:.5f}\n")
+        f.write(f"Mean Absolute Error: {global_abs:.5f}\n")
+        f.write(f"Max Absolute Error: {max_abs:.5f}\n")
+        f.write(f"Min Absolute Error: {min_abs:.5f}\n")
+        f.write(f"Mean Relative Error: {global_rel:.8f}\n")
+        f.write(f"Max Relative Error: {max_rel:.5f}\n")
+        f.write(f"Min Relative Error: {min_rel:.5f}\n")
+
+    print("\nDistnet training and evaluation completed!")
 
 
 if __name__ == "__main__":

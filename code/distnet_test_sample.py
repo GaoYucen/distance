@@ -29,36 +29,37 @@ class DistanceDataset(Dataset):
         return torch.tensor(x1, dtype=torch.float32), torch.tensor(x2, dtype=torch.float32), torch.tensor(y, dtype=torch.float32)
 
 
-def load_and_preprocess_data(config, eval_sample_size=10000):
+def load_and_preprocess_data(config, city: str = "chengdu", data_root: str = "/home/lizhuoran/distance/data", eval_sample_size=10000):
     """
     Load and preprocess data for sampled evaluation
     :param config: Configuration parameters
     :param eval_sample_size: Number of samples for evaluation
     :return: sampled_eval_loader, maxLength
     """
-    # Load shortest distance matrix
-    file_name = "data/chengdu_directed_shortest_distance_matrix.npy"
-    sdm = np.load(file_name)
+    # Load preprocessed files from data/<city>/pre/ (fallback to data/pre)
+    from pathlib import Path
+    pre_dir = Path(data_root) / city / "pre"
+    if not pre_dir.exists():
+        pre_dir = Path(data_root) / "pre"
+
+    sdm = np.load(pre_dir / "preprocessed_sdm.npy")
+    embed = np.load(pre_dir / "preprocessed_embed.npy")
+    node_long_lat = np.load(pre_dir / "preprocessed_node_long_lat.npy")
+    node_long_lat_origin = np.load(pre_dir / "preprocessed_node_long_lat_origin.npy")
 
     # Print city information
-    print("chengdu with " + str(sdm.shape[1]) + " nodes")
-
-    # Load node2vec embeddings
-    with open("param/dist2vec_embed.pkl", 'rb') as f:
-        embed = pickle.load(f)
-
-    # Load node coordinates
-    node_long_lat = pd.read_csv("data/chengdu_node-mod.txt", header=0, sep=',')
-    node_long_lat_origin = np.array(node_long_lat)[:, 1:3]
-    node_long_lat = np.array(node_long_lat)[:, 1:3]
+    print(f"{city} with {sdm.shape[1]} nodes")
 
     # Normalize data
     maxLength = np.max(sdm)
     sdm = sdm / maxLength
 
-    embed = np.array(list(embed.values()))
+    embed = np.array(embed)
+    if embed.dtype == object:
+        embed = np.array(list(embed))
     embed = (embed - embed.min()) / (embed.max() - embed.min())
 
+    node_long_lat = np.array(node_long_lat)
     node_long_lat[:, 0] = (node_long_lat[:, 0] - node_long_lat[:, 0].min()) / (
                 node_long_lat[:, 0].max() - node_long_lat[:, 0].min())
     node_long_lat[:, 1] = (node_long_lat[:, 1] - node_long_lat[:, 1].min()) / (
@@ -117,13 +118,23 @@ def test_model(eval_loader, config, maxLength):
     output_dim = config.n_output
     model = ImprovedMultiLayerPerceptron(input_dim * 2, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
 
-    # Load pre-trained model
-    if config.type == 1:
-        model.load_state_dict(torch.load("param/distnet_best_chengdu_1.ckpt", map_location=device))
-    elif config.type == 2:
-        model.load_state_dict(torch.load("param/distnet_best_chengdu_tilde_L1.ckpt", map_location=device))
-    elif config.type == 3:
-        model.load_state_dict(torch.load("param/distnet_best_chengdu_L1.ckpt", map_location=device))
+    # Load pre-trained model (derive path from model_dir/save_prefix and city)
+    import os
+    model_dir = os.environ.get("DISTNET_MODEL_DIR", "param")
+    save_prefix = os.environ.get("DISTNET_SAVE_PREFIX", "distnet_best")
+    if os.getenv("DISTNET_MODEL_PATH"):
+        model_path = os.getenv("DISTNET_MODEL_PATH")
+    else:
+        if config.type == 1:
+            model_path = os.path.join(model_dir, f"{save_prefix}_{city}_1.ckpt")
+        elif config.type == 2:
+            model_path = os.path.join(model_dir, f"{save_prefix}_{city}_tilde_L1.ckpt")
+        elif config.type == 3:
+            model_path = os.path.join(model_dir, f"{save_prefix}_{city}_L1.ckpt")
+        else:
+            model_path = os.path.join(model_dir, f"{save_prefix}_{city}.ckpt")
+    model.load_state_dict(torch.load(model_path, map_location=device))
+    print(f"Loaded model: {model_path}")
 
     model.eval()  # Set model to evaluation mode
 
@@ -178,15 +189,20 @@ def test_model(eval_loader, config, maxLength):
     print(f"max relative error: {max_rel:.8f}")
     print(f"min relative error: {min_rel:.1f}")
 
-    # 存储指标结果，type不同，文件不同
+    # 存储指标结果，包含 city
+    import os
+    os.makedirs("log", exist_ok=True)
     if config.type == 1:
-        result_file = "log/distnet_1_results_sample.txt"
+        result_file = f"log/{save_prefix}_{city}_results_sample_type1.txt"
     elif config.type == 2:
-        result_file = "log/distnet_tilde_L1_results_sample.txt"
+        result_file = f"log/{save_prefix}_{city}_results_sample_tilde_L1.txt"
     elif config.type == 3:
-        result_file = "log/distnet_L1_results_sample.txt"
-    
+        result_file = f"log/{save_prefix}_{city}_results_sample_L1.txt"
+    else:
+        result_file = f"log/{save_prefix}_{city}_results_sample.txt"
+
     with open(result_file, 'w') as f:
+        f.write(f"City: {city}\n")
         f.write(f"Eval sample size: {len(trues)}\n")
         f.write(f"mean square error: {mse:.2f}\n")
         f.write(f"mean absolute error: {mae:.5f}\n")
@@ -197,6 +213,25 @@ def test_model(eval_loader, config, maxLength):
         f.write(f"min relative error: {min_rel:.1f}\n")
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Test DistNet on a city's preprocessed data sample")
+    parser.add_argument("--city", type=str, default="chengdu", help="City name to test (folder under data/)")
+    parser.add_argument("--data-root", type=str, default="/home/lizhuoran/distance/data", help="Root data directory containing city folders")
+    parser.add_argument("--model-dir", type=str, default="param", help="Directory where model checkpoints are stored")
+    parser.add_argument("--save-prefix", type=str, default="distnet_best", help="Prefix used when saving checkpoints")
+    parser.add_argument("--eval-samples", type=int, default=10000, help="Number of evaluation samples to draw")
+    parser.add_argument("--model-path", type=str, default=None, help="If provided, load this exact checkpoint path instead of deriving from model-dir and city")
+    args = parser.parse_args()
+
+    # export model path info to environment so load function can pick it up
+    if args.model_path:
+        import os
+        os.environ["DISTNET_MODEL_PATH"] = args.model_path
+    else:
+        import os
+        os.environ["DISTNET_MODEL_DIR"] = args.model_dir
+        os.environ["DISTNET_SAVE_PREFIX"] = args.save_prefix
+
     config, _ = get_config()
-    eval_loader, maxLength = load_and_preprocess_data(config, eval_sample_size=10000)
+    eval_loader, maxLength = load_and_preprocess_data(config, city=args.city, data_root=args.data_root, eval_sample_size=args.eval_samples)
     test_model(eval_loader, config, maxLength)

@@ -9,7 +9,7 @@ parser.add_argument('--long_lat_embed_dim', default=2, type=int, help='longtitud
 
 # Model
 parser.add_argument('--type', default=2, type=int, help='type')
-parser.add_argument('--batch_size', default=4096, type=int, help='Batch size')
+parser.add_argument('--batch_size', default=1024, type=int, help='Batch size')
 parser.add_argument('--num_epoch', default=20, type=int, help='Number of epochs')
 parser.add_argument('--learning_rate', default=0.001, type=float, help='learning rate')
 parser.add_argument('--selected_ratio', default=1, type=float, help='selected ratio')

@@ -9,6 +9,7 @@ Distnet用于路网距离估计，结合节点嵌入和地理坐标信息，通�
 5. 每个epoch随机采样训练数据以加快训练速度。
 """
 
+import argparse
 import numpy as np
 import pandas as pd
 import pickle
@@ -52,22 +53,28 @@ class DistanceDataset(Dataset):
                                                                                                           dtype=torch.float32)
 
 
-def load_and_preprocess_data(config):
+def load_and_preprocess_data(config, city: str = "harbin", data_root: str = "/home/lizhuoran/distance/data"):
     """
     Load and preprocess data for training
     :param config: Configuration parameters
     :return: train_loader, valid_loader
     """
-    # 直接加载预处理数据
-    sdm = np.load("data/pre/preprocessed_sdm.npy")
-    embed = np.load("data/pre/preprocessed_embed.npy")
-    node_long_lat = np.load("data/pre/preprocessed_node_long_lat.npy")
-    node_long_lat_origin = np.load("data/pre/preprocessed_node_long_lat_origin.npy")  # 新增加载
-    indices = np.load("data/pre/preprocessed_indices.npy", allow_pickle=True)
-    LM_indices = np.load("data/pre/preprocessed_LM_indices.npy", allow_pickle=True)
+    # 直接加载预处理数据，优先从 city 专用目录 data/<city>/pre/
+    from pathlib import Path
+    pre_dir = Path(data_root) / city / "pre"
+    # backward compatible fallback
+    if not pre_dir.exists():
+        pre_dir = Path(data_root) / "pre"
+
+    sdm = np.load(pre_dir / "preprocessed_sdm.npy")
+    embed = np.load(pre_dir / "preprocessed_embed.npy")
+    node_long_lat = np.load(pre_dir / "preprocessed_node_long_lat.npy")
+    node_long_lat_origin = np.load(pre_dir / "preprocessed_node_long_lat_origin.npy")  # 新增加载
+    indices = np.load(pre_dir / "preprocessed_indices.npy", allow_pickle=True)
+    LM_indices = np.load(pre_dir / "preprocessed_LM_indices.npy", allow_pickle=True)
 
     # Print city information
-    print("chengdu with " + str(sdm.shape[1]) + " nodes")
+    print(f"{city} with {sdm.shape[1]} nodes")
 
     # 转换为list，便于后续采样和索引
     indices = indices.tolist()
@@ -97,7 +104,7 @@ def load_and_preprocess_data(config):
     batch_size = config.batch_size
     import os
     # num_workers用8个
-    num_workers = min(8, os.cpu_count() or 1)
+    num_workers = min(2, os.cpu_count() or 1)
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
@@ -118,7 +125,7 @@ def load_and_preprocess_data(config):
     return train_loader, valid_loader
 
 
-def train_model(train_loader, valid_loader, config):
+def train_model(train_loader, valid_loader, config, city: str = "chengdu", out_dir: str = "param", save_prefix: str = "distnet_best"):
     """
     Train the neural network model
     :param train_loader: Training data loader
@@ -263,19 +270,30 @@ def train_model(train_loader, valid_loader, config):
         epoch_duration = epoch_end_time - epoch_start_time
 
         # Print progress
-        print(
-            f'Epoch: {epoch + 1}/{num_epochs}, Train Loss: {train_loss:.8f}, Valid Loss: {valid_loss:.8f}, Time: {epoch_duration:.2f}s')
+        print(f'Epoch: {epoch + 1}/{num_epochs}, Train Loss: {train_loss:.8f}, Valid Loss: {valid_loss:.8f}, Time: {epoch_duration:.2f}s')
 
         # Model checkpointing and early stopping
         if valid_loss < min_loss:
             min_loss = valid_loss
+            import os
+            os.makedirs(out_dir, exist_ok=True)
+            # build filename with city and config.type
             if config.type == 1:
-                torch.save(model.state_dict(), "param/distnet_best_chengdu_1.ckpt")
+                fname = os.path.join(out_dir, f"{save_prefix}_{city}_1.ckpt")
             elif config.type == 2:
-                torch.save(model.state_dict(), "param/distnet_best_chengdu_tilde_L1.ckpt")
+                fname = os.path.join(out_dir, f"{save_prefix}_{city}_tilde_L1.ckpt")
             elif config.type == 3:
-                torch.save(model.state_dict(), "param/distnet_best_chengdu_L1.ckpt")
-            print('Model saved.')
+                fname = os.path.join(out_dir, f"{save_prefix}_{city}_L1.ckpt")
+            else:
+                fname = os.path.join(out_dir, f"{save_prefix}_{city}.ckpt")
+            torch.save(model.state_dict(), fname)
+            print(f'Model saved to {fname}')
+            # also append best validation info to per-city log
+            log_dir = os.path.join("log")
+            os.makedirs(log_dir, exist_ok=True)
+            log_file = os.path.join(log_dir, f"{save_prefix}_{city}_train.log")
+            with open(log_file, 'a') as lf:
+                lf.write(f'Epoch: {epoch+1}, Train Loss: {train_loss:.8f}, Valid Loss: {valid_loss:.8f}, Time: {epoch_duration:.2f}s\n')
             early_stop = 0
         else:
             early_stop += 1
@@ -288,6 +306,19 @@ def train_model(train_loader, valid_loader, config):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Train DistNet on one or more city's preprocessed data")
+    parser.add_argument("--cities", nargs="+", default=["chengdu"], help="One or more city names to train on (space-separated), e.g. --cities harbin porto")
+    parser.add_argument("--data-root", type=str, default="/home/lizhuoran/distance/data", help="Root data directory containing city folders")
+    parser.add_argument("--out-dir", type=str, default="/home/lizhuoran/distance/param", help="Directory to save model checkpoints")
+    parser.add_argument("--save-prefix", type=str, default="distnet_best", help="Prefix for saved checkpoint filenames")
+    args = parser.parse_args()
+
     config, _ = get_config()
-    train_loader, valid_loader = load_and_preprocess_data(config)
-    train_model(train_loader, valid_loader, config)
+    for city in args.cities:
+        print(f"\n===== Starting training for city: {city} =====")
+        train_loader, valid_loader = load_and_preprocess_data(config, city=city, data_root=args.data_root)
+        train_model(train_loader, valid_loader, config, city=city, out_dir=args.out_dir, save_prefix=args.save_prefix)
+        # free CUDA memory between runs
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+    print('\nAll trainings completed.')

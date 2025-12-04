@@ -177,21 +177,42 @@ def train_model(train_loader, valid_loader, embed, config):
     # model = ImprovedMultiLayerPerceptron(input_dim * 2, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
 
     # Training parameters
-    num_epochs = config.num_epoch
+    num_epochs = 100 # Increase epochs
     learning_rate = config.learning_rate
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     # if config.type == 2:
     #     optimizer = optim.Adam(model.parameters(), lr=config.learning_rate, weight_decay=0.01)
-    criterion = nn.MSELoss()
+    
+    # Use Log-MSE Loss to balance MRE and MAE optimization
+    # Optimizing MSE in log-space is approximately equivalent to optimizing Relative Error,
+    # but much more numerically stable than direct division.
+    class LogMSELoss(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.mse = nn.MSELoss()
+
+        def forward(self, pred, target):
+            return self.mse(torch.log1p(pred), torch.log1p(target))
+
+    criterion = LogMSELoss()
 
     # Get dataset from loader
     train_dataset = train_loader.dataset
     batch_size = train_loader.batch_size
 
     # Training tracking variables
-    min_loss = 100
+    min_mre = 100.0 # Track min MRE
     start_time = time.time()
-    early_stop = 0
+    early_stop_counter = 0
+    patience = 10 # Increase patience
+
+    # History for plotting
+    history = {
+        'train_loss': [],
+        'valid_loss': [],
+        'mre': [],
+        'mae': []
+    }
 
     # create a targeted random num generator
     rng = np.random.RandomState(42)  # fixed seed
@@ -209,17 +230,19 @@ def train_model(train_loader, valid_loader, embed, config):
             batch_coords2 = batch_coords2.to(device, non_blocking=True)
             batch_y = batch_y.to(device, non_blocking=True)
             
+            target = batch_y.unsqueeze(-1)
+
             optimizer.zero_grad(set_to_none=True)
             if scaler:
                 with torch.amp.autocast('cuda'):
                     outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
-                    loss = criterion(outputs, batch_y.unsqueeze(-1))
+                    loss = criterion(outputs, target)
                 scaler.scale(loss).backward()
                 scaler.step(optimizer)
                 scaler.update()
             else:
                 outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
-                loss = criterion(outputs, batch_y.unsqueeze(-1))
+                loss = criterion(outputs, target)
                 loss.backward()
                 optimizer.step()
             train_loss += loss.item()
@@ -228,6 +251,10 @@ def train_model(train_loader, valid_loader, embed, config):
         # Validation phase
         model.eval()
         valid_loss = 0
+        total_mre = 0.0
+        total_mae = 0.0
+        total_samples = 0
+        
         with torch.no_grad():
             for batch_idx1, batch_idx2, batch_coords1, batch_coords2, batch_y in valid_loader:
                 batch_idx1 = batch_idx1.to(device, non_blocking=True)
@@ -236,26 +263,57 @@ def train_model(train_loader, valid_loader, embed, config):
                 batch_coords2 = batch_coords2.to(device, non_blocking=True)
                 batch_y = batch_y.to(device, non_blocking=True)
                 
+                target = batch_y.unsqueeze(-1)
+                
                 if scaler:
                     with torch.amp.autocast('cuda'):
                         outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
-                        loss = criterion(outputs, batch_y.unsqueeze(-1))
+                        loss = criterion(outputs, target)
                 else:
                     outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
-                    loss = criterion(outputs, batch_y.unsqueeze(-1))
+                    loss = criterion(outputs, target)
+                
                 valid_loss += loss.item()
+                
+                # Calculate metrics
+                pred = torch.abs(outputs) 
+                
+                # MAE
+                mae = torch.abs(pred - target)
+                total_mae += torch.sum(mae).item()
+                
+                # MRE
+                # Add epsilon to denominator to avoid division by zero
+                mre = torch.abs(pred - target) / (target + 1e-7)
+                total_mre += torch.sum(mre).item()
+                
+                total_samples += batch_y.size(0)
+
         valid_loss /= len(valid_loader)
+        avg_mre = total_mre / total_samples
+        avg_mae = total_mae / total_samples
+
+        # Update history
+        history['train_loss'].append(train_loss)
+        history['valid_loss'].append(valid_loss)
+        history['mre'].append(avg_mre)
+        history['mae'].append(avg_mae)
 
         epoch_end_time = time.time()
         epoch_duration = epoch_end_time - epoch_start_time
 
         # Print progress
-        print(
-            f'Epoch: {epoch + 1}/{num_epochs}, Train Loss: {train_loss:.8f}, Valid Loss: {valid_loss:.8f}, Time: {epoch_duration:.2f}s')
+        log_msg = f'Epoch: {epoch + 1}/{num_epochs}, Train Loss: {train_loss:.8f}, Valid Loss: {valid_loss:.8f}, MRE: {avg_mre:.8f}, MAE: {avg_mae:.8f}, Time: {epoch_duration:.2f}s'
+        print(log_msg)
+        
+        # Write to log file
+        with open("log/distnet_training_log.txt", "a") as f:
+            f.write(log_msg + "\n")
 
         # Model checkpointing and early stopping
-        if valid_loss < min_loss:
-            min_loss = valid_loss
+        # Use MRE for model selection
+        if avg_mre < min_mre:
+            min_mre = avg_mre
             if config.type == 1:
                 torch.save(model.state_dict(), "param/distnet_best_chengdu_1.ckpt")
             elif config.type == 2:
@@ -263,15 +321,43 @@ def train_model(train_loader, valid_loader, embed, config):
             elif config.type == 3:
                 torch.save(model.state_dict(), "param/distnet_best_chengdu_L1.ckpt")
             print('Model saved.')
-            early_stop = 0
+            early_stop_counter = 0
         else:
-            early_stop += 1
-            if early_stop > 5:
+            early_stop_counter += 1
+            if early_stop_counter > patience:
+                print("Early stopping triggered.")
                 break
 
     print("Optimization Finished!")
     end_time = time.time()
     print("Training time: ", end_time - start_time)
+    
+    # Plot training history
+    try:
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(12, 10))
+        
+        plt.subplot(2, 2, 1)
+        plt.plot(history['train_loss'], label='Train Loss')
+        plt.plot(history['valid_loss'], label='Valid Loss')
+        plt.title('Loss History')
+        plt.legend()
+        
+        plt.subplot(2, 2, 2)
+        plt.plot(history['mre'], label='MRE', color='orange')
+        plt.title('Mean Relative Error')
+        plt.legend()
+        
+        plt.subplot(2, 2, 3)
+        plt.plot(history['mae'], label='MAE', color='green')
+        plt.title('Mean Absolute Error')
+        plt.legend()
+        
+        plt.tight_layout()
+        plt.savefig('figure/training_history.png')
+        print("Training history plot saved to figure/training_history.png")
+    except Exception as e:
+        print(f"Failed to plot history: {e}")
 
 
 if __name__ == "__main__":

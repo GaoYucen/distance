@@ -23,7 +23,7 @@ from torch.utils.data import SubsetRandomSampler
 
 from sklearn.model_selection import train_test_split
 
-from distnet_model import ImprovedMultiLayerPerceptron
+from distnet_model import ImprovedMultiLayerPerceptron, LearnableDistNet
 from distnet_model import farthest_selection
 
 from config import get_config
@@ -32,7 +32,7 @@ from config import get_config
 class DistanceDataset(Dataset):
     def __init__(self, indices, embed, node_long_lat, sdm, LM_indices=None):
         self.indices = indices
-        self.embed = embed
+        self.embed = embed # Keep for compatibility, but we will use indices
         self.node_long_lat = node_long_lat
         self.sdm = sdm
         self.LM_indices = LM_indices if LM_indices else []
@@ -45,11 +45,18 @@ class DistanceDataset(Dataset):
             i, j = self.indices[idx]
         else:
             i, j = self.LM_indices[idx - len(self.indices)]
-        x1 = np.concatenate((self.embed[i], self.node_long_lat[i]), axis=0)
-        x2 = np.concatenate((self.embed[j], self.node_long_lat[j]), axis=0)
+        
+        # Return indices and coordinates separately
+        # x1 = np.concatenate((self.embed[i], self.node_long_lat[i]), axis=0)
+        # x2 = np.concatenate((self.embed[j], self.node_long_lat[j]), axis=0)
+        
+        coords1 = self.node_long_lat[i]
+        coords2 = self.node_long_lat[j]
         y = self.sdm[i][j]
-        return torch.tensor(x1, dtype=torch.float32), torch.tensor(x2, dtype=torch.float32), torch.tensor(y,
-                                                                                                          dtype=torch.float32)
+        
+        return torch.tensor(i, dtype=torch.long), torch.tensor(j, dtype=torch.long), \
+               torch.tensor(coords1, dtype=torch.float32), torch.tensor(coords2, dtype=torch.float32), \
+               torch.tensor(y, dtype=torch.float32)
 
 
 def load_and_preprocess_data(config):
@@ -137,14 +144,15 @@ def load_and_preprocess_data(config):
         persistent_workers=True
     )
 
-    return train_loader, valid_loader
+    return train_loader, valid_loader, embed
 
 
-def train_model(train_loader, valid_loader, config):
+def train_model(train_loader, valid_loader, embed, config):
     """
     Train the neural network model
     :param train_loader: Training data loader
     :param valid_loader: Validation data loader
+    :param embed: Pretrained embeddings for initialization
     :param config: Configuration parameters
     """
     # 优先使用CUDA
@@ -154,15 +162,19 @@ def train_model(train_loader, valid_loader, config):
         torch.backends.cudnn.benchmark = True
 
     # Model initialization
-    embed_dim = config.embed_dim
-    long_lat_embed_dim = config.long_lat_embed_dim
-    input_dim = embed_dim + long_lat_embed_dim
+    # embed_dim = config.embed_dim
+    # long_lat_embed_dim = config.long_lat_embed_dim
+    # input_dim = embed_dim + long_lat_embed_dim
 
     hidden_dim1 = 512
     hidden_dim2 = 256
     hidden_dim3 = 64
     output_dim = config.n_output
-    model = ImprovedMultiLayerPerceptron(input_dim * 2, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
+    
+    # Use LearnableDistNet
+    n_nodes = embed.shape[0]
+    model = LearnableDistNet(n_nodes, embed, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
+    # model = ImprovedMultiLayerPerceptron(input_dim * 2, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
 
     # Training parameters
     num_epochs = config.num_epoch
@@ -190,89 +202,46 @@ def train_model(train_loader, valid_loader, config):
         epoch_start_time = time.time()
         model.train()
         train_loss = 0
-        for batch_x1, batch_x2, batch_y in train_loader:
-            batch_x1 = batch_x1.to(device, non_blocking=True)
-            batch_x2 = batch_x2.to(device, non_blocking=True)
+        for batch_idx1, batch_idx2, batch_coords1, batch_coords2, batch_y in train_loader:
+            batch_idx1 = batch_idx1.to(device, non_blocking=True)
+            batch_idx2 = batch_idx2.to(device, non_blocking=True)
+            batch_coords1 = batch_coords1.to(device, non_blocking=True)
+            batch_coords2 = batch_coords2.to(device, non_blocking=True)
             batch_y = batch_y.to(device, non_blocking=True)
+            
             optimizer.zero_grad(set_to_none=True)
             if scaler:
                 with torch.amp.autocast('cuda'):
-                    outputs = model(batch_x1, batch_x2)
+                    outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
                     loss = criterion(outputs, batch_y.unsqueeze(-1))
                 scaler.scale(loss).backward()
                 scaler.step(optimizer)
                 scaler.update()
             else:
-                outputs = model(batch_x1, batch_x2)
+                outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
                 loss = criterion(outputs, batch_y.unsqueeze(-1))
                 loss.backward()
                 optimizer.step()
             train_loss += loss.item()
         train_loss /= len(train_loader)
 
-        # Identify high-error samples
-        # model.eval()
-        # loss_list = []
-        # with torch.no_grad():
-        #     for batch_x1, batch_x2, batch_y in train_loader:
-        #         batch_x1 = batch_x1.to(device, non_blocking=True)
-        #         batch_x2 = batch_x2.to(device, non_blocking=True)
-        #         batch_y = batch_y.to(device, non_blocking=True)
-        #         if scaler:
-        #             with torch.amp.autocast('cuda'):
-        #                 outputs = model(batch_x1, batch_x2)
-        #                 loss = criterion(outputs, batch_y.unsqueeze(-1))
-        #         else:
-        #             outputs = model(batch_x1, batch_x2)
-        #             loss = criterion(outputs, batch_y.unsqueeze(-1))
-        #         loss_list.extend([(loss.item(), (x1, x2, y)) for x1, x2, y in zip(batch_x1, batch_x2, batch_y)])
-
-        # Fine-tuning phase
-        # loss_list.sort(reverse=True, key=lambda x: x[0])
-        # high_error_samples = [sample for _, sample in loss_list[:int(0.1 * len(loss_list))]]
-
-        # model.train()
-        # fine_tune_loss = 0
-        # fine_tune_batch_size = 32
-        # fine_tune_num_batches = 0
-
-        # for i in range(0, len(high_error_samples), fine_tune_batch_size):
-        #     batch = high_error_samples[i:i + fine_tune_batch_size]
-        #     x1 = torch.stack([x[0] for x in batch]).to(device, non_blocking=True)
-        #     x2 = torch.stack([x[1] for x in batch]).to(device, non_blocking=True)
-        #     y = torch.stack([x[2] for x in batch]).to(device, non_blocking=True)
-        #     optimizer.zero_grad(set_to_none=True)
-        #     if scaler:
-        #         with torch.amp.autocast('cuda'):
-        #             outputs = model(x1, x2)
-        #             loss = criterion(outputs, y.unsqueeze(-1))
-        #         scaler.scale(loss).backward()
-        #         scaler.step(optimizer)
-        #         scaler.update()
-        #     else:
-        #         outputs = model(x1, x2)
-        #         loss = criterion(outputs, y.unsqueeze(-1))
-        #         loss.backward()
-        #         optimizer.step()
-        #     fine_tune_loss += loss.item()
-        #     fine_tune_num_batches += 1
-
-        # fine_tune_loss /= fine_tune_num_batches
-
         # Validation phase
         model.eval()
         valid_loss = 0
         with torch.no_grad():
-            for batch_x1, batch_x2, batch_y in valid_loader:
-                batch_x1 = batch_x1.to(device, non_blocking=True)
-                batch_x2 = batch_x2.to(device, non_blocking=True)
+            for batch_idx1, batch_idx2, batch_coords1, batch_coords2, batch_y in valid_loader:
+                batch_idx1 = batch_idx1.to(device, non_blocking=True)
+                batch_idx2 = batch_idx2.to(device, non_blocking=True)
+                batch_coords1 = batch_coords1.to(device, non_blocking=True)
+                batch_coords2 = batch_coords2.to(device, non_blocking=True)
                 batch_y = batch_y.to(device, non_blocking=True)
+                
                 if scaler:
                     with torch.amp.autocast('cuda'):
-                        outputs = model(batch_x1, batch_x2)
+                        outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
                         loss = criterion(outputs, batch_y.unsqueeze(-1))
                 else:
-                    outputs = model(batch_x1, batch_x2)
+                    outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
                     loss = criterion(outputs, batch_y.unsqueeze(-1))
                 valid_loss += loss.item()
         valid_loss /= len(valid_loader)
@@ -307,5 +276,5 @@ def train_model(train_loader, valid_loader, config):
 
 if __name__ == "__main__":
     config, _ = get_config()
-    train_loader, valid_loader = load_and_preprocess_data(config)
-    train_model(train_loader, valid_loader, config)
+    train_loader, valid_loader, embed = load_and_preprocess_data(config)
+    train_model(train_loader, valid_loader, embed, config)

@@ -81,3 +81,75 @@ def farthest_selection(points, num_landmarks):
         landmarks.append(points[new_landmark_index])  # 添加新地标的坐标
 
     return landmarks_indices  # 返回地标的索引
+
+class LearnableDistNet(nn.Module):
+    def __init__(self, n_nodes, pretrained_embed, n_hidden_1, n_hidden_2, n_hidden_3, n_output, r=config.r, s=0):
+        super(LearnableDistNet, self).__init__()
+        
+        # Embedding layer
+        # pretrained_embed shape: [n_nodes, embed_dim]
+        self.embed_dim = pretrained_embed.shape[1]
+        self.embedding = nn.Embedding(n_nodes, self.embed_dim)
+        self.embedding.weight.data.copy_(torch.from_numpy(pretrained_embed).float())
+        self.embedding.weight.requires_grad = True  # Allow fine-tuning
+        
+        # Input dimension for MLP: (embed_dim + lat_long_dim) * 2
+        # lat_long_dim is 2
+        self.input_dim = (self.embed_dim + 2) * 2
+        
+        self.fc1 = nn.Linear(self.input_dim, n_hidden_1)
+        self.bn1 = nn.BatchNorm1d(n_hidden_1)
+        self.dropout1 = nn.Dropout(0.2)
+
+        self.fc2 = nn.Linear(n_hidden_1, n_hidden_2)
+        self.bn2 = nn.BatchNorm1d(n_hidden_2)
+        self.dropout2 = nn.Dropout(0.2)
+
+        self.fc3 = nn.Linear(n_hidden_2, n_output)
+        self.bn3 = nn.BatchNorm1d(n_output)
+        self.fc4 = nn.Linear(n_hidden_2, 1)
+        self.act = nn.ReLU()
+        self.output_dim = n_output
+        
+        if config.type == 2:
+            self.s = n_output//2 - r
+            self.r = r
+
+    def forward(self, idx1, idx2, coords1, coords2):
+        # Look up embeddings
+        emb1 = self.embedding(idx1)
+        emb2 = self.embedding(idx2)
+        
+        # Concatenate with coordinates
+        x1 = torch.cat((emb1, coords1), dim=1)
+        x2 = torch.cat((emb2, coords2), dim=1)
+        
+        # Concatenate both nodes
+        x = torch.cat((x1, x2), dim=1)
+
+        x = self.act(self.bn1(self.fc1(x)))
+        # x = self.dropout1(x)
+
+        x = self.act(self.bn2(self.fc2(x)))
+        # x = self.dropout2(x)
+
+        # 最后一层不用激活函数
+        if config.type == 1:
+            output_layer = self.fc4(x)
+        else:
+            out_layer = self.act(self.bn3(self.fc3(x)))
+            # tilde_L1
+            if config.type == 2:
+                s = min(self.s, self.output_dim // 2)
+                part1 = torch.abs(out_layer[:, int(self.output_dim / 2):int(self.output_dim / 2) + s] -
+                                  out_layer[:, 0:s])
+                mean_part1 = torch.mean(part1, -1, keepdims=True) * s
+
+                part2 = out_layer[:, int(self.output_dim / 2) + s:] - out_layer[:, s:int(self.output_dim / 2)]
+                mean_part2 = torch.mean(part2, -1, keepdims=True) * self.r
+
+                output_layer = (mean_part1 + mean_part2) / (self.output_dim // 2)
+            # L1
+            if config.type == 3:
+                output_layer  = torch.mean(torch.abs(out_layer[:, self.output_dim//2:] - out_layer[:, 0:self.output_dim//2]), -1, keepdims=True)
+        return output_layer

@@ -4,7 +4,7 @@ import pickle
 import torch
 from torch.utils.data import Dataset, DataLoader
 
-from distnet_model import ImprovedMultiLayerPerceptron
+from distnet_model import ImprovedMultiLayerPerceptron, LearnableDistNet
 from config import get_config
 
 class DistanceDataset(Dataset):
@@ -23,10 +23,14 @@ class DistanceDataset(Dataset):
             i, j = self.indices[idx]
         else:
             i, j = self.LM_indices[idx - len(self.indices)]
-        x1 = np.concatenate((self.embed[i], self.node_long_lat[i]), axis=0)
-        x2 = np.concatenate((self.embed[j], self.node_long_lat[j]), axis=0)
+        
+        coords1 = self.node_long_lat[i]
+        coords2 = self.node_long_lat[j]
         y = self.sdm[i][j]
-        return torch.tensor(x1, dtype=torch.float32), torch.tensor(x2, dtype=torch.float32), torch.tensor(y, dtype=torch.float32)
+        
+        return torch.tensor(i, dtype=torch.long), torch.tensor(j, dtype=torch.long), \
+               torch.tensor(coords1, dtype=torch.float32), torch.tensor(coords2, dtype=torch.float32), \
+               torch.tensor(y, dtype=torch.float32)
 
 
 def load_and_preprocess_data(config, eval_sample_size=10000):
@@ -89,33 +93,29 @@ def load_and_preprocess_data(config, eval_sample_size=10000):
         shuffle=False
     )
 
-    return eval_loader, maxLength
+    return eval_loader, maxLength, embed
 
 
-def test_model(eval_loader, config, maxLength):
+def test_model(eval_loader, config, maxLength, embed):
     """
     Test the pre-trained model and compute required metrics
     :param eval_loader: Test data loader
     :param config: Configuration parameters
     :param maxLength: scalar used to denormalize distances
+    :param embed: Pretrained embeddings for initialization
     """
-    # 设置设备
-    # device = torch.device(
-    #     'cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
-    # print(f'Using device: {device}')
-
-    device = torch.device('cpu')
+    # 优先使用CUDA
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f'Using device: {device}')
 
     # Model initialization
-    embed_dim = config.embed_dim
-    long_lat_embed_dim = config.long_lat_embed_dim
-    input_dim = embed_dim + long_lat_embed_dim
-
     hidden_dim1 = 512
     hidden_dim2 = 256
     hidden_dim3 = 64
     output_dim = config.n_output
-    model = ImprovedMultiLayerPerceptron(input_dim * 2, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
+    
+    n_nodes = embed.shape[0]
+    model = LearnableDistNet(n_nodes, embed, hidden_dim1, hidden_dim2, hidden_dim3, output_dim).to(device)
 
     # Load pre-trained model
     if config.type == 1:
@@ -132,8 +132,14 @@ def test_model(eval_loader, config, maxLength):
     all_trues = []
 
     with torch.no_grad():
-        for batch_x1, batch_x2, batch_y in eval_loader:
-            outputs = model(batch_x1, batch_x2)
+        for batch_idx1, batch_idx2, batch_coords1, batch_coords2, batch_y in eval_loader:
+            batch_idx1 = batch_idx1.to(device)
+            batch_idx2 = batch_idx2.to(device)
+            batch_coords1 = batch_coords1.to(device)
+            batch_coords2 = batch_coords2.to(device)
+            batch_y = batch_y.to(device)
+            
+            outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
             outputs_np = outputs.cpu().numpy().squeeze()
             trues_np = batch_y.cpu().numpy()
             # denormalize
@@ -198,5 +204,5 @@ def test_model(eval_loader, config, maxLength):
 
 if __name__ == "__main__":
     config, _ = get_config()
-    eval_loader, maxLength = load_and_preprocess_data(config, eval_sample_size=10000)
-    test_model(eval_loader, config, maxLength)
+    eval_loader, maxLength, embed = load_and_preprocess_data(config, eval_sample_size=10000)
+    test_model(eval_loader, config, maxLength, embed)

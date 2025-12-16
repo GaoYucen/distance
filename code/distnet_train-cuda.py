@@ -179,7 +179,11 @@ def train_model(train_loader, valid_loader, embed, config):
     # Training parameters
     num_epochs = 100 # Increase epochs
     learning_rate = config.learning_rate
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    # Use AdamW for better regularization and stability
+    optimizer = optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
+    
+    # Use Scheduler to adjust learning rate when MRE plateaus
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=5, verbose=True)
     # if config.type == 2:
     #     optimizer = optim.Adam(model.parameters(), lr=config.learning_rate, weight_decay=0.01)
     
@@ -238,12 +242,15 @@ def train_model(train_loader, valid_loader, embed, config):
                     outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
                     loss = criterion(outputs, target)
                 scaler.scale(loss).backward()
+                scaler.unscale_(optimizer)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
                 scaler.step(optimizer)
                 scaler.update()
             else:
                 outputs = model(batch_idx1, batch_idx2, batch_coords1, batch_coords2)
                 loss = criterion(outputs, target)
                 loss.backward()
+                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
                 optimizer.step()
             train_loss += loss.item()
         train_loss /= len(train_loader)
@@ -292,6 +299,9 @@ def train_model(train_loader, valid_loader, embed, config):
         valid_loss /= len(valid_loader)
         avg_mre = total_mre / total_samples
         avg_mae = total_mae / total_samples
+        
+        # Step scheduler based on MRE
+        scheduler.step(avg_mre)
 
         # Update history
         history['train_loss'].append(train_loss)

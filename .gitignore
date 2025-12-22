@@ -1,0 +1,32 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 操作系统文件
+.DS_Store
+
+# 数据文件夹
+data/
+
+# 预处理输出 (最占用空间)
+data/*/pre/
+preprocessed_*.npy
+preprocessed_*.csv
+
+# 节点嵌入文件
+*.emb
+*.pkl
+
+# 原始数据格式
+*.xlsx
+*.xls
+data/*/map/
+
+# 模型权重与参数
+param/
+*.ckpt
+
+# 日志与实验结果
+log/
+*.log

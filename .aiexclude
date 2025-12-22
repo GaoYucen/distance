@@ -1,0 +1,11 @@
+# 排除所有数据文件夹下的预处理产物和原始数据
+data/**/*.npy
+data/**/*.emb
+data/**/*.pkl
+
+# 排除模型参数文件夹
+param/*.ckpt
+
+# 如果你想更彻底一点，可以直接排除整个 data 和 param 目录
+# data/
+# param/

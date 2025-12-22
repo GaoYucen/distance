@@ -1,0 +1,9 @@
+City: chengdu
+Eval sample size: 10000
+mean square error: 47257.44
+mean absolute error: 167.92427
+max absolute error: 2179.3413
+min absolute error: 0.0
+mean relative error: 0.02765572
+max relative error: 5.69161510
+min relative error: 0.0

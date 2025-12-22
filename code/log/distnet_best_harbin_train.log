@@ -1,0 +1,7 @@
+Epoch: 1, Train Loss: 0.00079907, Valid Loss: 0.00043843, Time: 43.13s
+Epoch: 2, Train Loss: 0.00024248, Valid Loss: 0.00029458, Time: 33.62s
+Epoch: 5, Train Loss: 0.00014858, Valid Loss: 0.00012384, Time: 41.48s
+Epoch: 1, Train Loss: 0.00140990, Valid Loss: 0.00039740, Time: 28.03s
+Epoch: 2, Train Loss: 0.00026241, Valid Loss: 0.00026342, Time: 22.64s
+Epoch: 3, Train Loss: 0.00019134, Valid Loss: 0.00022082, Time: 21.06s
+Epoch: 5, Train Loss: 0.00014394, Valid Loss: 0.00016734, Time: 21.68s

@@ -1,0 +1,11 @@
+Epoch: 1, Train Loss: 0.00054059, Valid Loss: 0.00013849, Time: 24.99s
+Epoch: 3, Train Loss: 0.00013543, Valid Loss: 0.00013000, Time: 19.28s
+Epoch: 4, Train Loss: 0.00011470, Valid Loss: 0.00008608, Time: 19.77s
+Epoch: 1, Train Loss: 0.00051371, Valid Loss: 0.00017144, Time: 25.34s
+Epoch: 2, Train Loss: 0.00017885, Valid Loss: 0.00013157, Time: 19.37s
+Epoch: 5, Train Loss: 0.00010908, Valid Loss: 0.00008536, Time: 20.87s
+Epoch: 6, Train Loss: 0.00009812, Valid Loss: 0.00008280, Time: 23.38s
+Epoch: 7, Train Loss: 0.00009028, Valid Loss: 0.00007625, Time: 25.13s
+Epoch: 8, Train Loss: 0.00008192, Valid Loss: 0.00006541, Time: 25.97s
+Epoch: 9, Train Loss: 0.00007347, Valid Loss: 0.00005516, Time: 25.72s
+Epoch: 10, Train Loss: 0.00006741, Valid Loss: 0.00004524, Time: 23.87s

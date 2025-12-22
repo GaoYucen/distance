@@ -26,7 +26,3 @@ data/*/map/
 # 模型权重与参数
 param/
 *.ckpt
-
-# 日志与实验结果
-log/
-*.log

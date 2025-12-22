@@ -1,0 +1,9 @@
+City: beijing
+mean square error: 1013017.06
+mean absolute error: 761.66492
+max absolute error: 11723.0879
+min absolute error: 0.1
+mean relative error: 0.05406459
+max relative error: 4.13404131
+min relative error: 0.0
+RMSE: 1006.4875

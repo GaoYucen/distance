@@ -1,0 +1,9 @@
+City: harbin
+Eval sample size: 10000
+mean square error: 202904.61
+mean absolute error: 340.97400
+max absolute error: 5009.4087
+min absolute error: 0.1
+mean relative error: 0.05576674
+max relative error: 52.70198441
+min relative error: 0.0

@@ -1,0 +1,36 @@
+--- /root/mornai-tmp/VLDB_Distance/shortest-distance-survey/src/models/lpnorm.py.bak	2026-05-23 13:54:14.865914634 +0800
++++ /root/mornai-tmp/VLDB_Distance/shortest-distance-survey/src/models/lpnorm_l1tilde.py	2026-05-23 14:03:58.333619797 +0800
+@@ -9,8 +9,8 @@
+ from models.basemodel import BaseModel
+ 
+ 
+-class LpNorm(BaseModel):
+-    def __init__(self, p=2, node_attributes=None):
++class LpNormL1Tilde(BaseModel):
++    def __init__(self, p=2, node_attributes=None, l1tilde_r=1, l1tilde_s=1):
+         """
+         Initializes the LpNorm model.
+ 
+@@ -19,6 +19,8 @@
+         """
+         super().__init__()
+         self.p = p
++        self.l1tilde_r = l1tilde_r
++        self.l1tilde_s = l1tilde_s
+ 
+         ## Define layers
+         # Embedding layer
+@@ -46,8 +48,11 @@
+         x1 = self.embedding(x1)
+         x2 = self.embedding(x2)
+ 
+-        # Compute Lp norm
+-        x = torch.norm(x1 - x2, p=self.p, dim=1, keepdim=True)
++        r, s = self.l1tilde_r, self.l1tilde_s
++        diff = x2 - x1
++        sym = torch.abs(diff[:, :r]).sum(dim=1, keepdim=True)
++        asym = diff[:, r:r+s].sum(dim=1, keepdim=True)
++        x = sym + asym
+ 
+         return x
+ 

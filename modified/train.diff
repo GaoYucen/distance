@@ -1,0 +1,66 @@
+--- /root/mornai-tmp/VLDB_Distance/shortest-distance-survey/src/train.py.bak	2026-05-23 14:03:59.296622255 +0800
++++ /root/mornai-tmp/VLDB_Distance/shortest-distance-survey/src/train.py	2026-05-23 14:04:00.538625448 +0800
+@@ -150,6 +150,11 @@
+                     help='Enable active fine-tuning for dist2gnn')
+ parser.add_argument('--dist2gnn_top_k_ratio', type=float, default=0.1,
+                     help='Top-k ratio for active fine-tuning')
++# L1Tilde metric parameters (for L1→L̃₁ ablation experiments)
++parser.add_argument('--l1tilde_r', type=int, default=62,
++                    help='Number of symmetric dimensions for L1Tilde (r+s must equal embed_dim)')
++parser.add_argument('--l1tilde_s', type=int, default=2,
++                    help='Number of asymmetric dimensions for L1Tilde (r+s must equal embed_dim)')
+ 
+ args = parser.parse_args()
+ 
+@@ -240,6 +245,9 @@
+ dist2gnn_landmark_ratio = args.dist2gnn_landmark_ratio
+ dist2gnn_active_finetune = args.dist2gnn_active_finetune
+ dist2gnn_top_k_ratio = args.dist2gnn_top_k_ratio
++# L1Tilde parameters
++l1tilde_r = args.l1tilde_r
++l1tilde_s = args.l1tilde_s
+ 
+ print("Arguments:")
+ for arg, value in vars(args).items():
+@@ -601,6 +609,41 @@
+         dist2gnn_landmarks = landmark_sampling(G, ratio=0.02, seed=seed)
+         print(f"  Landmark nodes selected: {len(dist2gnn_landmarks)}")
+ 
++elif model_class == 'rgnndist2vec_l1tilde':
++    from models.rgnndist2vec_l1tilde import RGNNdist2vecL1Tilde
++
++    # Initialize model (same params as rgnndist2vec, with L1→L̃₁)
++    model = RGNNdist2vecL1Tilde(n_input=2,
++                                 n_hidden_1=512,
++                                 n_hidden_2=embedding_dim,
++                                 layer_type=gnn_layer,
++                                 node_attributes=node_attributes,
++                                 edge_attributes=edge_attributes,
++                                 max_distance=max_distance,
++                                 disable_edge_weight=disable_edge_weight,
++                                 l1tilde_r=l1tilde_r,
++                                 l1tilde_s=l1tilde_s)
++elif model_class == 'rne_l1tilde':
++    from models.rne_l1tilde import RNEL1Tilde
++
++    # Load parts information (if available)
++    parts = read_parts_file(data_dir, data_name)
++
++    # Initialize model
++    model = RNEL1Tilde(num_nodes=num_nodes,
++                        embed_size=embedding_dim,
++                        max_distance=max_distance,
++                        parts=parts,
++                        l1tilde_r=l1tilde_r,
++                        l1tilde_s=l1tilde_s)
++elif model_class == 'lpnorm_l1tilde':
++    from models.lpnorm_l1tilde import LpNormL1Tilde
++
++    # Initialize model
++    model = LpNormL1Tilde(p=p_norm, node_attributes=node_attributes,
++                           l1tilde_r=l1tilde_r,
++                           l1tilde_s=l1tilde_s)
++
+ else:
+     raise ValueError(f"Unknown model class: {model_class}")
+ 

@@ -1,0 +1,34 @@
+--- /root/mornai-tmp/VLDB_Distance/shortest-distance-survey/src/models/rgnndist2vec.py.bak	2026-05-23 13:54:14.861914687 +0800
++++ /root/mornai-tmp/VLDB_Distance/shortest-distance-survey/src/models/rgnndist2vec_l1tilde.py	2026-05-23 14:03:55.599612888 +0800
+@@ -16,11 +16,14 @@
+ from torch_geometric.utils import k_hop_subgraph
+ 
+ 
+-# Define the RGNNdist2vec model
+-class RGNNdist2vec(nn.Module):
+-    def __init__(self, n_input, n_hidden_1, n_hidden_2, layer_type, node_attributes, edge_attributes, max_distance=1.0, disable_edge_weight=True):
++# Define the RGNNdist2vecL1Tilde model (L1 → L̃₁ metric)
++class RGNNdist2vecL1Tilde(nn.Module):
++    def __init__(self, n_input, n_hidden_1, n_hidden_2, layer_type, node_attributes, edge_attributes, max_distance=1.0, disable_edge_weight=True, l1tilde_r=62, l1tilde_s=2):
+         super().__init__()
+         self.max_distance = max_distance
++        self.l1tilde_r = l1tilde_r
++        self.l1tilde_s = l1tilde_s
++        assert l1tilde_r + l1tilde_s == n_hidden_2, f"L1Tilde: r({l1tilde_r})+s({l1tilde_s}) must equal embedding_dim({n_hidden_2})"
+ 
+         # Define GNN layers
+         self.layer_type = layer_type
+@@ -113,8 +116,11 @@
+         emb1 = embeddings[x1]
+         emb2 = embeddings[x2]
+ 
+-        # Compute L1 norm
+-        distances = torch.norm(emb1 - emb2, p=1, dim=1, keepdim=True)
++        # Compute L̃₁ asymmetric distance (replaces L1 norm)
++        r, s = self.l1tilde_r, self.l1tilde_s
++        sym = torch.abs(emb2[:, :r] - emb1[:, :r]).sum(dim=1, keepdim=True)
++        asym = (emb2[:, r:r+s] - emb1[:, r:r+s]).sum(dim=1, keepdim=True)
++        distances = sym + asym
+ 
+         # Scale distances back to original range
+         distances = distances * self.max_distance

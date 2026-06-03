@@ -1,0 +1,37 @@
+--- /root/mornai-tmp/VLDB_Distance/shortest-distance-survey/src/models/rne.py.bak	2026-05-23 13:54:14.863914660 +0800
++++ /root/mornai-tmp/VLDB_Distance/shortest-distance-survey/src/models/rne_l1tilde.py	2026-05-23 14:03:56.815615947 +0800
+@@ -13,15 +13,18 @@
+ from models.basemodel import BaseModel
+ 
+ 
+-class RNE(BaseModel):
+-    def __init__(self, num_nodes, embed_size, max_distance=1.0, parts=None):
++class RNEL1Tilde(BaseModel):
++    def __init__(self, num_nodes, embed_size, max_distance=1.0, parts=None, l1tilde_r=62, l1tilde_s=2):
+         """
+         Initializes the RNE model.
+         """
+         super().__init__()
+         self.embed_size = embed_size
++        self.l1tilde_r = l1tilde_r
++        self.l1tilde_s = l1tilde_s
+         self.max_distance = max_distance
+         self.parts = torch.from_numpy(parts) if parts is not None else None
++        assert l1tilde_r + l1tilde_s == embed_size, f"L1Tilde: r({l1tilde_r})+s({l1tilde_s}) must equal embed_size({embed_size})"
+         print(f"Initializing RNE...")
+         print(f"  - Number of nodes: {num_nodes}")
+         print(f"  - Embedding size: {embed_size}")
+@@ -47,8 +50,11 @@
+         x1 = self.embedding(x1)
+         x2 = self.embedding(x2)
+ 
+-        x = torch.abs(x1 - x2)                  # Shape: (B, embed_size)
+-        x = torch.mean(x, dim=1, keepdim=True)  # Shape: (B, 1)
++        r, s = self.l1tilde_r, self.l1tilde_s
++        diff = x2 - x1
++        sym = torch.abs(diff[:, :r]).mean(dim=1, keepdim=True)    # L̃₁ symmetric part (mean over r dims)
++        asym = diff[:, r:r+s].mean(dim=1, keepdim=True)           # L̃₁ asymmetric part (mean over s dims)
++        x = sym + asym
+         x = torch.clamp(x, min=0.0)
+         x = x * self.max_distance
+ 

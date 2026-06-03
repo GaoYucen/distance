@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.pt
+*.pth
+results/
+data/
+cache/
+.claude/
+*.log
+quick_harbin_l1tilde/filtered_data/

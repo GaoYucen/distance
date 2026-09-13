@@ -1,0 +1,230 @@
+{
+  "status": "passed",
+  "runs": 24,
+  "device": "cpu",
+  "method": "load trained checkpoint in a new process, recompute decoder formulas and raw prediction metrics",
+  "tolerance_prediction": {
+    "rtol": 2e-05,
+    "atol_distance_units": 0.1
+  },
+  "tolerance_validation_mre_pp": 0.002,
+  "rows": [
+    {
+      "mode": "shared_l1",
+      "seed": 42,
+      "test_mre_percent": 14.463243788085933,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.037109375,
+      "cpu_replayed_validation_mre_percent": 14.526623784169267,
+      "validation_mre_replay_difference_pp": 2.6835355058096866e-06,
+      "checkpoint_sha256": "332b42c4a57bef5c0cae41d0cd76720d60d42660339ce97ff4ee8a97b16a2032"
+    },
+    {
+      "mode": "shared_tilde_63_1",
+      "seed": 42,
+      "test_mre_percent": 14.404848403560337,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.0517578125,
+      "cpu_replayed_validation_mre_percent": 14.42253646558836,
+      "validation_mre_replay_difference_pp": 5.692870903573066e-07,
+      "checkpoint_sha256": "d336d66e140dd4e36c1613166ce6203a2e3927e063805dfe5a4900a6e20c90b5"
+    },
+    {
+      "mode": "shared_tilde_62_2",
+      "seed": 42,
+      "test_mre_percent": 14.730867321369729,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.05322265625,
+      "cpu_replayed_validation_mre_percent": 14.761829991931192,
+      "validation_mre_replay_difference_pp": 2.1058266082008004e-06,
+      "checkpoint_sha256": "6c9e90eb11d11874967fdbebc5cf47546b529d11e88306f7c1965d0c7e59f72f"
+    },
+    {
+      "mode": "shared_linf",
+      "seed": 42,
+      "test_mre_percent": 6.190418132944154,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.02978515625,
+      "cpu_replayed_validation_mre_percent": 5.93632028363134,
+      "validation_mre_replay_difference_pp": 5.301036987148677e-07,
+      "checkpoint_sha256": "d00e01ab00c35200513ed3880e29c84e20def2e981ee3f8de7979f68ed307c04"
+    },
+    {
+      "mode": "cross_scalar",
+      "seed": 42,
+      "test_mre_percent": 10.84065844619166,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.00390625,
+      "cpu_replayed_validation_mre_percent": 9.724843889837127,
+      "validation_mre_replay_difference_pp": 3.877924488193685e-07,
+      "checkpoint_sha256": "610e03938df305ce142f98ce71f5235f257da4a01216c8ddc892497662d97cda"
+    },
+    {
+      "mode": "cross_l1",
+      "seed": 42,
+      "test_mre_percent": 13.139361803414321,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.00390625,
+      "cpu_replayed_validation_mre_percent": 12.929379420244501,
+      "validation_mre_replay_difference_pp": 5.197884576091383e-07,
+      "checkpoint_sha256": "a1f3b0af99a20f5e203d557b2988e508eb2a4d8d23833b4e94266340d10bbcc6"
+    },
+    {
+      "mode": "cross_tilde_62_2",
+      "seed": 42,
+      "test_mre_percent": 11.946698304276362,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.0048828125,
+      "cpu_replayed_validation_mre_percent": 11.90204550722418,
+      "validation_mre_replay_difference_pp": 1.4414471607437918e-06,
+      "checkpoint_sha256": "81500d44e9c55b1fa3e883175c8c1972442c838ff4fb3c3c8f8fa45d726d72cd"
+    },
+    {
+      "mode": "cross_tilde_2_62",
+      "seed": 42,
+      "test_mre_percent": 7.3639181952108625,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.005859375,
+      "cpu_replayed_validation_mre_percent": 6.727305838680501,
+      "validation_mre_replay_difference_pp": 7.06100229841411e-07,
+      "checkpoint_sha256": "9502209091aa68c354355928ef1f7792abef89e40a6346f520ea0d88b824a502"
+    },
+    {
+      "mode": "shared_l1",
+      "seed": 99,
+      "test_mre_percent": 13.174335066070686,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.05078125,
+      "cpu_replayed_validation_mre_percent": 12.824739599601735,
+      "validation_mre_replay_difference_pp": 2.8964119067609317e-06,
+      "checkpoint_sha256": "bcc85b37c0fe0f82d9b81b350a79dc7172fce24cf448e962d07e10fe282787ef"
+    },
+    {
+      "mode": "shared_tilde_63_1",
+      "seed": 99,
+      "test_mre_percent": 12.936434320855458,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.041015625,
+      "cpu_replayed_validation_mre_percent": 12.722955773836219,
+      "validation_mre_replay_difference_pp": 3.109937750878089e-06,
+      "checkpoint_sha256": "161a6e6a8d2e9d66a88541d0179d744f65dfd87d963aa88542f49c5a75ae94e3"
+    },
+    {
+      "mode": "shared_tilde_62_2",
+      "seed": 99,
+      "test_mre_percent": 13.479708458011366,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.0439453125,
+      "cpu_replayed_validation_mre_percent": 13.263362122444972,
+      "validation_mre_replay_difference_pp": 9.664581863688682e-07,
+      "checkpoint_sha256": "984a5077d47706b755463b94d1f3b9be3f3c8d10cd45f15f72318ff497970d9d"
+    },
+    {
+      "mode": "shared_linf",
+      "seed": 99,
+      "test_mre_percent": 6.325914953613321,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.02734375,
+      "cpu_replayed_validation_mre_percent": 6.324164401988343,
+      "validation_mre_replay_difference_pp": 9.124476161304074e-07,
+      "checkpoint_sha256": "882815476c8704001ab9c4b641052b5d7bd6a7f7803bea0b1bc8f29541197710"
+    },
+    {
+      "mode": "cross_scalar",
+      "seed": 99,
+      "test_mre_percent": 10.532537159168234,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.00390625,
+      "cpu_replayed_validation_mre_percent": 9.495258846942138,
+      "validation_mre_replay_difference_pp": 2.2941475030791025e-07,
+      "checkpoint_sha256": "345c0ba43143885e7dc6586958e797d17232aea4aa55880237200a177cb110be"
+    },
+    {
+      "mode": "cross_l1",
+      "seed": 99,
+      "test_mre_percent": 14.275804227159556,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.005859375,
+      "cpu_replayed_validation_mre_percent": 13.91297769551905,
+      "validation_mre_replay_difference_pp": 4.172864755958017e-07,
+      "checkpoint_sha256": "5acbb4271577158c63129b47b18b746d4e33cbf341e1d914cfad90879352d296"
+    },
+    {
+      "mode": "cross_tilde_62_2",
+      "seed": 99,
+      "test_mre_percent": 12.771264381793568,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.005859375,
+      "cpu_replayed_validation_mre_percent": 12.610710135189397,
+      "validation_mre_replay_difference_pp": 1.0221325332793185e-06,
+      "checkpoint_sha256": "66aeba9406f94086f40cc5ad20fab47edbb7243c2b2aeff653e0fae3f5cb1181"
+    },
+    {
+      "mode": "cross_tilde_2_62",
+      "seed": 99,
+      "test_mre_percent": 6.812207868668778,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.005859375,
+      "cpu_replayed_validation_mre_percent": 6.440361139991206,
+      "validation_mre_replay_difference_pp": 4.4920213770893724e-07,
+      "checkpoint_sha256": "dc8e486159c56a6acbfe28ee2be7cbe973c26e5a01be4bff9b8e1ce9faa2a220"
+    },
+    {
+      "mode": "shared_l1",
+      "seed": 1234,
+      "test_mre_percent": 12.516767202728493,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.02734375,
+      "cpu_replayed_validation_mre_percent": 12.301921010086357,
+      "validation_mre_replay_difference_pp": 1.5794541248226324e-06,
+      "checkpoint_sha256": "f0f54d94969cb70c766ba00a5dd5dc20096c786742407506ed93495bdbea3d91"
+    },
+    {
+      "mode": "shared_tilde_63_1",
+      "seed": 1234,
+      "test_mre_percent": 12.57545215076932,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.029296875,
+      "cpu_replayed_validation_mre_percent": 12.345229675480931,
+      "validation_mre_replay_difference_pp": 1.3312788897934524e-06,
+      "checkpoint_sha256": "8214d4885f644d80362b15ef4529b7013aa1611d3362925f59a6f861d3d20a4c"
+    },
+    {
+      "mode": "shared_tilde_62_2",
+      "seed": 1234,
+      "test_mre_percent": 12.592872483171352,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.03515625,
+      "cpu_replayed_validation_mre_percent": 12.391050926520263,
+      "validation_mre_replay_difference_pp": 3.7037592779398665e-06,
+      "checkpoint_sha256": "d07cc90662f37e1eb4a6217a9b109daaf64c01f476cf4a8804931c96b9b58cff"
+    },
+    {
+      "mode": "shared_linf",
+      "seed": 1234,
+      "test_mre_percent": 6.041618435316104,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.025390625,
+      "cpu_replayed_validation_mre_percent": 5.93877741027732,
+      "validation_mre_replay_difference_pp": 6.623182766674063e-07,
+      "checkpoint_sha256": "f4deb263b885df4ea23729870c81b0515922e145ddec852b0afbaa683852c4b3"
+    },
+    {
+      "mode": "cross_scalar",
+      "seed": 1234,
+      "test_mre_percent": 10.738873886979206,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.00390625,
+      "cpu_replayed_validation_mre_percent": 9.61810206150048,
+      "validation_mre_replay_difference_pp": 6.976223687615857e-07,
+      "checkpoint_sha256": "8940c06b75ab10a48246b66945ced016f107f9e347d0d94d164f800ba74a4c43"
+    },
+    {
+      "mode": "cross_l1",
+      "seed": 1234,
+      "test_mre_percent": 13.923351981854143,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.005859375,
+      "cpu_replayed_validation_mre_percent": 13.379192440177343,
+      "validation_mre_replay_difference_pp": 1.402233698044597e-06,
+      "checkpoint_sha256": "c64e59236f208bf05083bbb4c1fdbc0ad7de80e329913a1b17bb5c3d2e0a54d0"
+    },
+    {
+      "mode": "cross_tilde_62_2",
+      "seed": 1234,
+      "test_mre_percent": 12.434355243094469,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.005859375,
+      "cpu_replayed_validation_mre_percent": 12.12300298599332,
+      "validation_mre_replay_difference_pp": 1.3610926323792683e-06,
+      "checkpoint_sha256": "b55fbc726cb2725a7a991fc97ee8e7b267b66dc16e7cbd46b91535762e892743"
+    },
+    {
+      "mode": "cross_tilde_2_62",
+      "seed": 1234,
+      "test_mre_percent": 7.491723654999603,
+      "cpu_vs_gpu_prediction_max_abs_difference": 0.005859375,
+      "cpu_replayed_validation_mre_percent": 6.841456162051139,
+      "validation_mre_replay_difference_pp": 1.7002997232395956e-08,
+      "checkpoint_sha256": "5a05341358bf64a9d1f2d245f37446e163b9a3ac156abcb57ea695e2b1e1deaa"
+    }
+  ],
+  "scope": "artifact consistency only; not an independent dataset replication or significance test"
+}

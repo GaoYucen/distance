@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "test_label_invariance": true,
+  "exact_training_history_equal": true,
+  "exact_selected_state_equal": true,
+  "decode_and_grouping_checks": true,
+  "guard_threads": 1,
+  "guard_deterministic_algorithms": true,
+  "guard_note": "Prior exact-equality failure also occurred for identical-label repeats under parallel CPU floating-point reductions. No native data trained before guard passed.",
+  "device": "NVIDIA GeForce RTX 4090",
+  "torch": "2.6.0+cu124"
+}

@@ -1,0 +1,131 @@
+{
+  "runs": [
+    {
+      "initial_trainable_weights_sha256": "a008f730580ba024d2eeeb9ada15a083e09e22e161d9c802852390ba1699abe5",
+      "decoder_scale": 0.027159523694193083,
+      "calibration_raw_mean": 12.600440979003906,
+      "calibration_target_mean": 0.3422219753265381,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.0030347903137095274,
+          "validation_mre_percent": 23.813696205615997
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.0004990667403675616,
+          "validation_mre_percent": 13.108956813812256
+        }
+      ],
+      "best_validation_epoch": 2,
+      "test": {
+        "all": {
+          "count": 5000,
+          "mre_percent": 13.060036484446172,
+          "mae": 3.0509554464721673,
+          "directional_difference_rmse": 0.04360699770074645
+        },
+        "short_train_q25": {
+          "count": 1238,
+          "mre_percent": 45.66266417975828,
+          "mae": 4.713133109405469,
+          "directional_difference_rmse": 0.052603628757219634
+        },
+        "high_asymmetry_ge_20pct": {
+          "count": 0
+        },
+        "negative_prediction_fraction": 0.0,
+        "best_possible_symmetric_pairwise_mre_percent": 0.13900143108604024
+      },
+      "input_unchanged": true
+    },
+    {
+      "initial_trainable_weights_sha256": "a008f730580ba024d2eeeb9ada15a083e09e22e161d9c802852390ba1699abe5",
+      "decoder_scale": 0.027159523694193083,
+      "calibration_raw_mean": 12.600440979003906,
+      "calibration_target_mean": 0.3422219753265381,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.003034790320880711,
+          "validation_mre_percent": 23.8136887550354
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.0004990667465142905,
+          "validation_mre_percent": 13.108956813812256
+        }
+      ],
+      "best_validation_epoch": 2,
+      "test": {
+        "all": {
+          "count": 5000,
+          "mre_percent": 48.83160470480299,
+          "mae": 103.59481694032668,
+          "directional_difference_rmse": 0.08379648765510697
+        },
+        "short_train_q25": {
+          "count": 608,
+          "mre_percent": 37.0323602853138,
+          "mae": 8.261177538413751,
+          "directional_difference_rmse": 0.10106123778003512
+        },
+        "high_asymmetry_ge_20pct": {
+          "count": 0
+        },
+        "negative_prediction_fraction": 0.0,
+        "best_possible_symmetric_pairwise_mre_percent": 0.13900143108604024
+      },
+      "input_unchanged": true
+    },
+    {
+      "initial_trainable_weights_sha256": "a008f730580ba024d2eeeb9ada15a083e09e22e161d9c802852390ba1699abe5",
+      "decoder_scale": 0.027159523694193083,
+      "calibration_raw_mean": 12.600440979003906,
+      "calibration_target_mean": 0.3422219753265381,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.00303479026844725,
+          "validation_mre_percent": 23.81368726491928
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.0004990667831152678,
+          "validation_mre_percent": 13.108956813812256
+        }
+      ],
+      "best_validation_epoch": 2,
+      "test": {
+        "all": {
+          "count": 5000,
+          "mre_percent": 13.060035755679278,
+          "mae": 3.0509540733718867,
+          "directional_difference_rmse": 0.04360698978172166
+        },
+        "short_train_q25": {
+          "count": 1238,
+          "mre_percent": 45.66266566914067,
+          "mae": 4.713133130204504,
+          "directional_difference_rmse": 0.05260358697559929
+        },
+        "high_asymmetry_ge_20pct": {
+          "count": 0
+        },
+        "negative_prediction_fraction": 0.0,
+        "best_possible_symmetric_pairwise_mre_percent": 0.13900143108604024
+      },
+      "input_unchanged": true
+    }
+  ],
+  "original_data_hashes": {
+    "train": "756f4837872cd42a034c770e404599eda34bc5c0f117f757cc433389be9b2339",
+    "validation": "da6239e90f80849194e7cdf58a393d17e95bc1a5b7934862f295eb7bb58ac175",
+    "test": "a9652e039104eaa4ea221720381ac418eb28a640eed6bee6bde0f0345f9de49f",
+    "coordinates": "3af19cac6caeea22f38cd6a61d11913412e5bc641fef88e6f6bc048cfb8c04fe",
+    "edges": "c1d43ad84df0fbec6ca330fe41b9f7c5b8cb33039c11b4d5758a538b0aa49011"
+  },
+  "history_0_1_equal": false,
+  "history_0_2_equal": false,
+  "history_1_2_equal": false
+}

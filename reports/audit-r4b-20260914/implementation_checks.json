@@ -1,0 +1,153 @@
+{
+  "passed": true,
+  "checks": 27,
+  "records": [
+    {
+      "name": "numpy_decoder_and_structure_L1",
+      "passed": true
+    },
+    {
+      "name": "batched_vs_serial_Adam_L1",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_T1",
+      "passed": true
+    },
+    {
+      "name": "batched_vs_serial_Adam_T1",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_P64",
+      "passed": true
+    },
+    {
+      "name": "batched_vs_serial_Adam_P64",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_B2",
+      "passed": true
+    },
+    {
+      "name": "batched_vs_serial_Adam_B2",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_B4",
+      "passed": true
+    },
+    {
+      "name": "batched_vs_serial_Adam_B4",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_B8",
+      "passed": true
+    },
+    {
+      "name": "batched_vs_serial_Adam_B8",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_Shared-L1",
+      "passed": true
+    },
+    {
+      "name": "batched_vs_serial_Adam_Shared-L1",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_MRN-L2",
+      "passed": true
+    },
+    {
+      "name": "authors_MRNFixed_postprojection_equivalence",
+      "passed": true,
+      "source_commit": "0365394d4ecbd614f38775787af724d8b142c9d2",
+      "convention": "plain L2 = authors RMS with sqrt(32) coordinates; potential sign negated"
+    },
+    {
+      "name": "batched_vs_serial_Adam_MRN-L2",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_IQE-maxmean",
+      "passed": true
+    },
+    {
+      "name": "authors_IQE_IQE-maxmean",
+      "passed": true,
+      "source_commit": "0365394d4ecbd614f38775787af724d8b142c9d2"
+    },
+    {
+      "name": "batched_vs_serial_Adam_IQE-maxmean",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "numpy_decoder_and_structure_IQE-sum",
+      "passed": true
+    },
+    {
+      "name": "authors_IQE_IQE-sum",
+      "passed": true,
+      "source_commit": "0365394d4ecbd614f38775787af724d8b142c9d2"
+    },
+    {
+      "name": "batched_vs_serial_Adam_IQE-sum",
+      "passed": true,
+      "updates": 4
+    },
+    {
+      "name": "IQE_empty_overlapping_and_tied_intervals",
+      "passed": true,
+      "seeds": [
+        42,
+        99,
+        1234
+      ]
+    },
+    {
+      "name": "analytic_product_exact_B4",
+      "passed": true,
+      "nodes": 192,
+      "coordinates_stored": 64,
+      "active_coordinates": 21,
+      "max_error": 0.0
+    },
+    {
+      "name": "analytic_product_exact_B8",
+      "passed": true,
+      "nodes": 192,
+      "coordinates_stored": 64,
+      "active_coordinates": 21,
+      "max_error": 0.0
+    },
+    {
+      "name": "analytic_product_exact_Shared-L1",
+      "passed": true,
+      "nodes": 192,
+      "coordinates_stored": 64,
+      "active_coordinates": 9,
+      "max_error": 0.0
+    }
+  ],
+  "baseline_commit": "0365394d4ecbd614f38775787af724d8b142c9d2",
+  "torch_version": "2.6.0+cu124",
+  "upstream_files_sha256": {
+    "torchqmet/iqe.py": "9c9c8d94a3f076e44cd806e597de4eafb561a73818713dba503bd5cbc8658ab7",
+    "torchqmet/mrn.py": "17c3a6c62f92d4801d53883be4f9a90d806b48b1767a8cc4fe457e3c697f5381",
+    "torchqmet/reductions.py": "ffacce6feeff757564f22a91a9d9b1f6e5358766818d0013630e63644bd6f9ec"
+  },
+  "scope": "implementation checks and exact witnesses; not random-init fitting scores"
+}

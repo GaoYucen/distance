@@ -1,0 +1,8 @@
+{
+  "change": "CRLF to LF only; parsed CSV cells unchanged",
+  "rows": 120,
+  "before_sha256": "b063c61dc15249f3741beee1f6f058ec66a06bdcda87206b00e04bbfbf2f53b7",
+  "after_sha256": "120d77f8f716f55e6d8c8853b9fef7c5050fc7fceb0fa91872a868bf520f72b7",
+  "model_retraining": false,
+  "replay_tolerances_changed": false
+}

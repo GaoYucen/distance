@@ -1,0 +1,85 @@
+{
+  "classification": "synthetic full-matrix representation/optimization diagnostic, NOT generalization",
+  "protocol": "R4 v1.0 stage B with preregistered implementation clarification",
+  "graphs": {
+    "tree127": {
+      "nodes": 127,
+      "directed_arcs": 252,
+      "ordered_fit_pairs": 16002,
+      "strongly_connected": true,
+      "strict_positive_weights": true,
+      "independent_label_max_difference": 0.0,
+      "mean_distance": 27.649043869516312,
+      "max_distance": 52.0,
+      "file": "data/protocol_r4b/tree127.npz",
+      "sha256": "1c8e660ae6f22ce9e28eb322c831b6b2108c9f9e64c6946691421d78ea22f233",
+      "arrays_sha256": {
+        "D": "f412c09de23d9e16147b01c075240760e2a3bc446f8d9d996635c09bce9e4b21",
+        "edges": "50c582ee5eba97084bd473c82cfad990838a0605299fee6c3e9688ce795beb2f",
+        "mapping": "57661f46176ebe9a1ac13196bc1176d527abdfc67e0bafa87fc007868590d3c3",
+        "triples": "8cccadbdcf5b4c77e7e212efc69200cb19407585511697761893cdfc9efc0975"
+      }
+    },
+    "cycle97": {
+      "nodes": 97,
+      "directed_arcs": 97,
+      "ordered_fit_pairs": 9312,
+      "strongly_connected": true,
+      "strict_positive_weights": true,
+      "independent_label_max_difference": 0.0,
+      "mean_distance": 48.5,
+      "max_distance": 96.0,
+      "file": "data/protocol_r4b/cycle97.npz",
+      "sha256": "67eceaae449a8236ca9950169d849c3e4e5b025439c296cc5d860eb462723902",
+      "arrays_sha256": {
+        "D": "4de14bf481d6cca0194a0f845fade0d0c64a265a5033b1f189a066ff112f8be5",
+        "edges": "d3be7dc268916321573ed056669e775482a7621c016a22ef20266d187146dd8a",
+        "mapping": "57bc2b5e25a87033b5ecf05d936e6274e9e7faeb35e9084af3fa1589c10c7306",
+        "triples": "50a9c2db97992cb2409bd2498a03d2694dca1a2fd691b8761699b12fa39c9cfd"
+      }
+    },
+    "grid12": {
+      "nodes": 144,
+      "directed_arcs": 286,
+      "ordered_fit_pairs": 20592,
+      "strongly_connected": true,
+      "strict_positive_weights": true,
+      "independent_label_max_difference": 0.0,
+      "mean_distance": 8.898601398601398,
+      "max_distance": 22.0,
+      "file": "data/protocol_r4b/grid12.npz",
+      "sha256": "c84ad0647c10daace1f24d5cc56127ddaa0135b9720e1e177e970914e42e3a70",
+      "arrays_sha256": {
+        "D": "db79cb8f0ae7c97bcc5e7896a759d24ad936d657b359bbe2dfd2f86d6ab0a318",
+        "edges": "76e6a65587411f47723a4ad442ec76ae8edb3f159a62277e058096d11703098b",
+        "mapping": "85630e627ad5380c3309246334ecc5d95f871b680ca7c89353745d8f333ea549",
+        "triples": "04032c6d399c3b48e83fd33e9ec5cde8cec1efe67caa9c7dedf5cbf1b5cdc927"
+      }
+    },
+    "cube6_cycle3": {
+      "nodes": 192,
+      "directed_arcs": 1344,
+      "ordered_fit_pairs": 36672,
+      "strongly_connected": true,
+      "strict_positive_weights": true,
+      "independent_label_max_difference": 0.0,
+      "mean_distance": 4.020942408376963,
+      "max_distance": 8.0,
+      "file": "data/protocol_r4b/cube6_cycle3.npz",
+      "sha256": "5c5031deb2a840bf35f2a558b3e63454e709d6c92c6b4034d5cc55756eb2a759",
+      "arrays_sha256": {
+        "D": "723d24eaf0839580859c6de3a14d060383e3ba70e7e4ced7e7194b1813ba5349",
+        "edges": "6219e015b8c2467eccd96a46b82cd7cc780cf56b87fd1c386efc5ed281d43df1",
+        "mapping": "5539c662fd151ae39de8d4e747aa7abb49aa2b5567bf5326332fd3754e9807ae",
+        "triples": "ced7b28f95e11142eaa17cda79d525072f7ff77c82ff8a9869adf6aec9959fb8"
+      }
+    }
+  },
+  "versions": {
+    "python": "3.11.11",
+    "numpy": "1.26.4",
+    "scipy": "1.16.3",
+    "networkx": "3.4.2"
+  },
+  "source_commit": "0a279276d5b549ce3fcfbd1e00a09370e6f68070"
+}

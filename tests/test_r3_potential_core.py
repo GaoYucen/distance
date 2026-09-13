@@ -44,3 +44,11 @@ def test_invalid():
  with pytest.raises(ValueError):mre([1],[np.nan],[1],[1])
  with pytest.raises(ValueError):node_design([[1,1]],3)
  with pytest.raises(ValueError):node_design([[0,4]],3)
+
+@pytest.mark.parametrize('seed',range(5))
+def test_equivalent_dual(seed):
+ from scripts.r3_potential_core import fit_mre_lp_dual
+ rng=np.random.default_rng(seed);X=rng.normal(size=(40,5));a=rng.uniform(.2,4,40);b=rng.uniform(.2,4,40);s=rng.uniform(.2,4,40)
+ t,p=fit_mre_lp(X,s,a,b,10);tt,d=fit_mre_lp_dual(X,s,a,b,10)
+ assert p['success'] and d['success'] and d['numerical_optimum_certified']
+ assert abs(mre(s,X@t,a,b)-mre(s,X@tt,a,b))<1e-7

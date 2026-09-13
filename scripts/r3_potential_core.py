@@ -84,3 +84,23 @@ def fit_mre_lp(X,s,a,b,time_limit=120.):
   numerical_optimum_certified=violation<1e-6 and gap<1e-6 and abs(direct-sol.fun)<1e-6)
  if not info['numerical_optimum_certified'] or direct>zero+1e-6:raise AssertionError(f'LP verification failed: {info}')
  return theta,info
+
+def fit_mre_lp_dual(X,s,a,b,time_limit=120.):
+ """Equivalent LAD dual: same model/objective, only k feature equalities."""
+ s,a,b=arrays(s,a,b);X=sparse.csr_matrix(X,dtype=np.float64);n,k=X.shape
+ if n!=len(s) or not np.isfinite(X.data).all():raise ValueError('Invalid design')
+ D=sparse.vstack([X,-X],format='csr');target=np.r_[a-s,b-s];weights=np.r_[.5/a,.5/b];t=time.perf_counter()
+ with warnings.catch_warnings():
+  warnings.filterwarnings('ignore',category=OptimizeWarning,message='Unrecognized options detected.*')
+  sol=linprog(-target,A_eq=D.T.tocsc(),b_eq=np.zeros(k),bounds=np.column_stack([-weights,weights]),method='highs-ipm',
+   options={'time_limit':time_limit,'presolve':True,'threads':2,'primal_feasibility_tolerance':1e-8,
+   'dual_feasibility_tolerance':1e-8,'ipm_optimality_tolerance':1e-9})
+ info={'solver':'HiGHS-IPM / equivalent LAD dual','success':bool(sol.success),'status':int(sol.status),
+  'message':str(sol.message),'seconds':time.perf_counter()-t,'iterations':int(sol.nit),'equalities':k,'variables':2*n,'time_limit':time_limit}
+ if not sol.success:return None,info
+ theta=-np.asarray(sol.eqlin.marginals);direct=mre(s,np.asarray(X@theta).ravel(),a,b);dual=-float(sol.fun)/n
+ residual=float(np.max(abs(D.T@sol.x)));violation=float(max(0.,np.max(abs(sol.x)-weights)));gap=abs(direct-dual)
+ info.update(train_mre=direct,dual_objective_mre=dual,absolute_duality_gap=gap,dual_equality_residual=residual,
+  dual_bound_violation=violation,numerical_optimum_certified=gap<1e-6 and residual<1e-5 and violation<1e-7)
+ if not info['numerical_optimum_certified'] or direct>mre(s,np.zeros(n),a,b)+1e-6:raise AssertionError(f'Dual verification failed: {info}')
+ return theta,info

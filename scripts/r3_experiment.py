@@ -150,7 +150,7 @@ def neural():
    torch.save({'state_dict':state,'scale':float(base['scale'])},path);info['weights_sha256']=digest(path)
    record(seed,'mlp',obj,h,info)
  print('R3_NEURAL_FINISHED',flush=True)
-def finalize():
+def finalize(output_name='summary.json'):
  prep=json.loads((R/'preparation.json').read_text());rows=[];missing=[]
  for base in prep['base']:assert digest(ROOT/base['path'])==base['sha256']
  for seed in SEEDS:
@@ -176,7 +176,7 @@ def finalize():
       'Q1_mre_mean':float(np.mean([r[version][split]['Q1']['mre'] for r in rs])) if values else None,
       'high_asym_mre_mean':float(np.mean([r[version][split]['high_asym']['mre'] for r in rs])) if values else None}
    summary['methods'][f'{rep}/{obj}']=entry
- save(R/'summary.json',summary);print('R3_FINAL_SUMMARY',json.dumps(summary),flush=True)
+ save(R/output_name,summary);print('R3_FINAL_SUMMARY',json.dumps(summary),flush=True)
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--phase',choices=['prepare','guards','convex','neural','finalize'],required=True)
  args=p.parse_args();torch.set_num_threads(2);globals()[args.phase]()

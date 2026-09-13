@@ -1,0 +1,10 @@
+{
+  "source_commit": "e9fb84f261b75af490f9a11c833692f1af01c839",
+  "nodes": 1901,
+  "directed_edges": 5941,
+  "strongly_connected": true,
+  "weight_convention": "int(length) per legacy generate.py, last duplicate wins",
+  "all_pairs_finite_mask_matches": true,
+  "all_pairs_max_abs_difference": 0.0,
+  "passed": true
+}

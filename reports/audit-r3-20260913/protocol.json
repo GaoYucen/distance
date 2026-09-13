@@ -1,0 +1,31 @@
+{
+  "seeds": [
+    42,
+    99,
+    1234
+  ],
+  "train": 20000,
+  "val": 5000,
+  "test": 5000,
+  "secondary": 5000,
+  "secondary_not_untouched": true,
+  "backbone_frozen": true,
+  "dimensions": 65,
+  "capacity_not_matched": true,
+  "representations": [
+    "free",
+    "linear",
+    "mlp"
+  ],
+  "objectives": [
+    "A_l2",
+    "MRE"
+  ],
+  "MLP": "2-64-64-1, zero output layer, 300 full-batch Adam steps, lr .003, minimum TRAIN objective incl step0",
+  "free_fallback": "zero for cross-training-component queries; not globally metric-preserving wrapper",
+  "shrink": "one validation-only global lambda in [0,1] exact weighted-median minimization; zero included",
+  "negative_predictions": "raw, no clipping",
+  "LP": "training-only HiGHS-IPM, time limit120s; report optimum only after primal/dual checks",
+  "source_commit": "9577919a8973facc320eae80c8bc27194fe1d0cc",
+  "no_test_tuning": true
+}

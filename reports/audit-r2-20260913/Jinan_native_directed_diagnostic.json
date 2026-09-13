@@ -1,0 +1,216 @@
+{
+  "solver": {
+    "stop_code": 2,
+    "iterations": 125,
+    "residual_norm": 108727.78613871167,
+    "normal_residual_norm": 0.0006859685263673027,
+    "converged": true
+  },
+  "fit_scope": "training unordered pairs only",
+  "asymmetry_definition": "abs(d_uv-d_vu) / ((d_uv+d_vu)/2)",
+  "warning": "Oracle symmetric component S uses ground truth: these are structural diagnostics, NOT learned-model MRE.",
+  "energy_warning": "Explained ratio measures squared directional difference, not fraction of queries and not fraction of total model error.",
+  "split_metrics": {
+    "train": {
+      "input_count": 100000,
+      "identifiable_pair_count": 100000,
+      "all": {
+        "count": 100000,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.0,
+          0.036339922260934174,
+          0.2237720728416542,
+          0.3514341533660835,
+          0.7738072560511002,
+          1.9648553360568581
+        ],
+        "asymmetric_energy": 402788.59215544997,
+        "potential_residual_energy": 118217.31478625366,
+        "potential_explained_energy_ratio_vs_zero": 0.7065028228489909,
+        "asymmetry_rmse": 634.6562787489382,
+        "potential_residual_rmse": 343.82744914601227,
+        "oracle_symmetric_midpoint_mre_percent": 4.965857731570993,
+        "best_possible_symmetric_pairwise_mre_percent": 3.866185683346348,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 4.174482968166292,
+        "oracle_S_plus_potential_negative_prediction_fraction": 9.5e-05
+      },
+      "short_train_q25": {
+        "count": 25000,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.0,
+          0.05619689872800343,
+          0.3588701947643413,
+          0.5194552145994231,
+          0.9856739006662948,
+          1.9648553360568581
+        ],
+        "asymmetric_energy": 69203.18155020001,
+        "potential_residual_energy": 52169.915863596856,
+        "potential_explained_energy_ratio_vs_zero": 0.24613414159647007,
+        "asymmetry_rmse": 263.06497590937494,
+        "potential_residual_rmse": 228.40734634331895,
+        "oracle_symmetric_midpoint_mre_percent": 7.92970080792145,
+        "best_possible_symmetric_pairwise_mre_percent": 5.625878342652813,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 8.092085303736114,
+        "oracle_S_plus_potential_negative_prediction_fraction": 0.00038
+      },
+      "high_asymmetry_ge_20pct": {
+        "count": 11754,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.20000740219845267,
+          0.3185225705978819,
+          0.7251625989645476,
+          0.9294503862514136,
+          1.3751117980709944,
+          1.9648553360568581
+        ],
+        "asymmetric_energy": 3045298.269898332,
+        "potential_residual_energy": 570618.4298216588,
+        "potential_explained_energy_ratio_vs_zero": 0.8126231392629042,
+        "asymmetry_rmse": 1745.0782990738073,
+        "potential_residual_rmse": 755.392897651056,
+        "oracle_symmetric_midpoint_mre_percent": 24.674266886895307,
+        "best_possible_symmetric_pairwise_mre_percent": 16.19436452257602,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 14.868849978110882,
+        "oracle_S_plus_potential_negative_prediction_fraction": 0.0
+      },
+      "asymmetry_lt_1pct_fraction": 0.26701,
+      "asymmetry_ge_20pct_fraction": 0.11754
+    },
+    "validation": {
+      "input_count": 10000,
+      "identifiable_pair_count": 9989,
+      "all": {
+        "count": 9989,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.0,
+          0.035821931175054514,
+          0.2230366925624071,
+          0.3545491142750036,
+          0.768103575774785,
+          1.8477032670105626
+        ],
+        "asymmetric_energy": 359293.3459069976,
+        "potential_residual_energy": 157483.9908351255,
+        "potential_explained_energy_ratio_vs_zero": 0.561684087308731,
+        "asymmetry_rmse": 599.4108323237057,
+        "potential_residual_rmse": 396.8425264952403,
+        "oracle_symmetric_midpoint_mre_percent": 5.063314602631438,
+        "best_possible_symmetric_pairwise_mre_percent": 3.8509411938541627,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 4.734548370186081,
+        "oracle_S_plus_potential_negative_prediction_fraction": 0.00010011012113324657
+      },
+      "short_train_q25": {
+        "count": 2574,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.0,
+          0.054889526288197446,
+          0.3511482136847215,
+          0.49613187681579474,
+          1.0587315616076047,
+          1.8477032670105626
+        ],
+        "asymmetric_energy": 62269.69061577311,
+        "potential_residual_energy": 55114.55002059405,
+        "potential_explained_energy_ratio_vs_zero": 0.11490567119289075,
+        "asymmetry_rmse": 249.53895610860664,
+        "potential_residual_rmse": 234.76488242621392,
+        "oracle_symmetric_midpoint_mre_percent": 8.201707182054088,
+        "best_possible_symmetric_pairwise_mre_percent": 5.534136426434214,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 9.253254405696538,
+        "oracle_S_plus_potential_negative_prediction_fraction": 0.0003885003885003885
+      },
+      "high_asymmetry_ge_20pct": {
+        "count": 1153,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.20002584684309543,
+          0.32070037608222723,
+          0.7261587449046706,
+          0.9451982242887211,
+          1.4014645971282855,
+          1.8477032670105626
+        ],
+        "asymmetric_energy": 2740071.0017454466,
+        "potential_residual_energy": 738455.9840274964,
+        "potential_explained_energy_ratio_vs_zero": 0.7304975004088966,
+        "asymmetry_rmse": 1655.315982447293,
+        "potential_residual_rmse": 859.3346170308143,
+        "oracle_symmetric_midpoint_mre_percent": 25.974461533950848,
+        "best_possible_symmetric_pairwise_mre_percent": 16.35958447433228,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 17.44187312987465,
+        "oracle_S_plus_potential_negative_prediction_fraction": 0.0
+      },
+      "asymmetry_lt_1pct_fraction": 0.2652918210031034,
+      "asymmetry_ge_20pct_fraction": 0.1154269696666333
+    },
+    "test": {
+      "input_count": 10000,
+      "identifiable_pair_count": 9988,
+      "all": {
+        "count": 9988,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.0,
+          0.03722058842869831,
+          0.22596380995545062,
+          0.3535907406538906,
+          0.7909326578377774,
+          1.8934353091140854
+        ],
+        "asymmetric_energy": 441430.1369833801,
+        "potential_residual_energy": 159614.1372629384,
+        "potential_explained_energy_ratio_vs_zero": 0.638415858161157,
+        "asymmetry_rmse": 664.4020898397146,
+        "potential_residual_rmse": 399.51738042660725,
+        "oracle_symmetric_midpoint_mre_percent": 5.202570562439583,
+        "best_possible_symmetric_pairwise_mre_percent": 3.9420107531412723,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 4.850292310608031,
+        "oracle_S_plus_potential_negative_prediction_fraction": 0.0001501802162595114
+      },
+      "short_train_q25": {
+        "count": 2554,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.0,
+          0.06238190122058057,
+          0.3490483545124993,
+          0.5054606306744398,
+          0.9829317891259162,
+          1.8934353091140854
+        ],
+        "asymmetric_energy": 70521.30625489428,
+        "potential_residual_energy": 58673.67953108145,
+        "potential_explained_energy_ratio_vs_zero": 0.16800067033628707,
+        "asymmetry_rmse": 265.5584799152426,
+        "potential_residual_rmse": 242.22650460071756,
+        "oracle_symmetric_midpoint_mre_percent": 8.603318845629449,
+        "best_possible_symmetric_pairwise_mre_percent": 5.7081174480898165,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 9.63961617485315,
+        "oracle_S_plus_potential_negative_prediction_fraction": 0.0005873140172278779
+      },
+      "high_asymmetry_ge_20pct": {
+        "count": 1191,
+        "asymmetry_abs_diff_over_mean_quantiles": [
+          0.2002222884870833,
+          0.3158274909708944,
+          0.7231257981783066,
+          0.9601098575320539,
+          1.4896530014959182,
+          1.8934353091140854
+        ],
+        "asymmetric_energy": 3323706.8607052895,
+        "potential_residual_energy": 818796.8851142853,
+        "potential_explained_energy_ratio_vs_zero": 0.7536494885290405,
+        "asymmetry_rmse": 1823.103634110055,
+        "potential_residual_rmse": 904.8739608996854,
+        "oracle_symmetric_midpoint_mre_percent": 25.918670263489872,
+        "best_possible_symmetric_pairwise_mre_percent": 16.24559096202604,
+        "oracle_S_plus_train_fitted_potential_mre_percent": 17.083377744412275,
+        "oracle_S_plus_potential_negative_prediction_fraction": 0.0
+      },
+      "asymmetry_lt_1pct_fraction": 0.2592110532639167,
+      "asymmetry_ge_20pct_fraction": 0.11924309171005207
+    }
+  },
+  "short_threshold_train_q25_distance_units": 3755.625,
+  "dataset_name": "Jinan_native_directed",
+  "data_sha256": "22640a0e3fc7d5e35ae9b9d5dab6e3e172b787fd99c3b6ccac80809161b2053c"
+}

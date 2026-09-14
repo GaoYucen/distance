@@ -83,7 +83,7 @@ def main():
     Xr,Lr,Ur=rich_features(node,coords,train[:,:2],scale);Xrv,Lrv,Urv=rich_features(node,coords,val[:,:2],scale)
     assert np.array_equal(Ltr,Lr) and np.array_equal(Utr,Ur) and np.array_equal(Lv,Lrv) and np.array_equal(Uv,Urv)
     ytr=train[:,2].astype(np.float64);yv=val[:,2].astype(np.float64)
-    specs=[('old109_exactMRE',Small,Xo,Xov),('rich242_small_exactMRE',Small,Xr,Xrv),('rich242_large_exactMRE',Large,Xr,Xrv)]
+    specs=[('old109_exactMRE',Small,Xo,Xov),('rich246_small_exactMRE',Small,Xr,Xrv),('rich246_large_exactMRE',Large,Xr,Xrv)]
     trained={}
     for name,cls,X,Xv in specs:
         rows,states=train_variant(name,cls,X,Ltr,Utr,ytr,Xv,Lv,Uv,yv);trained[name]=(cls,X.shape[1],rows,states)

@@ -54,10 +54,20 @@ def build_index(z):
 
 def pair_features(node,coords,ids,scale):
     ids=np.asarray(ids,dtype=np.int64);u,v=ids.T
-    f=node[:,:32].astype(np.float64);t=node[:,32:].astype(np.float64)
+    # Central float32 values are used as model features. For certified interval endpoints,
+    # outward-round each stored coordinate by one float32 representable value so the
+    # original float64 Dijkstra distance is bracketed after round-to-nearest storage.
+    x=np.asarray(node,dtype=np.float32)
+    f=x[:,:32].astype(np.float64);t=x[:,32:].astype(np.float64)
     low1=f[v]-f[u];low2=t[u]-t[v];low=np.concatenate((low1,low2),axis=1)
-    up=t[u]+f[v];L=np.maximum(0.,low.max(1));U=up.min(1)
-    if np.any(U+1e-6<L):raise AssertionError('invalid landmark bounds')
+    up=t[u]+f[v]
+    lo=np.nextafter(x,np.float32(-np.inf),dtype=np.float32).astype(np.float64)
+    hi=np.nextafter(x,np.float32(np.inf),dtype=np.float32).astype(np.float64)
+    flo,fhi=lo[:,:32],hi[:,:32];tlo,thi=lo[:,32:],hi[:,32:]
+    low_safe=np.concatenate((flo[v]-fhi[u],tlo[u]-thi[v]),axis=1)
+    up_safe=thi[u]+fhi[v]
+    L=np.maximum(0.,low_safe.max(1));U=up_safe.min(1)
+    if np.any(U<L):raise AssertionError(('invalid landmark bounds after outward rounding',float(np.max(L-U))))
     dxy=coords[v].astype(np.float64)-coords[u].astype(np.float64);eu=np.sqrt(np.square(dxy).sum(1));adx=np.abs(dxy)
     top=np.partition(low,-4,axis=1)[:,-4:];bottom=np.partition(up,3,axis=1)[:,:4]
     eps=1e-6
@@ -118,7 +128,7 @@ def main():
     Xtr,Ltr,Utr=pair_features(node,coords,train[:,:2],scale);Xv,Lv,Uv=pair_features(node,coords,val[:,:2],scale)
     ytr=train[:,2].astype(np.float64);yv=val[:,2].astype(np.float64)
     for L,U,y,split in [(Ltr,Utr,ytr,'train'),(Lv,Uv,yv,'validation')]:
-        tol=1e-3+1e-5*np.maximum(1.,y)
+        tol=1e-9
         if np.any(L>y+tol) or np.any(U<y-tol):raise AssertionError(('bound violation',split,float(np.max(L-y)),float(np.max(y-U))))
     gap=Uv-Lv;mask=gap>1e-9;targets=np.clip((yv[mask]-Lv[mask])/gap[mask],0,1);weights=gap[mask]/yv[mask]
     alpha=weighted_median(targets,weights)
@@ -127,7 +137,7 @@ def main():
     mlp_rows,mlp_states=train_family('MLPAlpha',AlphaMLP,Xtr,Ltr,Utr,ytr,Xv,Lv,Uv,yv,'cuda')
     # Selection is frozen. Only now load test labels.
     zt=np.load(DATA);test=zt['test'].copy();Xt,Lt,Ut=pair_features(node,coords,test[:,:2],scale);yt=test[:,2].astype(np.float64)
-    tol=1e-3+1e-5*np.maximum(1.,yt)
+    tol=1e-9
     if np.any(Lt>yt+tol) or np.any(Ut<yt-tol):raise AssertionError(('test bound violation',float(np.max(Lt-yt)),float(np.max(yt-Ut))))
     reverse=label_pairs(A,test[:,:2].astype(np.int64)[:,::-1])
     baselines={'ALT32-LB':metrics(Lt,yt,short,reverse),'ALT32-UB':metrics(Ut,yt,short,reverse),
@@ -146,7 +156,8 @@ def main():
     report={'status':'completed','classification':'survey-matched directed workload development; not final independent confirmation',
             'data_sha256':sha(DATA),'landmarks':landmarks.tolist(),'index_scalars_per_node':64,'index_bytes_per_node_float32':256,
             'index_build_seconds':build_seconds,'train_rows':len(train),'validation_rows':len(val),'test_rows':len(test),'scale_m':scale,'short_threshold_m':short,
-            'feature_dim':int(Xtr.shape[1]),'fixed_protocol':{'updates':UPDATES,'batch':BATCH,'val_every':VAL_EVERY,'lr':LR,'seeds':list(SEEDS),'loss':'relative SmoothL1 beta=0.02'},
+            'feature_dim':int(Xtr.shape[1]),'bound_storage_policy':'float32 index with one-ULP outward rounding at decode for certified L<=d<=U',
+            'fixed_protocol':{'updates':UPDATES,'batch':BATCH,'val_every':VAL_EVERY,'lr':LR,'seeds':list(SEEDS),'loss':'relative SmoothL1 beta=0.02'},
             'baselines':baselines,'learned':learned,'index_artifact':str(idx.relative_to(ROOT)),'index_sha256':sha(idx)}
     REPORT.mkdir(parents=True,exist_ok=True);(REPORT/'directed_landmark_residual.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n')
     print('R4E_RESIDUAL_COMPLETE',json.dumps({'baselines':baselines,'learned':{k:{'test_mre_mean':v['test_mre_mean'],'test_mre_sd':v['test_mre_sd']} for k,v in learned.items()}}),flush=True)

@@ -8,7 +8,12 @@ other code to r4c_realroads.py.
 """
 from __future__ import annotations
 import argparse
+from pathlib import Path
+import sys
 import torch
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 import scripts.r4c_realroads as base
 
 

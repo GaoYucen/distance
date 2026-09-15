@@ -51,7 +51,8 @@ def main():
               'raw_test':r4e.metrics(pt,yt,short,reverse),'projected_test':r4e.metrics(qt,yt,short,reverse),
               'validation_projection_changed_fraction':float(np.mean(np.abs(qv-pv)>0)),'test_projection_changed_fraction':float(np.mean(np.abs(qt-pt)>0))}
     if ensemble['projected_validation_mre_percent']>ensemble['raw_validation_mre_percent']+1e-10 or ensemble['projected_test']['mre_percent']>ensemble['raw_test']['mre_percent']+1e-10:raise AssertionError('ensemble projection worsened')
-    best_idx=int(np.argmin([x['best_validation_mre_percent'] for x in rec['runs']));best_seed=rec['runs'][best_idx]['seed']
+    best_idx=int(np.argmin([x['best_validation_mre_percent'] for x in rec['runs']]))
+    best_seed=rec['runs'][best_idx]['seed']
     out={'status':'completed','classification':'zero-training development diagnostic on previously exposed test','lemma':'If L<=d<=U, scalar projection Pi_[L,U](g) cannot increase absolute or relative absolute error.',
          'index_scalars_per_node':64,'index_bytes_per_node_float32':256,'rows':rows,'ensemble3':ensemble,'r4f_validation_best_seed':best_seed}
     OUTDIR.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps(out,indent=2)+'\n')

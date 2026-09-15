@@ -1,9 +1,13 @@
 """Export the frozen R4M model as an end-to-end node-ID -> distance TorchScript module.
 
 The exported module includes all online work that must be counted in query latency:
-  node/coordinate gathers, directed ALT L/U reductions, normalized pair features,
-  the bounded MLP, and final L + alpha*(U-L) decode.
+  node/coordinate gathers, normalization, one-ULP outward rounding, directed ALT L/U reductions,
+  pair features, bounded MLP, and final L + alpha*(U-L) decode.
 Offline Dijkstra/index construction is not inside forward and is reported separately.
+
+Storage rule: only the original 64-float32 directed-landmark table, 2-float32 coordinates/node,
+and small normalization statistics are cached.  We intentionally do NOT cache extra normalized/lo/hi
+copies merely to improve latency, because that would silently triple the index footprint.
 """
 from __future__ import annotations
 import argparse,json,sys
@@ -25,39 +29,38 @@ class R4MEndToEnd(nn.Module):
     def __init__(self,node,coords,scale,bound_mu,bound_sd,state):
         super().__init__()
         node=np.asarray(node,dtype=np.float32);coords=np.asarray(coords,dtype=np.float32)
-        # Survey-style normalized LandmarkNN features are constants per node and can be cached in the index.
-        nmu=node.mean(0,keepdims=True,dtype=np.float64);nsd=node.std(0,keepdims=True,dtype=np.float64);nsd=np.where(nsd<1e-8,1.,nsd)
-        cmu=coords.mean(0,keepdims=True,dtype=np.float64);csd=coords.std(0,keepdims=True,dtype=np.float64);csd=np.where(csd<1e-8,1.,csd)
-        node_norm=((node.astype(np.float64)-nmu)/nsd).astype(np.float32)
-        coord_norm=((coords.astype(np.float64)-cmu)/csd).astype(np.float32)
-        lo=np.nextafter(node,np.float32(-np.inf),dtype=np.float32)
-        hi=np.nextafter(node,np.float32(np.inf),dtype=np.float32)
-        self.register_buffer('node_norm',torch.from_numpy(node_norm),persistent=True)
-        self.register_buffer('coord_norm',torch.from_numpy(coord_norm),persistent=True)
-        self.register_buffer('node_lo',torch.from_numpy(lo),persistent=True)
-        self.register_buffer('node_hi',torch.from_numpy(hi),persistent=True)
+        nmu=node.mean(0,dtype=np.float64).astype(np.float32);nsd=node.std(0,dtype=np.float64).astype(np.float32);nsd=np.where(nsd<1e-8,1.,nsd).astype(np.float32)
+        cmu=coords.mean(0,dtype=np.float64).astype(np.float32);csd=coords.std(0,dtype=np.float64).astype(np.float32);csd=np.where(csd<1e-8,1.,csd).astype(np.float32)
+        self.register_buffer('node',torch.from_numpy(node),persistent=True)
+        self.register_buffer('coords',torch.from_numpy(coords),persistent=True)
+        self.register_buffer('node_mu',torch.from_numpy(nmu),persistent=True)
+        self.register_buffer('node_sd',torch.from_numpy(nsd),persistent=True)
+        self.register_buffer('coord_mu',torch.from_numpy(cmu),persistent=True)
+        self.register_buffer('coord_sd',torch.from_numpy(csd),persistent=True)
         self.register_buffer('bound_mu',torch.as_tensor(np.asarray(bound_mu,dtype=np.float32)),persistent=True)
         self.register_buffer('bound_sd',torch.as_tensor(np.asarray(bound_sd,dtype=np.float32)),persistent=True)
         self.scale=float(scale)
         self.fc1=nn.Linear(139,1024);self.fc2=nn.Linear(1024,512);self.fc3=nn.Linear(512,1)
-        self.load_state_dict({**self.state_dict(),
-                              'fc1.weight':state['fc1.weight'],'fc1.bias':state['fc1.bias'],
-                              'fc2.weight':state['fc2.weight'],'fc2.bias':state['fc2.bias'],
-                              'fc3.weight':state['fc3.weight'],'fc3.bias':state['fc3.bias']},strict=True)
+        with torch.no_grad():
+            self.fc1.weight.copy_(state['fc1.weight']);self.fc1.bias.copy_(state['fc1.bias'])
+            self.fc2.weight.copy_(state['fc2.weight']);self.fc2.bias.copy_(state['fc2.bias'])
+            self.fc3.weight.copy_(state['fc3.weight']);self.fc3.bias.copy_(state['fc3.bias'])
 
     def forward(self,src:torch.Tensor,dst:torch.Tensor)->torch.Tensor:
         u=src.long();v=dst.long()
-        # Normalized LandmarkNN features.
-        a=self.node_norm.index_select(0,u);b=self.node_norm.index_select(0,v)
-        ca=self.coord_norm.index_select(0,u);cb=self.coord_norm.index_select(0,v)
+        raw_u=self.node.index_select(0,u);raw_v=self.node.index_select(0,v)
+        cu_raw=self.coords.index_select(0,u);cv_raw=self.coords.index_select(0,v)
+        a=(raw_u-self.node_mu)/self.node_sd;b=(raw_v-self.node_mu)/self.node_sd
+        ca=(cu_raw-self.coord_mu)/self.coord_sd;cb=(cv_raw-self.coord_mu)/self.coord_sd
         cos=(a*b).sum(1)/torch.clamp(torch.sqrt((a*a).sum(1)*(b*b).sum(1)),min=1e-12)
         l2=torch.sqrt(torch.clamp(((ca-cb)*(ca-cb)).sum(1),min=0.0))
         base=torch.cat((a,b,ca,cb,cos.unsqueeze(1),l2.unsqueeze(1)),1)
 
-        # Certified directed landmark interval from one-ULP outward-rounded float32 index values.
-        lo_u=self.node_lo.index_select(0,u);lo_v=self.node_lo.index_select(0,v)
-        hi_u=self.node_hi.index_select(0,u);hi_v=self.node_hi.index_select(0,v)
-        # first 32 = d(l,node); last 32 = d(node,l)
+        # One-ULP outward rounding is part of online computation so storage remains one 64-float table.
+        neg_inf_u=torch.full_like(raw_u,-float('inf'));pos_inf_u=torch.full_like(raw_u,float('inf'))
+        neg_inf_v=torch.full_like(raw_v,-float('inf'));pos_inf_v=torch.full_like(raw_v,float('inf'))
+        lo_u=torch.nextafter(raw_u,neg_inf_u);hi_u=torch.nextafter(raw_u,pos_inf_u)
+        lo_v=torch.nextafter(raw_v,neg_inf_v);hi_v=torch.nextafter(raw_v,pos_inf_v)
         lower1=lo_v[:,:32]-hi_u[:,:32]
         lower2=lo_u[:,32:]-hi_v[:,32:]
         L=torch.clamp(torch.maximum(lower1.max(1).values,lower2.max(1).values),min=0.0)
@@ -73,7 +76,7 @@ class R4MEndToEnd(nn.Module):
 
 def numpy_reference(seed,src,dst):
     rec=json.load(open(REPORT));run=next(x for x in rec['runs'] if int(x['seed'])==seed);ck=torch.load(ROOT/run['checkpoint'],map_location='cpu',weights_only=False)
-    iz=np.load(INDEX);node=iz['node_features'];z=np.load(DATA);coords=z['coordinates'];scale=float(z['train'][:,2].mean())
+    iz=np.load(INDEX);node=iz['node_features'];z=np.load(DATA);coords=z['coordinates'].astype(np.float32);scale=float(z['train'][:,2].mean())
     X,L,U,_,_=r4m.build_features(node,coords,np.column_stack((src,dst)),scale,ck['bound_extra_mu'],ck['bound_extra_sd'])
     m=r4m.BoundedLandmarkNN(X.shape[1],ck['alpha0']);m.load_state_dict(ck['state_dict']);m.eval()
     with torch.no_grad():alpha=m(torch.from_numpy(X)).numpy()
@@ -94,8 +97,11 @@ def main():
     with torch.no_grad():q=loaded(torch.from_numpy(src),torch.from_numpy(dst)).numpy()
     replay=float(np.max(np.abs(q-ref)))
     if replay>0.05:raise AssertionError(replay)
-    nparams=sum(p.numel() for p in mod.parameters());index_bytes=node.nbytes+coords.astype(np.float32).nbytes+np.asarray(ck['bound_extra_mu'],dtype=np.float32).nbytes+np.asarray(ck['bound_extra_sd'],dtype=np.float32).nbytes
+    nparams=sum(p.numel() for p in mod.parameters())
+    # Only central 64-float index + coordinates + tiny normalization/bound stats count as cached online state.
+    stats_bytes=(mod.node_mu.numel()+mod.node_sd.numel()+mod.coord_mu.numel()+mod.coord_sd.numel()+mod.bound_mu.numel()+mod.bound_sd.numel())*4
+    index_bytes=node.nbytes+coords.nbytes+stats_bytes
     print(json.dumps({'status':'completed','seed':args.seed,'validation_best_seed':best,'parity_max_abs_m':max_abs,'jit_replay_max_abs_m':replay,
-                      'parameter_count':nparams,'model_parameter_bytes_fp32':4*nparams,'cached_index_bytes_including_coords_stats':int(index_bytes),
-                      'jit_file_bytes':args.output.stat().st_size,'output':str(args.output)},indent=2))
+                      'parameter_count':nparams,'model_parameter_bytes_fp32':4*nparams,'cached_index_bytes_including_coords_and_stats':int(index_bytes),
+                      'per_node_primary_index_bytes':int(node.shape[1]*4+coords.shape[1]*4),'jit_file_bytes':args.output.stat().st_size,'output':str(args.output)},indent=2))
 if __name__=='__main__':main()

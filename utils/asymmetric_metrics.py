@@ -44,7 +44,8 @@ class L1Tilde(nn.Module):
         super().__init__()
         self.r = r
         self.s = s
-        assert r > 0 or s > 0, "r 和 s 不能同时为 0"
+        if not isinstance(r, int) or not isinstance(s, int) or min(r, s) < 0 or r+s == 0:
+            raise ValueError("Require integer r,s >= 0 and r+s > 0")
 
     def forward(self, x, y):
         """
@@ -57,6 +58,8 @@ class L1Tilde(nn.Module):
         Returns:
             torch.Tensor, shape (batch_size, 1)
         """
+        if x.ndim != 2 or y.shape != x.shape or x.shape[1] != self.r+self.s:
+            raise ValueError("L1Tilde expects matching [batch,r+s] tensors")
         # 前 r 维：对称项
         sym = torch.abs(y[:, :self.r] - x[:, :self.r])
         sym = sym.sum(dim=1, keepdim=True)

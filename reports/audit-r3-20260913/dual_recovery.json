@@ -1,0 +1,63 @@
+{
+  "same_model_data_objective": true,
+  "same_120s_limit": true,
+  "results": [
+    {
+      "seed": 42,
+      "solver": "HiGHS-IPM / equivalent LAD dual",
+      "success": true,
+      "status": 0,
+      "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "seconds": 9.881436957977712,
+      "iterations": 19,
+      "equalities": 64,
+      "variables": 40000,
+      "time_limit": 120.0,
+      "train_mre": 0.09582381118724187,
+      "dual_objective_mre": 0.09582381118724148,
+      "absolute_duality_gap": 3.885780586188048e-16,
+      "dual_equality_residual": 1.929567616798522e-12,
+      "dual_bound_violation": 0.0,
+      "numerical_optimum_certified": true,
+      "initial_timeout_record": "FAILED_linear_MRE_42.json"
+    },
+    {
+      "seed": 99,
+      "solver": "HiGHS-IPM / equivalent LAD dual",
+      "success": true,
+      "status": 0,
+      "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "seconds": 10.046864056959748,
+      "iterations": 20,
+      "equalities": 64,
+      "variables": 40000,
+      "time_limit": 120.0,
+      "train_mre": 0.09425751711585342,
+      "dual_objective_mre": 0.09425751711585459,
+      "absolute_duality_gap": 1.1657341758564144e-15,
+      "dual_equality_residual": 3.4929836800756675e-12,
+      "dual_bound_violation": 0.0,
+      "numerical_optimum_certified": true,
+      "initial_timeout_record": "FAILED_linear_MRE_99.json"
+    },
+    {
+      "seed": 1234,
+      "solver": "HiGHS-IPM / equivalent LAD dual",
+      "success": true,
+      "status": 0,
+      "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "seconds": 10.324787651188672,
+      "iterations": 20,
+      "equalities": 64,
+      "variables": 40000,
+      "time_limit": 120.0,
+      "train_mre": 0.09463473962436632,
+      "dual_objective_mre": 0.09463473962436567,
+      "absolute_duality_gap": 6.522560269672795e-16,
+      "dual_equality_residual": 1.1773915176149785e-12,
+      "dual_bound_violation": 0.0,
+      "numerical_optimum_certified": true,
+      "initial_timeout_record": "FAILED_linear_MRE_1234.json"
+    }
+  ]
+}

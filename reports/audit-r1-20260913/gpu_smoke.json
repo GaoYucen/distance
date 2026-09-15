@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "torch": "2.6.0+cu124",
+  "device": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "0",
+  "shared_sage_forward_backward": true,
+  "cross_encoder_forward_backward": true,
+  "code_commit": "923f93c5f7332737b57fb19b65b0888e5d8b7eb0"
+}

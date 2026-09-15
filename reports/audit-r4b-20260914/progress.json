@@ -1,0 +1,440 @@
+{
+  "status": "completed_pending_independent_replay",
+  "completed_fits": 120,
+  "planned_fits": 120,
+  "groups": [
+    {
+      "case": "tree127",
+      "mode": "L1",
+      "wall_seconds": 7.682287083007395,
+      "mre_percent": [
+        8.376577502498115,
+        8.378780025082172,
+        8.380193342646619
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "T1",
+      "wall_seconds": 7.345182324759662,
+      "mre_percent": [
+        0.1545882837232859,
+        0.20168382657040637,
+        0.1897445765279825
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "P64",
+      "wall_seconds": 6.563729191198945,
+      "mre_percent": [
+        0.20839699505275472,
+        0.3077224823681439,
+        0.31593121396805374
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "B2",
+      "wall_seconds": 7.553229733835906,
+      "mre_percent": [
+        0.04149885005472107,
+        0.09950382986055337,
+        0.05938743026013525
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "B4",
+      "wall_seconds": 7.523606480099261,
+      "mre_percent": [
+        0.09282237220920264,
+        0.12901795300890154,
+        0.21574675832637802
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "B8",
+      "wall_seconds": 7.541443668771535,
+      "mre_percent": [
+        0.14864809769522289,
+        0.04654000588308911,
+        0.15468506768724638
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "Shared-L1",
+      "wall_seconds": 7.703897007741034,
+      "mre_percent": [
+        1.106709689623195,
+        1.0661427174168066,
+        0.8610667393944874
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "MRN-L2",
+      "wall_seconds": 7.727764912880957,
+      "mre_percent": [
+        1.2766584175773072,
+        1.382977080565052,
+        1.3322617077922123
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "IQE-maxmean",
+      "wall_seconds": 10.229665127117187,
+      "mre_percent": [
+        1.445865688715501,
+        1.4928100336707157,
+        1.3344656052961998
+      ]
+    },
+    {
+      "case": "tree127",
+      "mode": "IQE-sum",
+      "wall_seconds": 8.691631630063057,
+      "mre_percent": [
+        0.4138173190931997,
+        0.4910347442428711,
+        0.3992862719593394
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "L1",
+      "wall_seconds": 6.762353108730167,
+      "mre_percent": [
+        190.52055891550154,
+        190.51000059135444,
+        190.512032180409
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "T1",
+      "wall_seconds": 7.392272570636123,
+      "mre_percent": [
+        190.51784710449977,
+        190.4968749900917,
+        190.52044823401772
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "P64",
+      "wall_seconds": 6.3810665546916425,
+      "mre_percent": [
+        17.551994995838587,
+        19.070496191670966,
+        18.00096987969734
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "B2",
+      "wall_seconds": 7.404823329299688,
+      "mre_percent": [
+        133.32076895490914,
+        133.56546323929038,
+        135.04093874426613
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "B4",
+      "wall_seconds": 7.408396817743778,
+      "mre_percent": [
+        104.60833726969379,
+        106.04467573246987,
+        101.79350742101869
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "B8",
+      "wall_seconds": 7.4255784950219095,
+      "mre_percent": [
+        71.12054354006405,
+        74.9618998660064,
+        72.03572298669809
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "Shared-L1",
+      "wall_seconds": 7.598437897861004,
+      "mre_percent": [
+        95.5890660357768,
+        98.30668608297482,
+        109.21488380850599
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "MRN-L2",
+      "wall_seconds": 7.566442391835153,
+      "mre_percent": [
+        39.59836857545035,
+        41.56606247494854,
+        40.60029682321105
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "IQE-maxmean",
+      "wall_seconds": 10.070600708946586,
+      "mre_percent": [
+        29.845840956850388,
+        28.905055337002004,
+        28.369305999212852
+      ]
+    },
+    {
+      "case": "cycle97",
+      "mode": "IQE-sum",
+      "wall_seconds": 7.9148379056714475,
+      "mre_percent": [
+        94.27206865721357,
+        93.83368716467497,
+        93.91543999381086
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "L1",
+      "wall_seconds": 6.613472271244973,
+      "mre_percent": [
+        13.567033560971668,
+        13.567040418421772,
+        13.572643969727629
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "T1",
+      "wall_seconds": 7.242926748935133,
+      "mre_percent": [
+        12.78876887814166,
+        12.781677559146647,
+        12.780915351055672
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "P64",
+      "wall_seconds": 6.4928389973938465,
+      "mre_percent": [
+        0.1959073372916561,
+        0.19163827407097184,
+        0.19503336071301755
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "B2",
+      "wall_seconds": 7.538425291888416,
+      "mre_percent": [
+        9.37717449131764,
+        9.121449594017392,
+        8.576843526575292
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "B4",
+      "wall_seconds": 7.539463939145207,
+      "mre_percent": [
+        4.803097584528541,
+        4.315095524639996,
+        4.4299455519625255
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "B8",
+      "wall_seconds": 7.524353901855648,
+      "mre_percent": [
+        1.6294624565272766,
+        1.8882941920882024,
+        1.406662890020357
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "Shared-L1",
+      "wall_seconds": 7.723314114846289,
+      "mre_percent": [
+        7.76546218695294,
+        6.680993967409661,
+        7.838366299916035
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "MRN-L2",
+      "wall_seconds": 7.741998955141753,
+      "mre_percent": [
+        0.6571030418044909,
+        0.883230331926238,
+        0.4758370018929823
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "IQE-maxmean",
+      "wall_seconds": 11.097003114875406,
+      "mre_percent": [
+        1.1584214503408339,
+        1.980995931152567,
+        1.1777742191074323
+      ]
+    },
+    {
+      "case": "grid12",
+      "mode": "IQE-sum",
+      "wall_seconds": 10.256687785033137,
+      "mre_percent": [
+        9.08087509854064,
+        9.149886518586758,
+        9.091187122267138
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "L1",
+      "wall_seconds": 7.027932947035879,
+      "mre_percent": [
+        8.344251236116822,
+        8.344242446430119,
+        8.344245333516168
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "T1",
+      "wall_seconds": 7.656066520139575,
+      "mre_percent": [
+        8.344244832248995,
+        8.34424234586307,
+        8.34424267873059
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "P64",
+      "wall_seconds": 6.586345220915973,
+      "mre_percent": [
+        4.4166561739043555,
+        4.926170033377896,
+        4.803595149510806
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B2",
+      "wall_seconds": 7.661615188233554,
+      "mre_percent": [
+        4.340501883415711e-06,
+        3.655030512308467e-06,
+        5.258663808933906e-06
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B4",
+      "wall_seconds": 7.632942602969706,
+      "mre_percent": [
+        5.539658063072066e-06,
+        5.818237519210724e-06,
+        5.368586652229168e-06
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B8",
+      "wall_seconds": 7.650207774247974,
+      "mre_percent": [
+        0.29757766602137514,
+        0.011977945150014796,
+        7.6291332377228746e-06
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "Shared-L1",
+      "wall_seconds": 7.837119658011943,
+      "mre_percent": [
+        7.436972591017663e-06,
+        5.8144775548897044e-06,
+        6.77163227631011e-06
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "MRN-L2",
+      "wall_seconds": 7.8762609120458364,
+      "mre_percent": [
+        9.237243642312743,
+        9.646898563150964,
+        8.327188892632865
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "IQE-maxmean",
+      "wall_seconds": 16.504480639006943,
+      "mre_percent": [
+        0.5268976237969457,
+        0.5510421914857992,
+        0.5284211206055857
+      ]
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "IQE-sum",
+      "wall_seconds": 15.649712223093957,
+      "mre_percent": [
+        5.688166746888724e-05,
+        0.00041860351808784625,
+        0.00010068555675440178
+      ]
+    }
+  ],
+  "classification": "full-matrix fitting; NOT held-out performance",
+  "source_commit": "0a279276d5b549ce3fcfbd1e00a09370e6f68070",
+  "source_hashes": {
+    "scripts/r4b_checks.py": "a0e3c24e922723b8cbefe0793e47110781b7505dbb497bef859cb972e9e75b2f",
+    "scripts/r4b_data.py": "f49daf1ebe6428bcef131c3e1617ac69a86a4037b45bb307d409a1fb1ea7db73",
+    "scripts/r4b_models.py": "c679cbbb53f10c74d5abaf220ddbb0f70edb515338bdd650c7b779ea6e34d37d",
+    "scripts/r4b_report.py": "3ff68203228f61e6ae1ada68cf540472096b5335418331b610466d8aa5cebdf7",
+    "scripts/r4b_train.py": "380c3157096eb64b937d2031c7dbba6871389b2e44bce25c52cf1445ce815a75"
+  },
+  "upstream_commit": "0365394d4ecbd614f38775787af724d8b142c9d2",
+  "device": "NVIDIA GeForce RTX 4090",
+  "torch": "2.6.0+cu124",
+  "cuda": "12.4",
+  "protocol": {
+    "scalars_per_node": 64,
+    "dtype": "float32",
+    "seeds": [
+      42,
+      99,
+      1234
+    ],
+    "updates": 1500,
+    "learning_rate": 0.01,
+    "batch": "all ordered non-diagonal pairs",
+    "loss": "MSE of distances divided by fitting mean",
+    "selection": "minimum fitting MSE steps0..1500",
+    "initialization": "CPU Normal(0,0.1), same seed table for all decoders",
+    "calibration": "frozen output multiplier setting initial normalized prediction mean to1",
+    "independent_seed_vectorization": true,
+    "seed_loss_aggregation": "sum",
+    "warmstart": "not used"
+  },
+  "wall_seconds": 331.1133049642667
+}

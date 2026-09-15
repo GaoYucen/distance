@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "training_only_signature": true,
+  "exact_state_and_history_equal": true,
+  "changed_unrelated_test_labels": true,
+  "threads": 1,
+  "deterministic_algorithms": true
+}

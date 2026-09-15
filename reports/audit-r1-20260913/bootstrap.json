@@ -1,0 +1,41 @@
+{
+  "python": "3.11.11 | packaged by conda-forge | (main, Dec  5 2024, 14:17:24) [GCC 13.3.0]",
+  "base_commit": "c4fb4797efbe4485a337cf9ae446e9d28ed14fef",
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "torch_geometric": "2.7.0",
+    "numpy": "1.26.4",
+    "scipy": "1.16.3",
+    "pytest": "9.1.1",
+    "networkx": "3.4.2"
+  },
+  "datasets": [
+    {
+      "file": "data/audit/chengdu_link-mod.txt",
+      "bytes": 123083,
+      "sha256": "2b8735d3578013431d651e118d3ad134d342f1d7ed1b250e6a38b803efc0c966"
+    },
+    {
+      "file": "data/audit/chengdu_directed_shortest_distance_matrix.npy",
+      "bytes": 28910536,
+      "sha256": "41f76cbcc335965de344db1738aa36d2b5a7a5759d74936f8525c6646eb0b141"
+    },
+    {
+      "file": "data/audit/chengdu_node-mod.txt",
+      "bytes": 53630,
+      "sha256": "32efe4167f3dcafd9c7b2181269f0c7a3e81e0040ffa0e3a86ac5fb5f49995e1"
+    }
+  ],
+  "Harbin": "not found in /workspace bounded preflight",
+  "Beijing": "not found in /workspace bounded preflight",
+  "legacy_chengdu": {
+    "shape": [
+      1901,
+      1901
+    ],
+    "dtype": "float64",
+    "finite": 3613801,
+    "min": 0.0,
+    "max": 32419.0
+  }
+}

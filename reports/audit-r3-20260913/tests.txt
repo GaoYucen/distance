@@ -1,0 +1,8 @@
+................................                                         [100%]
+=============================== warnings summary ===============================
+tests/test_audit_r1.py::test_dist2gnn_encoder_receives_gradient_after_repair
+  /workspace/distance/.venv-audit/lib/python3.11/site-packages/torch_geometric/llm/utils/backend_utils.py:26: DeprecationWarning: `torch_geometric.distributed` has been deprecated since 2.7.0 and will no longer be maintained. For distributed training, refer to our tutorials on distributed training at https://pytorch-geometric.readthedocs.io/en/latest/tutorial/distributed.html or cuGraph examples at https://github.com/rapidsai/cugraph-gnn/tree/main/python/cugraph-pyg/cugraph_pyg/examples
+    from torch_geometric.distributed import (
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+32 passed, 1 warning in 4.59s

@@ -1,0 +1,10 @@
+{
+  "solver": "SciPy linprog / HiGHS-IPM",
+  "success": false,
+  "status": 1,
+  "message": "Time limit reached. (HiGHS Status 13: model_status is Time limit reached; primal_status is Feasible)",
+  "iterations": 8,
+  "seconds": 121.46703527867794,
+  "time_limit": 120.0,
+  "requested_threads": 2
+}

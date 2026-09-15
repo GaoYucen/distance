@@ -1,0 +1,161 @@
+{
+  "status": "completed_and_replayed",
+  "classification": "held-out OD development validation; NOT final independent confirmation",
+  "source_commit": "e0b351af530d6b1b4a9e7d2c4006d48469e9c874",
+  "upstream_torchqmet": "0365394d4ecbd614f38775787af724d8b142c9d2",
+  "protocol": {
+    "scalars_per_node": 64,
+    "dtype": "float32",
+    "seeds": [
+      42,
+      99,
+      1234
+    ],
+    "updates": 1500,
+    "batch_groups": 8192,
+    "validation_every": 25,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "objective": "normalized MSE",
+    "selection": "validation MRE only"
+  },
+  "leakage_guard": {
+    "passed": true,
+    "note": "training function has no test argument; deterministic repeated histories/states match exactly"
+  },
+  "data": {
+    "Jinan_native_directed": {
+      "sha256": "22640a0e3fc7d5e35ae9b9d5dab6e3e172b787fd99c3b6ccac80809161b2053c",
+      "nodes": 8840,
+      "splits": [
+        100000,
+        10000,
+        10000
+      ],
+      "workload": "trajectory-derived unordered OD groups after overlap isolation"
+    },
+    "Shenzhen_native_directed_uniform": {
+      "sha256": "8cede9cc3b77d22acf2877ee85e0d6fa34d05785bf05b1b4cc9a3f86566fc92c",
+      "nodes": 11738,
+      "splits": [
+        40000,
+        5000,
+        5000
+      ],
+      "workload": "seeded uniform unordered OD groups, not trajectories"
+    }
+  },
+  "runs": [
+    {
+      "case": "Jinan_native_directed",
+      "mode": "L1",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__L1.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "T1",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__T1.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "P64",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__P64.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "B2",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__B2.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "B4",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__B4.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "B8",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__B8.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "Shared-L1",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__Shared-L1.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "MRN-L2",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__MRN-L2.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "IQE-maxmean",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__IQE-maxmean.json"
+    },
+    {
+      "case": "Jinan_native_directed",
+      "mode": "IQE-sum",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__IQE-sum.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "L1",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__L1.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "T1",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__T1.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "P64",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__P64.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "B2",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__B2.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "B4",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__B4.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "B8",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__B8.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "Shared-L1",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__Shared-L1.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "MRN-L2",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__MRN-L2.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "IQE-maxmean",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__IQE-maxmean.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "mode": "IQE-sum",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__IQE-sum.json"
+    }
+  ],
+  "landmarks": [
+    {
+      "case": "Jinan_native_directed",
+      "file": "reports/audit-r4c-20260914/runs/Jinan_native_directed__ALT32.json"
+    },
+    {
+      "case": "Shenzhen_native_directed_uniform",
+      "file": "reports/audit-r4c-20260914/runs/Shenzhen_native_directed_uniform__ALT32.json"
+    }
+  ],
+  "replays": 60
+}

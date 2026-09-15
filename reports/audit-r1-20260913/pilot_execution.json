@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/workspace/distance/.venv-audit/bin/python",
+    "scripts/audit_pilot.py",
+    "--device",
+    "cuda",
+    "--epochs",
+    "30",
+    "--hidden",
+    "128",
+    "--train-pairs",
+    "20000",
+    "--eval-pairs",
+    "5000",
+    "--seeds",
+    "42",
+    "99",
+    "1234"
+  ],
+  "exit_code": 0,
+  "time_budget_seconds": 1200,
+  "expected_runs": 24,
+  "classification": "exploratory small-graph pilot, not SOTA benchmark",
+  "completed_runs": 24,
+  "status": "completed"
+}

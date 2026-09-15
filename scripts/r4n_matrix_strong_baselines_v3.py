@@ -8,7 +8,13 @@ and delegates all model/data/seed/time-budget logic to v2 unchanged.
 """
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
 import numpy as np
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 import scripts.r4n_matrix_strong_baselines_v2 as base
 
 
@@ -20,8 +26,8 @@ def directed_bounds_outward(node: np.ndarray, pairs: np.ndarray):
 
     lo = np.nextafter(x, np.float32(-np.inf), dtype=np.float32).astype(np.float64)
     hi = np.nextafter(x, np.float32(np.inf), dtype=np.float32).astype(np.float64)
-    flo, fhi = lo[:, :k], hi[:, :k]      # d(landmark, x)
-    tlo, thi = lo[:, k:], hi[:, k:]      # d(x, landmark)
+    flo, fhi = lo[:, :k], hi[:, :k]
+    tlo, thi = lo[:, k:], hi[:, k:]
 
     lower_safe = np.concatenate(
         (flo[v] - fhi[u], tlo[u] - thi[v]), axis=1

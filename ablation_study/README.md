@@ -1,3 +1,10 @@
+> **Audit R1 (2026-09-13):** This branch preserves historical findings below, but
+> their causal explanations are not accepted as established conclusions. Shared
+> encoders + L1Tilde CAN be asymmetric; signed dimensions collapse to one potential.
+> Cross-Encoder + L1 is not necessarily symmetric. Historical cross-encoder results
+> used test-driven model selection and need independent reruns. See
+> `docs/AUDIT_R1_20260913.md` for fixes, scope, and current evidence.
+
 # L̃₁ Asymmetric Metric Ablation Study
 
 ## 1. 研究问题

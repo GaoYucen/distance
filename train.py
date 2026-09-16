@@ -21,6 +21,8 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
+from utils.audit_protocol import assert_disjoint_od, split_training_pairs
+from utils.torch_utils import WorkloadDataset
 
 from utils.data_utils import (
     seed_everything,
@@ -84,6 +86,7 @@ parser.add_argument('--epochs', type=int, default=20,
                     help='Number of epochs for training')
 parser.add_argument('--time_limit', type=float, default=None,
                     help='Time limit for training in minutes')
+parser.add_argument('--validation_fraction', type=float, default=0.1, help='Fraction of training OD groups held out for validation')
 parser.add_argument('--validate', action='store_true',
                     help='Whether to perform validation during training')
 parser.add_argument('--eval_runs', type=int, default=0,
@@ -300,7 +303,16 @@ print("Node Attributes.shape: ", node_attributes.shape)
 
 # Enable return_reverse for auxiliary loss
 load_return_reverse = (args.aux_loss_weight > 0)
-train_dataset, test_dataset = load_dataset(dir_name=query_dir, seed=seed, replicate_test=True, target_test_size=batch_size_test, drop_duplicates=False, force_shift=force_shift, return_reverse=load_return_reverse)
+train_dataset, test_dataset = load_dataset(dir_name=query_dir, seed=seed, replicate_test=False, target_test_size=batch_size_test, drop_duplicates=False, force_shift=force_shift, return_reverse=load_return_reverse)
+
+# Audit R1: test is never validation; reject reverse-pair overlap as well.
+assert_disjoint_od(train_dataset.queries, test_dataset.queries)
+val_dataset = None
+if validate:
+    train_rows, val_rows = split_training_pairs(train_dataset.queries, args.validation_fraction, seed)
+    train_dataset = WorkloadDataset(train_rows, return_reverse=load_return_reverse)
+    val_dataset = WorkloadDataset(val_rows, return_reverse=load_return_reverse)
+    assert_disjoint_od(train_dataset.queries, val_dataset.queries, test_dataset.queries)
 
 # Save auxiliary loss config
 aux_loss_weight = args.aux_loss_weight
@@ -319,6 +331,11 @@ if model_class not in ('ndist2vec', 'lpnorm', 'landmark', 'catboost'):
         test_dataset.queries[:, 3] = test_dataset.queries[:, 3].astype(float) / max_distance_raw
     train_dataset.D = train_dataset.D / max_distance_raw
     test_dataset.D = test_dataset.D / max_distance_raw
+    if val_dataset is not None:
+        val_dataset.queries[:, 2] = val_dataset.queries[:, 2].astype(float) / max_distance_raw
+        if val_dataset.queries.shape[1] > 3:
+            val_dataset.queries[:, 3] = val_dataset.queries[:, 3].astype(float) / max_distance_raw
+        val_dataset.D = val_dataset.D / max_distance_raw
     max_distance = 1.0
     print(f"  - Raw max distance: {max_distance_raw:.2f}")
     print(f"  - Distances normalized to [0, 1]")
@@ -359,7 +376,7 @@ print(f"  - Pin memory: {pin_memory}")
 val_dataloader = None
 if validate:
     print("Creating val dataloader...")
-    val_dataloader = DataLoader(test_dataset, batch_size=(batch_size_train),
+    val_dataloader = DataLoader(val_dataset, batch_size=(batch_size_train),
                                 shuffle=False,
                                 num_workers=num_workers,
                                 pin_memory=pin_memory)

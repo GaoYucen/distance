@@ -1,0 +1,333 @@
+{
+  "stage": "data and labels audited, not a model benchmark",
+  "seed": 20260913,
+  "upstream_commit": "dcaa89d38300bfb823eda84ccdfc85c42edbeae8",
+  "survey_manifest": {
+    "upstream_repo": "purduedb/shortest-distance-survey",
+    "upstream_commit": "dcaa89d38300bfb823eda84ccdfc85c42edbeae8",
+    "files": [
+      {
+        "path": "LICENSE",
+        "bytes": 11357,
+        "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      {
+        "path": "README.md",
+        "bytes": 10680,
+        "git_blob_sha1": "1e90a21c21298692a8f3fbf8c2e6674dbb5665d3",
+        "sha256": "604bf0c379c41cc99df494c969fb093ea009a0a1a9987819344284779d64bd61"
+      },
+      {
+        "path": "data/README.md",
+        "bytes": 14147,
+        "git_blob_sha1": "1f18537151b80b9b477e61683673fb21f0528795",
+        "sha256": "f17eed4e85ffa4606f05c1b6a432923e9120e40bf04305dcc256335dcc978dc3"
+      },
+      {
+        "path": "data/Surat/Surat.edges",
+        "bytes": 91880,
+        "git_blob_sha1": "4f0da1608d5acc6d378f8c6b6aa7a539452e57d8",
+        "sha256": "cffe178128bfcff09309af5cce28c97ff8e33e0ab03d13c383543a973f97eb05"
+      },
+      {
+        "path": "data/Surat/Surat.nodes",
+        "bytes": 93611,
+        "git_blob_sha1": "080bb934dd5e5b376b1ba45049f9685303526597",
+        "sha256": "b65ba4ff20973219ea2a74d9d6ebd59a61a49781bcf4c19b7c89368191bd945d"
+      },
+      {
+        "path": "data/Surat/stats.json",
+        "bytes": 239,
+        "git_blob_sha1": "e5f1a3a827af23262da90081d831a68b9b03e301",
+        "sha256": "a045e96fa2d16494cca6e71ab3e1a6caa9b4bdf93903e36479080b1d52a05e72"
+      },
+      {
+        "path": "data/W_Jinan/W_Jinan.edges",
+        "bytes": 381346,
+        "git_blob_sha1": "732275ea2bc31b057fa8a8c6e30499c8a8b28e25",
+        "sha256": "098957116e957a18bfe0c701b9bd111559746fe93a8cc6f52cdb7723e38ac710"
+      },
+      {
+        "path": "data/W_Jinan/W_Jinan.nodes",
+        "bytes": 366491,
+        "git_blob_sha1": "2c1a57d6d695d2542926f5a54aff5cfdcfd84655",
+        "sha256": "9338d6d888afa885b0244e97b5fe68c8238f36ee0ed0388240fb5edd0b64b272"
+      },
+      {
+        "path": "data/W_Jinan/real_workload/W_Jinan.queries.npz",
+        "bytes": 2355258,
+        "git_blob_sha1": "75b99c8da7a81a7cbb4bbf0f406874c35d4ac4f5",
+        "sha256": "87ea8c3b6c62e4720f6a6ab21ce474565d2d6ad3777fe869a450c2fbea645954"
+      },
+      {
+        "path": "data/W_Jinan/real_workload_perturb_500k/W_Jinan_test.queries.npz",
+        "bytes": 367647,
+        "git_blob_sha1": "89cf2d208050c12278f192333619f029cfc01d4d",
+        "sha256": "fee978d5287dabae0b57974ec8c5b750c2e27ce3d10b22fee491ce95b43ef520"
+      },
+      {
+        "path": "data/W_Jinan/real_workload_perturb_500k/W_Jinan_train.queries.npz",
+        "bytes": 2921387,
+        "git_blob_sha1": "8d127d027fec4644adb27aae2dc67b848a0d5aaa",
+        "sha256": "69cd60313e5b094d0f215495d0ae968035002a9513779296c49b4beffff382fb"
+      },
+      {
+        "path": "data/W_Jinan/real_workload_perturb_500k/W_Jinan_val.queries.npz",
+        "bytes": 367570,
+        "git_blob_sha1": "d18a39b7989c0c6d9279c3eed4f6902ea67ba3a3",
+        "sha256": "4b64ba20dc88aae72537c8f2d6ecb98f1039819150f345684213513a41b4180d"
+      },
+      {
+        "path": "data/W_Jinan/stats.json",
+        "bytes": 243,
+        "git_blob_sha1": "432cdc9264b124623737b19f6a6e066fdbd0cde4",
+        "sha256": "16f90dda6ab8483018dfd523bf0efc7e9446983b8f2ecde92c9950f16d3307cf"
+      },
+      {
+        "path": "src/data_preprocess/download_and_preprocess_data.py",
+        "bytes": 2351,
+        "git_blob_sha1": "15c12d64e0ef5ad47c98e0ac642b0edb40e52806",
+        "sha256": "35aab4bff1ddfda94aebf670959c6dfd83ce7014b2cd1ecd68cb36ca247a68b1"
+      },
+      {
+        "path": "src/data_preprocess/generate_query_data.py",
+        "bytes": 15118,
+        "git_blob_sha1": "736d8e5a13ea4cc93dd2c13ba04aa5f78624f412",
+        "sha256": "a2c7dfe949af4d87d479d9bb597be2926c3dbfaf2d793f82ef4eab47bde8a4e7"
+      },
+      {
+        "path": "src/train.py",
+        "bytes": 38454,
+        "git_blob_sha1": "cfc5d472f2af81d1df0dfdd0b33bc0263fcba969",
+        "sha256": "c77de59fb6317c599a7c8b03d3e121bbc3061d58b44ed6dcbbf64211cf9c308d"
+      },
+      {
+        "path": "src/utils/data_utils.py",
+        "bytes": 44311,
+        "git_blob_sha1": "f39ed1b40a4125bfd26d67666cf85e6db5bef3e8",
+        "sha256": "7cd208dc05a6016406a990523303095d1905eda23ca5217e65c244deb149cefe"
+      }
+    ],
+    "cloud_probe": {
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 387468,
+      "requires_login": false,
+      "final_host": "purdue0-my.sharepoint.com"
+    },
+    "stage": "acquired, not yet label-audited"
+  },
+  "native_manifest": {
+    "source_doi": "10.1038/s41597-023-02589-y",
+    "files": [
+      {
+        "name": "node_jinan.csv",
+        "article_id": 23282774,
+        "version": 1,
+        "file_id": 41034803,
+        "bytes": 246362,
+        "md5": "f2bc3461f6f8725cc66a116f24104fef",
+        "sha256": "8dcba339349b8e95062a65c6db293a7d44b2fea3311512bcc3a323a37f7c9ebf",
+        "license": {
+          "value": 2,
+          "name": "CC0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+        },
+        "download_url": "https://ndownloader.figshare.com/files/41034803"
+      },
+      {
+        "name": "edge_jinan.csv",
+        "article_id": 23282777,
+        "version": 1,
+        "file_id": 41034806,
+        "bytes": 3327181,
+        "md5": "23ad98b754f5b2d695c98c90963be03e",
+        "sha256": "446bd54efca6ef915846e83e53c1b60db2a4603b4a4273b9cef65bea053c8d15",
+        "license": {
+          "value": 2,
+          "name": "CC0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+        },
+        "download_url": "https://ndownloader.figshare.com/files/41034806"
+      },
+      {
+        "name": "node_shenzhen.csv",
+        "article_id": 23282708,
+        "version": 1,
+        "file_id": 41034722,
+        "bytes": 332236,
+        "md5": "e43b9af970331030493dc21e1148ea16",
+        "sha256": "e056ff60b0e474754fc5cf297004af74392a123d1939a55ab9d7827ab012b146",
+        "license": {
+          "value": 2,
+          "name": "CC0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+        },
+        "download_url": "https://ndownloader.figshare.com/files/41034722"
+      },
+      {
+        "name": "edge_shenzhen.csv",
+        "article_id": 23282783,
+        "version": 1,
+        "file_id": 41034809,
+        "bytes": 4526158,
+        "md5": "be41bef5115223d98c47de40e8633726",
+        "sha256": "52a9523f56c137fc210a576fd18a5996e19d4252ed5e5729b42b1a99b9618d6d",
+        "license": {
+          "value": 2,
+          "name": "CC0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+        },
+        "download_url": "https://ndownloader.figshare.com/files/41034809"
+      }
+    ],
+    "errors": []
+  },
+  "cases": {
+    "Jinan_native_directed": {
+      "file": "data/protocol_r2/Jinan_native_directed.npz",
+      "sha256": "22640a0e3fc7d5e35ae9b9d5dab6e3e172b787fd99c3b6ccac80809161b2053c",
+      "split_counts": [
+        100000,
+        10000,
+        10000
+      ],
+      "test_direction_energy_explained": 0.638415858161157
+    },
+    "Jinan_native_undirected": {
+      "file": "data/protocol_r2/Jinan_native_undirected.npz",
+      "sha256": "06b06b8eaeac121a2582daae18275d4e79d04a024385d4d89837d181273dc3ed",
+      "split_counts": [
+        100000,
+        10000,
+        10000
+      ],
+      "test_direction_energy_explained": null
+    },
+    "Shenzhen_native_directed_uniform": {
+      "file": "data/protocol_r2/Shenzhen_native_directed_uniform.npz",
+      "sha256": "8cede9cc3b77d22acf2877ee85e0d6fa34d05785bf05b1b4cc9a3f86566fc92c",
+      "split_counts": [
+        40000,
+        5000,
+        5000
+      ],
+      "test_direction_energy_explained": 0.3124770810693246
+    }
+  },
+  "jinan_native": {
+    "raw_nodes": 8908,
+    "raw_edge_rows": 23312,
+    "deduplicated_nonself_arcs": 23312,
+    "strong_components": 66,
+    "largest_strong_component_nodes": 8840,
+    "nodes_excluded": 68,
+    "directed_arcs_used": 23206,
+    "companion_undirected_edges": 13968,
+    "zero_weight_arcs": 0,
+    "arcs_without_reverse_fraction": 0.20382659656985264,
+    "native_id_to_protocol_mapping": "largest SCC sorted original IDs -> zero-based",
+    "parallel_edges": "minimum length for each ordered pair; self loops removed",
+    "weights": "native decimal Length in metres, no integer truncation",
+    "coordinate_epsg": 32650,
+    "input_hashes": {
+      "node_jinan.csv": "8dcba339349b8e95062a65c6db293a7d44b2fea3311512bcc3a323a37f7c9ebf",
+      "edge_jinan.csv": "446bd54efca6ef915846e83e53c1b60db2a4603b4a4273b9cef65bea053c8d15"
+    },
+    "survey_mapping_max_projected_error_m": 2.3283064365386963e-09
+  },
+  "jinan_split_protocol": {
+    "train": {
+      "published_rows": 400000,
+      "unique_unordered_pairs": 393278,
+      "within_split_repetitions": 6722,
+      "removed_overlap_with_higher_priority": 3336,
+      "excluded_outside_scc_or_self": 1872,
+      "eligible_groups": 388070,
+      "selected_for_diagnostic": 100000
+    },
+    "validation": {
+      "published_rows": 50000,
+      "unique_unordered_pairs": 49906,
+      "within_split_repetitions": 94,
+      "removed_overlap_with_higher_priority": 217,
+      "excluded_outside_scc_or_self": 240,
+      "eligible_groups": 49449,
+      "selected_for_diagnostic": 10000
+    },
+    "test": {
+      "published_rows": 50000,
+      "unique_unordered_pairs": 49894,
+      "within_split_repetitions": 106,
+      "removed_overlap_with_higher_priority": 0,
+      "excluded_outside_scc_or_self": 220,
+      "eligible_groups": 49674,
+      "selected_for_diagnostic": 10000
+    },
+    "cross_split_group_overlap": {
+      "train/validation": 1590,
+      "train/test": 1746,
+      "validation/test": 217
+    }
+  },
+  "protocol_note": "Survey test > validation > train priority for unordered OD overlap removal; equal weight per unordered group, then both directions. Not original workload-frequency weighting.",
+  "published_survey_label_check": {
+    "queries": 512,
+    "max_abs_difference_m": 1.0,
+    "passed": true,
+    "zero_weight_edges": 6,
+    "stored_weight_check_passed": false,
+    "minimum_one_metre_check_max_error": 0.0,
+    "minimum_one_metre_check_passed": true,
+    "convention": "Published labels match max(stored edge weight,1m) on checked queries; native experiments retain raw decimal lengths and recompute labels."
+  },
+  "excluded_nonpositive_or_nonfinite_pairs": 0,
+  "undirected_roundoff_max_abs_m": 1.8189894035458565e-11,
+  "independent_label_checks": {
+    "directed": {
+      "checked_directions": 128,
+      "max_abs_difference_m": 0.0,
+      "passed": true
+    },
+    "undirected": {
+      "checked_directions": 128,
+      "max_abs_difference_m": 5.4569682106375694e-12,
+      "passed": true
+    },
+    "shenzhen": {
+      "checked_directions": 128,
+      "max_abs_difference_m": 0.0,
+      "passed": true
+    }
+  },
+  "shenzhen_native": {
+    "raw_nodes": 11933,
+    "raw_edge_rows": 27410,
+    "deduplicated_nonself_arcs": 27410,
+    "strong_components": 163,
+    "largest_strong_component_nodes": 11738,
+    "nodes_excluded": 195,
+    "directed_arcs_used": 27105,
+    "companion_undirected_edges": 18633,
+    "zero_weight_arcs": 0,
+    "arcs_without_reverse_fraction": 0.3748754842280022,
+    "native_id_to_protocol_mapping": "largest SCC sorted original IDs -> zero-based",
+    "parallel_edges": "minimum length for each ordered pair; self loops removed",
+    "weights": "native decimal Length in metres, no integer truncation",
+    "coordinate_epsg": 32649,
+    "input_hashes": {
+      "node_shenzhen.csv": "e056ff60b0e474754fc5cf297004af74392a123d1939a55ab9d7827ab012b146",
+      "edge_shenzhen.csv": "52a9523f56c137fc210a576fd18a5996e19d4252ed5e5729b42b1a99b9618d6d"
+    },
+    "query_source": "seeded uniform unordered pairs, not trajectory workload",
+    "nonpositive_pairs_excluded": 0
+  },
+  "runtime_seconds": 37.91576507687569,
+  "passed": true,
+  "environment_change": {
+    "project_environment": ".venv-audit",
+    "installed_dependency": "pyproj",
+    "version": "3.7.2"
+  }
+}

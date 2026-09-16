@@ -1,0 +1,2045 @@
+{
+  "passed": true,
+  "replays": [
+    {
+      "case": "tree127",
+      "mode": "L1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 7.388964306187518e-06,
+      "mre_difference_pp": 5.475504671892395e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3747f279202f950ee306ebbcd432cd07f973b991e674f657147731d522b5f86c"
+    },
+    {
+      "case": "tree127",
+      "mode": "L1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.366808550874794e-06,
+      "mre_difference_pp": 7.738094254250427e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3747f279202f950ee306ebbcd432cd07f973b991e674f657147731d522b5f86c"
+    },
+    {
+      "case": "tree127",
+      "mode": "L1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 7.582855808152544e-06,
+      "mre_difference_pp": 6.466935253968131e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3747f279202f950ee306ebbcd432cd07f973b991e674f657147731d522b5f86c"
+    },
+    {
+      "case": "tree127",
+      "mode": "T1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.600563056404553e-06,
+      "mre_difference_pp": 1.359442386439369e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3cbad0e19adf8fa78103a2f7c38e281c01f7457ec8f22198fa3c31f3b17261d7"
+    },
+    {
+      "case": "tree127",
+      "mode": "T1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.082422311872506e-06,
+      "mre_difference_pp": 2.479475597061409e-09,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3cbad0e19adf8fa78103a2f7c38e281c01f7457ec8f22198fa3c31f3b17261d7"
+    },
+    {
+      "case": "tree127",
+      "mode": "T1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.783065858608552e-06,
+      "mre_difference_pp": 1.537912394655727e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3cbad0e19adf8fa78103a2f7c38e281c01f7457ec8f22198fa3c31f3b17261d7"
+    },
+    {
+      "case": "tree127",
+      "mode": "P64",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 5.843378751535511e-06,
+      "mre_difference_pp": 4.379508672380794e-09,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 7.105427357601002e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6d1a6a33b552397b0da6afe1bc34d9244dc71972dac694a34d697bd972c4a215"
+    },
+    {
+      "case": "tree127",
+      "mode": "P64",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 5.927550972728568e-06,
+      "mre_difference_pp": 2.4424352562668616e-07,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 7.105427357601002e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6d1a6a33b552397b0da6afe1bc34d9244dc71972dac694a34d697bd972c4a215"
+    },
+    {
+      "case": "tree127",
+      "mode": "P64",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 6.134603999896626e-06,
+      "mre_difference_pp": 5.4538708771367794e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 7.105427357601002e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6d1a6a33b552397b0da6afe1bc34d9244dc71972dac694a34d697bd972c4a215"
+    },
+    {
+      "case": "tree127",
+      "mode": "B2",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.253424127246944e-06,
+      "mre_difference_pp": 9.322982109233324e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "1dba8e5ba2a26a9dfaa0e83b6938ba546d787b39cd417628e8c60c19c03320b8"
+    },
+    {
+      "case": "tree127",
+      "mode": "B2",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 7.888401881928075e-06,
+      "mre_difference_pp": 6.135138749807645e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "1dba8e5ba2a26a9dfaa0e83b6938ba546d787b39cd417628e8c60c19c03320b8"
+    },
+    {
+      "case": "tree127",
+      "mode": "B2",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.879017066476536e-06,
+      "mre_difference_pp": 1.723011444562661e-07,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "1dba8e5ba2a26a9dfaa0e83b6938ba546d787b39cd417628e8c60c19c03320b8"
+    },
+    {
+      "case": "tree127",
+      "mode": "B4",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.161315541599379e-06,
+      "mre_difference_pp": 7.49053677001621e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 3.552713678800501e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "c25da7add6b274094cce2dfe725a284155539fe649c3f80ca0331de43a0ed8f8"
+    },
+    {
+      "case": "tree127",
+      "mode": "B4",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 7.029338156883114e-06,
+      "mre_difference_pp": 6.416513645413069e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 7.105427357601002e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "c25da7add6b274094cce2dfe725a284155539fe649c3f80ca0331de43a0ed8f8"
+    },
+    {
+      "case": "tree127",
+      "mode": "B4",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 7.885591230660793e-06,
+      "mre_difference_pp": 6.170264099658596e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 3.1086244689504383e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "c25da7add6b274094cce2dfe725a284155539fe649c3f80ca0331de43a0ed8f8"
+    },
+    {
+      "case": "tree127",
+      "mode": "B8",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.120439275671743e-06,
+      "mre_difference_pp": 1.716998220824273e-07,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 7.105427357601002e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7fb5ab14357806c80e40de5c7a599aac5e635ed02cd06ac80159a566eac54ca1"
+    },
+    {
+      "case": "tree127",
+      "mode": "B8",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 8.747366869954476e-06,
+      "mre_difference_pp": 4.819765538066623e-09,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 8.881784197001252e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7fb5ab14357806c80e40de5c7a599aac5e635ed02cd06ac80159a566eac54ca1"
+    },
+    {
+      "case": "tree127",
+      "mode": "B8",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 9.288344500646417e-06,
+      "mre_difference_pp": 8.043200919183313e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 7.105427357601002e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7fb5ab14357806c80e40de5c7a599aac5e635ed02cd06ac80159a566eac54ca1"
+    },
+    {
+      "case": "tree127",
+      "mode": "Shared-L1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 7.716299542437355e-06,
+      "mre_difference_pp": 1.1837488100852056e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "18c6939a7bbbfd22d95e77a5d0daeac6518624ef93dab82e1d5d5adcafb67dd8"
+    },
+    {
+      "case": "tree127",
+      "mode": "Shared-L1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.609156260774853e-06,
+      "mre_difference_pp": 1.1257863974378779e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "18c6939a7bbbfd22d95e77a5d0daeac6518624ef93dab82e1d5d5adcafb67dd8"
+    },
+    {
+      "case": "tree127",
+      "mode": "Shared-L1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.542315057979977e-06,
+      "mre_difference_pp": 9.418092528079569e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "18c6939a7bbbfd22d95e77a5d0daeac6518624ef93dab82e1d5d5adcafb67dd8"
+    },
+    {
+      "case": "tree127",
+      "mode": "MRN-L2",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 6.92446130301505e-06,
+      "mre_difference_pp": 4.4616066396940823e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "d3cfb2f8b08198d955a836a7c06aee38ce9d6bc3f515df9d3cacdbfc912e0c1b"
+    },
+    {
+      "case": "tree127",
+      "mode": "MRN-L2",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 6.415804108428347e-06,
+      "mre_difference_pp": 1.1919097131496414e-07,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "d3cfb2f8b08198d955a836a7c06aee38ce9d6bc3f515df9d3cacdbfc912e0c1b"
+    },
+    {
+      "case": "tree127",
+      "mode": "MRN-L2",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 6.593700028645344e-06,
+      "mre_difference_pp": 5.0259459927204375e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "d3cfb2f8b08198d955a836a7c06aee38ce9d6bc3f515df9d3cacdbfc912e0c1b"
+    },
+    {
+      "case": "tree127",
+      "mode": "IQE-maxmean",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 8.02559238621825e-06,
+      "mre_difference_pp": 4.5033650586390195e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "216efafc28c5ca4c7f19e5aec19c97e09b3bd0e85a84940d2a7530cee8eb61f1"
+    },
+    {
+      "case": "tree127",
+      "mode": "IQE-maxmean",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 7.70077030409766e-06,
+      "mre_difference_pp": 2.378577321771047e-07,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "216efafc28c5ca4c7f19e5aec19c97e09b3bd0e85a84940d2a7530cee8eb61f1"
+    },
+    {
+      "case": "tree127",
+      "mode": "IQE-maxmean",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 6.712262866415131e-06,
+      "mre_difference_pp": 7.714552485715842e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "216efafc28c5ca4c7f19e5aec19c97e09b3bd0e85a84940d2a7530cee8eb61f1"
+    },
+    {
+      "case": "tree127",
+      "mode": "IQE-sum",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 7.75076581049916e-06,
+      "mre_difference_pp": 5.8720958817648494e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "375d1950e4ec10504bd7662b89ae53a1caca4c3562842f2c30615640bb86001c"
+    },
+    {
+      "case": "tree127",
+      "mode": "IQE-sum",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 7.564825587280666e-06,
+      "mre_difference_pp": 9.32482293047876e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "375d1950e4ec10504bd7662b89ae53a1caca4c3562842f2c30615640bb86001c"
+    },
+    {
+      "case": "tree127",
+      "mode": "IQE-sum",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 7.875542834767657e-06,
+      "mre_difference_pp": 7.270672380821352e-08,
+      "triangle": {
+        "checked_triples": 2048383,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 5.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "375d1950e4ec10504bd7662b89ae53a1caca4c3562842f2c30615640bb86001c"
+    },
+    {
+      "case": "cycle97",
+      "mode": "L1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.578211918575107e-06,
+      "mre_difference_pp": 4.78354706956452e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "b33dad13ed7dc12c0083655c70a27784120cd1cfdaf0bc654cb8f8bf2f9316cf"
+    },
+    {
+      "case": "cycle97",
+      "mode": "L1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.01475937350915e-06,
+      "mre_difference_pp": 2.999451282903465e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "b33dad13ed7dc12c0083655c70a27784120cd1cfdaf0bc654cb8f8bf2f9316cf"
+    },
+    {
+      "case": "cycle97",
+      "mode": "L1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 8.138195589424413e-06,
+      "mre_difference_pp": 3.5990018432130455e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "b33dad13ed7dc12c0083655c70a27784120cd1cfdaf0bc654cb8f8bf2f9316cf"
+    },
+    {
+      "case": "cycle97",
+      "mode": "T1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 9.695542523502354e-06,
+      "mre_difference_pp": 9.125750466409954e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "257d84e138962026b44d37f249c4160cd4641641d7eb184e0cc2de9e7b55814f"
+    },
+    {
+      "case": "cycle97",
+      "mode": "T1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.1444091796875e-05,
+      "max_numpy_gpu_prediction_difference": 9.056074205204823e-06,
+      "mre_difference_pp": 3.283321916569548e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "257d84e138962026b44d37f249c4160cd4641641d7eb184e0cc2de9e7b55814f"
+    },
+    {
+      "case": "cycle97",
+      "mode": "T1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.0119645935446897e-05,
+      "mre_difference_pp": 3.491604729788378e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "257d84e138962026b44d37f249c4160cd4641641d7eb184e0cc2de9e7b55814f"
+    },
+    {
+      "case": "cycle97",
+      "mode": "P64",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 1.0846621151472391e-05,
+      "mre_difference_pp": 1.6180803186216508e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 1.4210854715202004e-14,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "d228080376767f18bcc0b97806e4509d4f81f3c859205e3b0765770063e47951"
+    },
+    {
+      "case": "cycle97",
+      "mode": "P64",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 1.0667089711091648e-05,
+      "mre_difference_pp": 7.933793000347578e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 1.4210854715202004e-14,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "d228080376767f18bcc0b97806e4509d4f81f3c859205e3b0765770063e47951"
+    },
+    {
+      "case": "cycle97",
+      "mode": "P64",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 1.0902116628130898e-05,
+      "mre_difference_pp": 9.673691181433242e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 1.4210854715202004e-14,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "d228080376767f18bcc0b97806e4509d4f81f3c859205e3b0765770063e47951"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B2",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 2.288818359375e-05,
+      "max_numpy_gpu_prediction_difference": 1.3354973873447307e-05,
+      "mre_difference_pp": 2.5139843273791485e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7d17ef11238e8626679d15b842660f558dab2642d8c5eea8dbca80c2e906888a"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B2",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 2.288818359375e-05,
+      "max_numpy_gpu_prediction_difference": 1.2212949627610215e-05,
+      "mre_difference_pp": 1.3894620565224614e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7d17ef11238e8626679d15b842660f558dab2642d8c5eea8dbca80c2e906888a"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B2",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 2.288818359375e-05,
+      "max_numpy_gpu_prediction_difference": 1.5768763972801025e-05,
+      "mre_difference_pp": 2.6298465627405676e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7d17ef11238e8626679d15b842660f558dab2642d8c5eea8dbca80c2e906888a"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B4",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 2.288818359375e-05,
+      "max_numpy_gpu_prediction_difference": 1.2672081680875635e-05,
+      "mre_difference_pp": 8.774057391747192e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "2c88f1f41a91914e83ea659cf9f0bec1181c45e2f8a28907a9e3ecff66c8b304"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B4",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.3324096883593484e-05,
+      "mre_difference_pp": 6.130884315780349e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "2c88f1f41a91914e83ea659cf9f0bec1181c45e2f8a28907a9e3ecff66c8b304"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B4",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.2419622791526308e-05,
+      "mre_difference_pp": 1.3188989100854087e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "2c88f1f41a91914e83ea659cf9f0bec1181c45e2f8a28907a9e3ecff66c8b304"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B8",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.5317140537263185e-05,
+      "mre_difference_pp": 7.916128197393846e-09,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "cbaca8ba9cb63fb3b646353dbb216a27202c188bed8c0b18c42b03c0beb11996"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B8",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.3937340284542188e-05,
+      "mre_difference_pp": 2.4522499586510094e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 7.105427357601002e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "cbaca8ba9cb63fb3b646353dbb216a27202c188bed8c0b18c42b03c0beb11996"
+    },
+    {
+      "case": "cycle97",
+      "mode": "B8",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.3187513374646187e-05,
+      "mre_difference_pp": 4.2014596601802623e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 1.4210854715202004e-14,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "cbaca8ba9cb63fb3b646353dbb216a27202c188bed8c0b18c42b03c0beb11996"
+    },
+    {
+      "case": "cycle97",
+      "mode": "Shared-L1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.3113156086319577e-05,
+      "mre_difference_pp": 2.729390047306879e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "a0afce814c2b744fb071fdd58b4a75792329597cb5735b0d31af756575d90276"
+    },
+    {
+      "case": "cycle97",
+      "mode": "Shared-L1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.2155349139675309e-05,
+      "mre_difference_pp": 7.978404426012276e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "a0afce814c2b744fb071fdd58b4a75792329597cb5735b0d31af756575d90276"
+    },
+    {
+      "case": "cycle97",
+      "mode": "Shared-L1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.2554913723761274e-05,
+      "mre_difference_pp": 7.849207861454488e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "a0afce814c2b744fb071fdd58b4a75792329597cb5735b0d31af756575d90276"
+    },
+    {
+      "case": "cycle97",
+      "mode": "MRN-L2",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 1.5539632997274566e-05,
+      "mre_difference_pp": 5.11213897880225e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "8f7f4d7a3db8a97f60582600c7176584dde8396794d990799ba08b07f11b54f8"
+    },
+    {
+      "case": "cycle97",
+      "mode": "MRN-L2",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 1.4951861089684826e-05,
+      "mre_difference_pp": 1.526750281755085e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "8f7f4d7a3db8a97f60582600c7176584dde8396794d990799ba08b07f11b54f8"
+    },
+    {
+      "case": "cycle97",
+      "mode": "MRN-L2",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 7.62939453125e-06,
+      "max_numpy_gpu_prediction_difference": 1.4545511973551584e-05,
+      "mre_difference_pp": 4.644358710947927e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "8f7f4d7a3db8a97f60582600c7176584dde8396794d990799ba08b07f11b54f8"
+    },
+    {
+      "case": "cycle97",
+      "mode": "IQE-maxmean",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.739692555702277e-05,
+      "mre_difference_pp": 1.5168478704197241e-06,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "ba1f3daa1bf9dc7ee9bae5aee41f5458f5f8e5c2616c001c1920f4133ba4acdf"
+    },
+    {
+      "case": "cycle97",
+      "mode": "IQE-maxmean",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.771387118765233e-05,
+      "mre_difference_pp": 1.8850140328652287e-06,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "ba1f3daa1bf9dc7ee9bae5aee41f5458f5f8e5c2616c001c1920f4133ba4acdf"
+    },
+    {
+      "case": "cycle97",
+      "mode": "IQE-maxmean",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 2.288818359375e-05,
+      "max_numpy_gpu_prediction_difference": 1.475165160513825e-05,
+      "mre_difference_pp": 1.0713397600170538e-06,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "ba1f3daa1bf9dc7ee9bae5aee41f5458f5f8e5c2616c001c1920f4133ba4acdf"
+    },
+    {
+      "case": "cycle97",
+      "mode": "IQE-sum",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.2437202713044826e-05,
+      "mre_difference_pp": 5.7730545677259215e-08,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3886295ccc9092cd656cb33fc020e5e55accb9d4c90f569785cf7306726d805b"
+    },
+    {
+      "case": "cycle97",
+      "mode": "IQE-sum",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.1390036490865896e-05,
+      "mre_difference_pp": 1.70748762684525e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3886295ccc9092cd656cb33fc020e5e55accb9d4c90f569785cf7306726d805b"
+    },
+    {
+      "case": "cycle97",
+      "mode": "IQE-sum",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.52587890625e-05,
+      "max_numpy_gpu_prediction_difference": 1.2327731738537295e-05,
+      "mre_difference_pp": 2.402736782869397e-07,
+      "triangle": {
+        "checked_triples": 912673,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 9.600000000000001e-07,
+        "passed": true
+      },
+      "artifact_sha256": "3886295ccc9092cd656cb33fc020e5e55accb9d4c90f569785cf7306726d805b"
+    },
+    {
+      "case": "grid12",
+      "mode": "L1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.614668866447346e-06,
+      "mre_difference_pp": 4.0527301869985877e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "545061bf7ead38a4dd4c3ee64a1a3f13613d39ff2e015529886e27ec5ac0aaba"
+    },
+    {
+      "case": "grid12",
+      "mode": "L1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.6492602362159232e-06,
+      "mre_difference_pp": 4.300979359328494e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 1.7763568394002505e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "545061bf7ead38a4dd4c3ee64a1a3f13613d39ff2e015529886e27ec5ac0aaba"
+    },
+    {
+      "case": "grid12",
+      "mode": "L1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.265998476109644e-06,
+      "mre_difference_pp": 3.1328619876092034e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "545061bf7ead38a4dd4c3ee64a1a3f13613d39ff2e015529886e27ec5ac0aaba"
+    },
+    {
+      "case": "grid12",
+      "mode": "T1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.5143159209383157e-06,
+      "mre_difference_pp": 3.675592328278299e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6867cf02422b04f80cd0e0a39069351ff72a90d59144637007813cfbff319703"
+    },
+    {
+      "case": "grid12",
+      "mode": "T1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.4386935077179714e-06,
+      "mre_difference_pp": 3.9442854138371786e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6867cf02422b04f80cd0e0a39069351ff72a90d59144637007813cfbff319703"
+    },
+    {
+      "case": "grid12",
+      "mode": "T1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.210252771168598e-06,
+      "mre_difference_pp": 4.191519327179094e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6867cf02422b04f80cd0e0a39069351ff72a90d59144637007813cfbff319703"
+    },
+    {
+      "case": "grid12",
+      "mode": "P64",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 2.784726657267811e-06,
+      "mre_difference_pp": 2.7780931649568075e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 3.552713678800501e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7cb0614e5adb292dfe03058a20a373bf190ad5faefea117a786ffbc7dcc3ccc5"
+    },
+    {
+      "case": "grid12",
+      "mode": "P64",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 2.6335687870471247e-06,
+      "mre_difference_pp": 4.028630226637908e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 3.552713678800501e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7cb0614e5adb292dfe03058a20a373bf190ad5faefea117a786ffbc7dcc3ccc5"
+    },
+    {
+      "case": "grid12",
+      "mode": "P64",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 2.7160647420032547e-06,
+      "mre_difference_pp": 2.4070415274857204e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 3.552713678800501e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7cb0614e5adb292dfe03058a20a373bf190ad5faefea117a786ffbc7dcc3ccc5"
+    },
+    {
+      "case": "grid12",
+      "mode": "B2",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.7306014561977463e-06,
+      "mre_difference_pp": 3.4596351738969133e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 4.440892098500626e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "1e21ae6bb05e8b7995988e97fb4c6838c5409692ac16559f606297a6ee42d9f4"
+    },
+    {
+      "case": "grid12",
+      "mode": "B2",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.670190775295623e-06,
+      "mre_difference_pp": 3.39432457252542e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 5.329070518200751e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "1e21ae6bb05e8b7995988e97fb4c6838c5409692ac16559f606297a6ee42d9f4"
+    },
+    {
+      "case": "grid12",
+      "mode": "B2",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.970100671324417e-06,
+      "mre_difference_pp": 3.1090702279357174e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 5.329070518200751e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "1e21ae6bb05e8b7995988e97fb4c6838c5409692ac16559f606297a6ee42d9f4"
+    },
+    {
+      "case": "grid12",
+      "mode": "B4",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 4.136283589417644e-06,
+      "mre_difference_pp": 2.449250393610214e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 5.329070518200751e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7487a05b53f5cb1bf0938b2b99d08c05eae03b4b16bc647ab292f3e7be34db41"
+    },
+    {
+      "case": "grid12",
+      "mode": "B4",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 4.623107628276557e-06,
+      "mre_difference_pp": 3.920893485442889e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 5.329070518200751e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7487a05b53f5cb1bf0938b2b99d08c05eae03b4b16bc647ab292f3e7be34db41"
+    },
+    {
+      "case": "grid12",
+      "mode": "B4",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 4.033926135349475e-06,
+      "mre_difference_pp": 2.263378835465346e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 5.329070518200751e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "7487a05b53f5cb1bf0938b2b99d08c05eae03b4b16bc647ab292f3e7be34db41"
+    },
+    {
+      "case": "grid12",
+      "mode": "B8",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.6376026812945383e-06,
+      "mre_difference_pp": 1.5509937867363988e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 7.105427357601002e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "b9eec6a8c250186591de2cc8a645921739b1aaee76f7fa64b3c3df792dd91540"
+    },
+    {
+      "case": "grid12",
+      "mode": "B8",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.456649103839027e-06,
+      "mre_difference_pp": 5.945884451463712e-08,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 5.329070518200751e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "b9eec6a8c250186591de2cc8a645921739b1aaee76f7fa64b3c3df792dd91540"
+    },
+    {
+      "case": "grid12",
+      "mode": "B8",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.611302719974674e-06,
+      "mre_difference_pp": 6.683529636397623e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 5.329070518200751e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "b9eec6a8c250186591de2cc8a645921739b1aaee76f7fa64b3c3df792dd91540"
+    },
+    {
+      "case": "grid12",
+      "mode": "Shared-L1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 2.8931093076778325e-06,
+      "mre_difference_pp": 2.511412029448934e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 8.881784197001252e-16,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "4bdeea3d593ad2e02d5db561b9dc9573c8311e6324db6b18564721988f4246a3"
+    },
+    {
+      "case": "grid12",
+      "mode": "Shared-L1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 2.7335943144635166e-06,
+      "mre_difference_pp": 2.0445720494421948e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 8.881784197001252e-16,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "4bdeea3d593ad2e02d5db561b9dc9573c8311e6324db6b18564721988f4246a3"
+    },
+    {
+      "case": "grid12",
+      "mode": "Shared-L1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.6969853987045553e-06,
+      "mre_difference_pp": 2.0993785199152626e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 5.329070518200751e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "4bdeea3d593ad2e02d5db561b9dc9573c8311e6324db6b18564721988f4246a3"
+    },
+    {
+      "case": "grid12",
+      "mode": "MRN-L2",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 3.9016538124769795e-06,
+      "mre_difference_pp": 2.2934809540409162e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6dab022fbd83a75cc5f4c010d1763533e921b2ff8f11e7d8396af683ec39500d"
+    },
+    {
+      "case": "grid12",
+      "mode": "MRN-L2",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 3.826556675079473e-06,
+      "mre_difference_pp": 2.5844185558288046e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6dab022fbd83a75cc5f4c010d1763533e921b2ff8f11e7d8396af683ec39500d"
+    },
+    {
+      "case": "grid12",
+      "mode": "MRN-L2",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 3.5868342855849278e-06,
+      "mre_difference_pp": 2.2608197058904267e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "6dab022fbd83a75cc5f4c010d1763533e921b2ff8f11e7d8396af683ec39500d"
+    },
+    {
+      "case": "grid12",
+      "mode": "IQE-maxmean",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.3925392806111176e-06,
+      "mre_difference_pp": 1.0460614818796898e-08,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "666bffd881cf0278768e2b4d1cd5295d4f259a29edc1568c1eaf3837a88e1a71"
+    },
+    {
+      "case": "grid12",
+      "mode": "IQE-maxmean",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.100488346063912e-06,
+      "mre_difference_pp": 1.5331714897648396e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "666bffd881cf0278768e2b4d1cd5295d4f259a29edc1568c1eaf3837a88e1a71"
+    },
+    {
+      "case": "grid12",
+      "mode": "IQE-maxmean",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.6328888235459544e-06,
+      "mre_difference_pp": 4.6403526288152364e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "666bffd881cf0278768e2b4d1cd5295d4f259a29edc1568c1eaf3837a88e1a71"
+    },
+    {
+      "case": "grid12",
+      "mode": "IQE-sum",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.2026665373052765e-06,
+      "mre_difference_pp": 2.6557706611640697e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "fc5f0bf71de738246673e7fc4ce2b18308b4a40007b004e1852edcd09ce188d9"
+    },
+    {
+      "case": "grid12",
+      "mode": "IQE-sum",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 3.814697265625e-06,
+      "max_numpy_gpu_prediction_difference": 3.970688482013429e-06,
+      "mre_difference_pp": 2.253735171819926e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "fc5f0bf71de738246673e7fc4ce2b18308b4a40007b004e1852edcd09ce188d9"
+    },
+    {
+      "case": "grid12",
+      "mode": "IQE-sum",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 5.7220458984375e-06,
+      "max_numpy_gpu_prediction_difference": 3.351115466898591e-06,
+      "mre_difference_pp": 2.4880545446137603e-07,
+      "triangle": {
+        "checked_triples": 2985984,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 2.2e-07,
+        "passed": true
+      },
+      "artifact_sha256": "fc5f0bf71de738246673e7fc4ce2b18308b4a40007b004e1852edcd09ce188d9"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "L1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.3050062266373175e-06,
+      "mre_difference_pp": 1.1148535392635495e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "93a4693025bfa51348d7f6ef4fb1f9e6319f7de70423ab4577e86c36ece0442f"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "L1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.144986790713176e-06,
+      "mre_difference_pp": 1.3473665561036796e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "93a4693025bfa51348d7f6ef4fb1f9e6319f7de70423ab4577e86c36ece0442f"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "L1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.0925679001516642e-06,
+      "mre_difference_pp": 1.6477365569755875e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "93a4693025bfa51348d7f6ef4fb1f9e6319f7de70423ab4577e86c36ece0442f"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "T1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.2000766220765513e-06,
+      "mre_difference_pp": 1.5185423887231764e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "4b45ec24f087210a8c764ec895d1ebb7514a17c4eb3298b2e5c7ee7032d338ae"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "T1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.2667977209446235e-06,
+      "mre_difference_pp": 1.3030105705524875e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "4b45ec24f087210a8c764ec895d1ebb7514a17c4eb3298b2e5c7ee7032d338ae"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "T1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.0698740933179351e-06,
+      "mre_difference_pp": 4.41422166375105e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "4b45ec24f087210a8c764ec895d1ebb7514a17c4eb3298b2e5c7ee7032d338ae"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "P64",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 1.1106708628361162e-06,
+      "mre_difference_pp": 2.8132500160538143e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 1.7763568394002505e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "90c459f2f34e49aa487bb5fd48b24a352f34502339b535e61adca13d070e5855"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "P64",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 1.122051831892179e-06,
+      "mre_difference_pp": 2.8111480876447104e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 8.881784197001252e-16,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "90c459f2f34e49aa487bb5fd48b24a352f34502339b535e61adca13d070e5855"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "P64",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 0.0,
+      "max_numpy_gpu_prediction_difference": 1.1419082346364462e-06,
+      "mre_difference_pp": 2.868251862686577e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 8.881784197001252e-16,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "90c459f2f34e49aa487bb5fd48b24a352f34502339b535e61adca13d070e5855"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B2",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.4993133410357018e-06,
+      "mre_difference_pp": 1.8067926322877055e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "c4e2d8e059a25821680febc7280ac4e9a276dbd385663ea276af34cfae8d1ac1"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B2",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.1114515467980368e-06,
+      "mre_difference_pp": 3.0666199113138396e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 8.881784197001252e-16,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "c4e2d8e059a25821680febc7280ac4e9a276dbd385663ea276af34cfae8d1ac1"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B2",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.388103936683649e-06,
+      "mre_difference_pp": 7.960042217905736e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "c4e2d8e059a25821680febc7280ac4e9a276dbd385663ea276af34cfae8d1ac1"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B4",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 2.384185791015625e-06,
+      "max_numpy_gpu_prediction_difference": 1.2109864977460916e-06,
+      "mre_difference_pp": 1.209220105020238e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 1.7763568394002505e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "bc8a0734253447a873dfde7c436c63456c07b121b5dd89618b6dc926490158c9"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B4",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.4985123604205342e-06,
+      "mre_difference_pp": 6.707088440368363e-08,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 1.7763568394002505e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "bc8a0734253447a873dfde7c436c63456c07b121b5dd89618b6dc926490158c9"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B4",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.573864702564265e-06,
+      "mre_difference_pp": 1.4248760363007895e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 1.3322676295501878e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "bc8a0734253447a873dfde7c436c63456c07b121b5dd89618b6dc926490158c9"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B8",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 2.384185791015625e-06,
+      "max_numpy_gpu_prediction_difference": 1.783766398588682e-06,
+      "mre_difference_pp": 1.5824309768652789e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 1.7763568394002505e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "baaeac55a27a3ecc1e5ac360e699930d63bba602741a4b810838e89204dcc9f8"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B8",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.5642230106749366e-06,
+      "mre_difference_pp": 1.7949767366996078e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 1.7763568394002505e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "baaeac55a27a3ecc1e5ac360e699930d63bba602741a4b810838e89204dcc9f8"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "B8",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.6090679224589621e-06,
+      "mre_difference_pp": 5.295813921211548e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 1.7763568394002505e-15,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "baaeac55a27a3ecc1e5ac360e699930d63bba602741a4b810838e89204dcc9f8"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "Shared-L1",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.3112209931165353e-06,
+      "mre_difference_pp": 4.776822127748064e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "cef51cf3d4325877b41ef9f9d3f9152f6e74d7353570727a53eb53c917016c67"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "Shared-L1",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.3855308518273546e-06,
+      "mre_difference_pp": 1.856311000548134e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "cef51cf3d4325877b41ef9f9d3f9152f6e74d7353570727a53eb53c917016c67"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "Shared-L1",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.2892317808876896e-06,
+      "mre_difference_pp": 5.804641776006799e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "cef51cf3d4325877b41ef9f9d3f9152f6e74d7353570727a53eb53c917016c67"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "MRN-L2",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 9.5367431640625e-07,
+      "max_numpy_gpu_prediction_difference": 1.1801486454743326e-06,
+      "mre_difference_pp": 1.8091650151319527e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "6d8de1a1ace0b1649c7f5d6d33a6aa07a2bc133ea97703a30da86bc6d1ae22e1"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "MRN-L2",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 9.5367431640625e-07,
+      "max_numpy_gpu_prediction_difference": 1.1828837687133387e-06,
+      "mre_difference_pp": 1.547805052126705e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "6d8de1a1ace0b1649c7f5d6d33a6aa07a2bc133ea97703a30da86bc6d1ae22e1"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "MRN-L2",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 9.5367431640625e-07,
+      "max_numpy_gpu_prediction_difference": 1.2295789648675282e-06,
+      "mre_difference_pp": 1.7626484325461433e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "6d8de1a1ace0b1649c7f5d6d33a6aa07a2bc133ea97703a30da86bc6d1ae22e1"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "IQE-maxmean",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.635812257205771e-06,
+      "mre_difference_pp": 1.265775787406831e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "b7d09a9c5b53cc0e80f1746d1995130646c5c3389e5c76206195024f98fd9937"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "IQE-maxmean",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.747180829347883e-06,
+      "mre_difference_pp": 1.1670875641467404e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "b7d09a9c5b53cc0e80f1746d1995130646c5c3389e5c76206195024f98fd9937"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "IQE-maxmean",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.5769703791690404e-06,
+      "mre_difference_pp": 1.1998079061381617e-06,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "b7d09a9c5b53cc0e80f1746d1995130646c5c3389e5c76206195024f98fd9937"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "IQE-sum",
+      "seed": 42,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.617528289976633e-06,
+      "mre_difference_pp": 6.400957672181851e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "ebf98e5c1a9418ec750d0daf28fd228a61417621b384e1ed5f8e746bc79072fa"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "IQE-sum",
+      "seed": 99,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.9073486328125e-06,
+      "max_numpy_gpu_prediction_difference": 1.4785105211245764e-06,
+      "mre_difference_pp": 6.920108602493855e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "ebf98e5c1a9418ec750d0daf28fd228a61417621b384e1ed5f8e746bc79072fa"
+    },
+    {
+      "case": "cube6_cycle3",
+      "mode": "IQE-sum",
+      "seed": 1234,
+      "passed": true,
+      "max_cpu_gpu_prediction_difference": 1.430511474609375e-06,
+      "max_numpy_gpu_prediction_difference": 1.4904484180178201e-06,
+      "mre_difference_pp": 5.499085124055627e-07,
+      "triangle": {
+        "checked_triples": 7077888,
+        "max_positive_violation": 0.0,
+        "violations_above_tolerance": 0,
+        "tolerance": 8e-08,
+        "passed": true
+      },
+      "artifact_sha256": "ebf98e5c1a9418ec750d0daf28fd228a61417621b384e1ed5f8e746bc79072fa"
+    }
+  ]
+}

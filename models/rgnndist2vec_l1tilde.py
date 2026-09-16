@@ -176,7 +176,7 @@ class RGNNdist2vecL1Tilde(nn.Module):
             r, s = self.l1tilde_r, self.l1tilde_s
             emb1 = embeddings[x1_sub]
             emb2 = embeddings[x2_sub]
-            asym = (emb2[:, r:r+s] - emb1[:, r:r+s]).sum(dim=1, keepdim=True) / self.max_distance
+            asym = (emb2[:, r:r+s] - emb1[:, r:r+s]).sum(dim=1, keepdim=True)
             # Directional difference target: (d_uv - d_vu) / (2 * max_distance)
             d_rev_norm = d_rev / self.max_distance
             y_norm = y

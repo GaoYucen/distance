@@ -1,0 +1,243 @@
+{
+  "status": "completed",
+  "completed_runs": 30,
+  "protocol": {
+    "train_groups": 20000,
+    "validation_groups": 5000,
+    "test_groups": 5000,
+    "seeds": [
+      42,
+      99,
+      1234
+    ],
+    "epochs": 30,
+    "hidden": 128,
+    "embedding_dim": 64,
+    "batch_size": 2048,
+    "loss": "SmoothL1",
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "calibration": "frozen multiplier learned from first 4096 training groups only, both directions",
+    "selection": "validation MRE only",
+    "negative_predictions": "raw, not clipped",
+    "directed_vs_undirected": "same original nodes and OD groups; target labels and graph adjacency differ"
+  },
+  "summary": {
+    "Jinan_native_directed": {
+      "l1": {
+        "mean_test_mre_percent": 9.804184645981811,
+        "std_test_mre_pp": 0.09349086001323277,
+        "per_seed_mre_percent": [
+          9.91204028367807,
+          9.74626784620321,
+          9.75424580806415
+        ],
+        "best_validation_epochs": [
+          21,
+          25,
+          24
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 669.7633905346723,
+        "high_asymmetry_mre_mean": 22.970266789969674
+      },
+      "tilde_63_1": {
+        "mean_test_mre_percent": 9.76552159153332,
+        "std_test_mre_pp": 0.055683947501050046,
+        "per_seed_mre_percent": [
+          9.745797517331479,
+          9.722384358054732,
+          9.828382899213748
+        ],
+        "best_validation_epochs": [
+          25,
+          18,
+          24
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 660.6032143498626,
+        "high_asymmetry_mre_mean": 22.79988834938457
+      },
+      "tilde_62_2": {
+        "mean_test_mre_percent": 9.736190750274421,
+        "std_test_mre_pp": 0.08412835650156437,
+        "per_seed_mre_percent": [
+          9.740929329023043,
+          9.649793252712403,
+          9.817849669087817
+        ],
+        "best_validation_epochs": [
+          25,
+          18,
+          24
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 650.2633346212941,
+        "high_asymmetry_mre_mean": 22.67738748618825
+      },
+      "linf_symmetric": {
+        "mean_test_mre_percent": 10.109872154480643,
+        "std_test_mre_pp": 0.14107983097472743,
+        "per_seed_mre_percent": [
+          10.200125225397565,
+          9.947296455123897,
+          10.18219478292047
+        ],
+        "best_validation_epochs": [
+          25,
+          30,
+          22
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 669.7633905346723,
+        "high_asymmetry_mre_mean": 23.1356241777295
+      },
+      "linf_asymmetric": {
+        "mean_test_mre_percent": 10.563761506832059,
+        "std_test_mre_pp": 0.12522202999089882,
+        "per_seed_mre_percent": [
+          10.701051485231982,
+          10.455820803256952,
+          10.534412232007243
+        ],
+        "best_validation_epochs": [
+          25,
+          29,
+          28
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 639.3974258109023,
+        "high_asymmetry_mre_mean": 22.972126937298754
+      }
+    },
+    "Jinan_native_undirected": {
+      "l1": {
+        "mean_test_mre_percent": 6.9125660620675005,
+        "std_test_mre_pp": 0.0896927742057257,
+        "per_seed_mre_percent": [
+          7.009935239848615,
+          6.833316359756713,
+          6.894446586597171
+        ],
+        "best_validation_epochs": [
+          25,
+          29,
+          30
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 0.0,
+        "high_asymmetry_mre_mean": null
+      },
+      "tilde_63_1": {
+        "mean_test_mre_percent": 6.942988140674706,
+        "std_test_mre_pp": 0.08786745034929476,
+        "per_seed_mre_percent": [
+          7.03490958882295,
+          6.859831659334022,
+          6.934223173867145
+        ],
+        "best_validation_epochs": [
+          25,
+          27,
+          30
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 1.4238171945196523,
+        "high_asymmetry_mre_mean": null
+      },
+      "tilde_62_2": {
+        "mean_test_mre_percent": 6.917038365320906,
+        "std_test_mre_pp": 0.12206500785327028,
+        "per_seed_mre_percent": [
+          7.03508725507236,
+          6.791319011617325,
+          6.92470882927303
+        ],
+        "best_validation_epochs": [
+          25,
+          29,
+          30
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 9.959975113665948,
+        "high_asymmetry_mre_mean": null
+      },
+      "linf_symmetric": {
+        "mean_test_mre_percent": 7.1686927581062045,
+        "std_test_mre_pp": 0.14506713277766592,
+        "per_seed_mre_percent": [
+          7.328086684025298,
+          7.044390242830753,
+          7.133601347462563
+        ],
+        "best_validation_epochs": [
+          27,
+          29,
+          30
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 0.0,
+        "high_asymmetry_mre_mean": null
+      },
+      "linf_asymmetric": {
+        "mean_test_mre_percent": 7.670802806682701,
+        "std_test_mre_pp": 0.11794256504592143,
+        "per_seed_mre_percent": [
+          7.793192580501341,
+          7.5578777922065745,
+          7.661338047340189
+        ],
+        "best_validation_epochs": [
+          25,
+          27,
+          30
+        ],
+        "negative_prediction_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "direction_A_rmse_m_mean": 177.42595223264595,
+        "high_asymmetry_mre_mean": null
+      }
+    }
+  },
+  "same_od_control_passed": true,
+  "all_30_cpu_replays_passed": true
+}

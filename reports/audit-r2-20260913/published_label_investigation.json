@@ -1,0 +1,135 @@
+{
+  "queries": 512,
+  "raw_delta_values": [
+    -1.0,
+    0.0
+  ],
+  "counts": [
+    15,
+    497
+  ],
+  "zero_edges": 6,
+  "mismatches": [
+    {
+      "u_zero_based": 4025,
+      "v_zero_based": 640,
+      "published": 7155.0,
+      "scipy": 7154.0,
+      "networkx": 7154.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 5496,
+      "v_zero_based": 389,
+      "published": 14537.0,
+      "scipy": 14536.0,
+      "networkx": 14536.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 3073,
+      "v_zero_based": 1468,
+      "published": 6705.0,
+      "scipy": 6704.0,
+      "networkx": 6704.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 3603,
+      "v_zero_based": 2872,
+      "published": 11379.0,
+      "scipy": 11378.0,
+      "networkx": 11378.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 5072,
+      "v_zero_based": 7604,
+      "published": 7250.0,
+      "scipy": 7249.0,
+      "networkx": 7249.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 3127,
+      "v_zero_based": 1365,
+      "published": 6882.0,
+      "scipy": 6881.0,
+      "networkx": 6881.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 3932,
+      "v_zero_based": 7547,
+      "published": 3671.0,
+      "scipy": 3670.0,
+      "networkx": 3670.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 2601,
+      "v_zero_based": 5010,
+      "published": 7521.0,
+      "scipy": 7520.0,
+      "networkx": 7520.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 4640,
+      "v_zero_based": 4595,
+      "published": 3309.0,
+      "scipy": 3308.0,
+      "networkx": 3308.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 5962,
+      "v_zero_based": 2437,
+      "published": 8728.0,
+      "scipy": 8727.0,
+      "networkx": 8727.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 656,
+      "v_zero_based": 4588,
+      "published": 7599.0,
+      "scipy": 7598.0,
+      "networkx": 7598.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 8166,
+      "v_zero_based": 2759,
+      "published": 5183.0,
+      "scipy": 5182.0,
+      "networkx": 5182.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 2135,
+      "v_zero_based": 6217,
+      "published": 19397.0,
+      "scipy": 19396.0,
+      "networkx": 19396.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 3850,
+      "v_zero_based": 8648,
+      "published": 9147.0,
+      "scipy": 9146.0,
+      "networkx": 9146.0,
+      "zero_edges_on_one_shortest_path": 1
+    },
+    {
+      "u_zero_based": 3103,
+      "v_zero_based": 655,
+      "published": 7863.0,
+      "scipy": 7862.0,
+      "networkx": 7862.0,
+      "zero_edges_on_one_shortest_path": 1
+    }
+  ],
+  "min_edge_one_metre_max_difference": 0.0
+}

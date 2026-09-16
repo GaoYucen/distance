@@ -1,0 +1,183 @@
+{
+  "classification": "posthoc error decomposition on saved models, not a new benchmark",
+  "training_groups": 20000,
+  "test_groups": 5000,
+  "identifiable_test_groups": 4791,
+  "solver": {
+    "stop_code": 2,
+    "iterations": 127,
+    "residual_norm": 37778.50948486953,
+    "normal_residual_norm": 0.00013113695659867236,
+    "converged": true
+  },
+  "reference": "Unconstrained per-node potential least squares fitted to exactly the same 20,000 training OD groups. Not a test-optimal oracle or deployable distance model; reconstructed S uses ground truth.",
+  "potential_reference": {
+    "count": 4791,
+    "asymmetry_abs_diff_over_mean_quantiles": [
+      0.0,
+      0.03884246670503955,
+      0.2330971880286056,
+      0.3539213010553297,
+      0.7553648832289611,
+      1.8166346417787538
+    ],
+    "asymmetric_energy": 408386.0949780839,
+    "potential_residual_energy": 235523.26863898814,
+    "potential_explained_energy_ratio_vs_zero": 0.42328284058832233,
+    "asymmetry_rmse": 639.0509330077564,
+    "potential_residual_rmse": 485.30739602749526,
+    "oracle_symmetric_midpoint_mre_percent": 5.103293844279678,
+    "best_possible_symmetric_pairwise_mre_percent": 4.0018794575208005,
+    "oracle_S_plus_train_fitted_potential_mre_percent": 6.357835521512387,
+    "oracle_S_plus_potential_negative_prediction_fraction": 0.0005218117303276978
+  },
+  "learned_runs": [
+    {
+      "mode": "l1",
+      "seed": 42,
+      "symmetric_mse_m2": 482413.32660808443,
+      "direction_A_mse_m2": 408386.0949780839,
+      "paired_distance_mse_m2": 890799.4215861683,
+      "direction_energy_explained_vs_zero": 0.0
+    },
+    {
+      "mode": "tilde_63_1",
+      "seed": 42,
+      "symmetric_mse_m2": 469258.0228935153,
+      "direction_A_mse_m2": 402565.61536147585,
+      "paired_distance_mse_m2": 871823.6382549912,
+      "direction_energy_explained_vs_zero": 0.014252394212688424
+    },
+    {
+      "mode": "tilde_62_2",
+      "seed": 42,
+      "symmetric_mse_m2": 475392.40479301766,
+      "direction_A_mse_m2": 366371.89753272646,
+      "paired_distance_mse_m2": 841764.3023257442,
+      "direction_energy_explained_vs_zero": 0.10287861893929606
+    },
+    {
+      "mode": "linf_symmetric",
+      "seed": 42,
+      "symmetric_mse_m2": 497519.2006527552,
+      "direction_A_mse_m2": 408386.0949780839,
+      "paired_distance_mse_m2": 905905.295630839,
+      "direction_energy_explained_vs_zero": 0.0
+    },
+    {
+      "mode": "linf_asymmetric",
+      "seed": 42,
+      "symmetric_mse_m2": 485927.4838770994,
+      "direction_A_mse_m2": 347329.5560900982,
+      "paired_distance_mse_m2": 833257.0399671977,
+      "direction_energy_explained_vs_zero": 0.14950689957076602
+    },
+    {
+      "mode": "l1",
+      "seed": 99,
+      "symmetric_mse_m2": 460688.96614272945,
+      "direction_A_mse_m2": 408386.0949780839,
+      "paired_distance_mse_m2": 869075.0611208134,
+      "direction_energy_explained_vs_zero": 0.0
+    },
+    {
+      "mode": "tilde_63_1",
+      "seed": 99,
+      "symmetric_mse_m2": 500426.0383662214,
+      "direction_A_mse_m2": 401164.3339122974,
+      "paired_distance_mse_m2": 901590.3722785189,
+      "direction_energy_explained_vs_zero": 0.017683660522707312
+    },
+    {
+      "mode": "tilde_62_2",
+      "seed": 99,
+      "symmetric_mse_m2": 512953.7851073232,
+      "direction_A_mse_m2": 401516.99624917784,
+      "paired_distance_mse_m2": 914470.7813565012,
+      "direction_energy_explained_vs_zero": 0.016820109238231296
+    },
+    {
+      "mode": "linf_symmetric",
+      "seed": 99,
+      "symmetric_mse_m2": 493699.07585008384,
+      "direction_A_mse_m2": 408386.0949780839,
+      "paired_distance_mse_m2": 902085.1708281678,
+      "direction_energy_explained_vs_zero": 0.0
+    },
+    {
+      "mode": "linf_asymmetric",
+      "seed": 99,
+      "symmetric_mse_m2": 504872.68309999275,
+      "direction_A_mse_m2": 386517.6186948421,
+      "paired_distance_mse_m2": 891390.3017948348,
+      "direction_energy_explained_vs_zero": 0.053548532998939136
+    },
+    {
+      "mode": "l1",
+      "seed": 1234,
+      "symmetric_mse_m2": 468006.47516266117,
+      "direction_A_mse_m2": 408386.0949780839,
+      "paired_distance_mse_m2": 876392.570140745,
+      "direction_energy_explained_vs_zero": 0.0
+    },
+    {
+      "mode": "tilde_63_1",
+      "seed": 1234,
+      "symmetric_mse_m2": 479075.10476146254,
+      "direction_A_mse_m2": 386901.13903074566,
+      "paired_distance_mse_m2": 865976.2437922081,
+      "direction_energy_explained_vs_zero": 0.05260942086799314
+    },
+    {
+      "mode": "tilde_62_2",
+      "seed": 1234,
+      "symmetric_mse_m2": 485050.3460440567,
+      "direction_A_mse_m2": 384501.22419612866,
+      "paired_distance_mse_m2": 869551.5702401854,
+      "direction_energy_explained_vs_zero": 0.05848600399393378
+    },
+    {
+      "mode": "linf_symmetric",
+      "seed": 1234,
+      "symmetric_mse_m2": 495227.677288093,
+      "direction_A_mse_m2": 408386.0949780839,
+      "paired_distance_mse_m2": 903613.772266177,
+      "direction_energy_explained_vs_zero": 0.0
+    },
+    {
+      "mode": "linf_asymmetric",
+      "seed": 1234,
+      "symmetric_mse_m2": 500797.9987666903,
+      "direction_A_mse_m2": 345994.8131697697,
+      "paired_distance_mse_m2": 846792.81193646,
+      "direction_energy_explained_vs_zero": 0.1527752354341605
+    }
+  ],
+  "summary": {
+    "l1": {
+      "symmetric_mse_m2": 470369.5893044917,
+      "direction_A_mse_m2": 408386.0949780839,
+      "direction_energy_explained_vs_zero": 0.0
+    },
+    "tilde_63_1": {
+      "symmetric_mse_m2": 482919.7220070665,
+      "direction_A_mse_m2": 396877.0294348397,
+      "direction_energy_explained_vs_zero": 0.028181825201129624
+    },
+    "tilde_62_2": {
+      "symmetric_mse_m2": 491132.17864813254,
+      "direction_A_mse_m2": 384130.039326011,
+      "direction_energy_explained_vs_zero": 0.05939491072382038
+    },
+    "linf_symmetric": {
+      "symmetric_mse_m2": 495481.9845969773,
+      "direction_A_mse_m2": 408386.0949780839,
+      "direction_energy_explained_vs_zero": 0.0
+    },
+    "linf_asymmetric": {
+      "symmetric_mse_m2": 497199.3885812608,
+      "direction_A_mse_m2": 359947.32931823673,
+      "direction_energy_explained_vs_zero": 0.11861022266795522
+    }
+  }
+}

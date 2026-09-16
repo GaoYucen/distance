@@ -1,0 +1,22 @@
+SOURCE_VERIFIED LICENSE 11357
+SOURCE_VERIFIED README.md 10680
+SOURCE_VERIFIED data/README.md 14147
+SOURCE_VERIFIED data/Surat/Surat.edges 91880
+SOURCE_VERIFIED data/Surat/Surat.nodes 93611
+SOURCE_VERIFIED data/Surat/stats.json 239
+SOURCE_VERIFIED data/W_Jinan/W_Jinan.edges 381346
+SOURCE_VERIFIED data/W_Jinan/W_Jinan.nodes 366491
+SOURCE_VERIFIED data/W_Jinan/real_workload/W_Jinan.queries.npz 2355258
+SOURCE_VERIFIED data/W_Jinan/real_workload_perturb_500k/W_Jinan_test.queries.npz 367647
+SOURCE_VERIFIED data/W_Jinan/real_workload_perturb_500k/W_Jinan_train.queries.npz 2921387
+SOURCE_VERIFIED data/W_Jinan/real_workload_perturb_500k/W_Jinan_val.queries.npz 367570
+SOURCE_VERIFIED data/W_Jinan/stats.json 243
+SOURCE_VERIFIED src/data_preprocess/download_and_preprocess_data.py 2351
+SOURCE_VERIFIED src/data_preprocess/generate_query_data.py 15118
+SOURCE_VERIFIED src/train.py 38454
+SOURCE_VERIFIED src/utils/data_utils.py 44311
+SOURCE_VERIFIED node_jinan.csv 246362
+SOURCE_VERIFIED edge_jinan.csv 3327181
+SOURCE_VERIFIED node_shenzhen.csv 332236
+SOURCE_VERIFIED edge_shenzhen.csv 4526158
+ALL_R2_SOURCES_VERIFIED 21

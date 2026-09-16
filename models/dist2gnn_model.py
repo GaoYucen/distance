@@ -1,7 +1,7 @@
 """
 dist2gnn_model.py
 
-Dist2GNN: 面向有向路网的最短路径距离估计模型 — 精确复现论文实现。
+Dist2GNN: 面向有向路网的最短路径距离估计模型 — 审计修正版；不是原始论文实现的逐行复现。
 
 论文: Learning-Based Shortest Path Distance Estimation on Road Network
       Using Asymmetric Metric (VLDB 2025)
@@ -39,7 +39,7 @@ def landmark_sampling(graph, ratio=0.02, seed=42):
 
     The paper's original method iteratively selects farthest nodes,
     but that is O(k^2 * n log n) which is too slow for large graphs.
-    Random selection is equivalent in expectation for uniform coverage.
+    Random selection is a different heuristic, NOT equivalent to farthest-point coverage.
 
     Args:
         graph: networkx.Graph / nx.DiGraph
@@ -207,7 +207,7 @@ class Dist2GNNModel(BaseModel):
 
         # Pairwise MLP: paper eq(6) — combines raw features of OD pair
         # Input: [x_o, x_d] where x ∈ R^gnn_input_dim
-        pairwise_input_dim = gnn_input_dim * 2
+        pairwise_input_dim = gnn_output_dim * 2  # audit R1: consume actual per-node encoder outputs
         pairwise_hidden = gnn_hidden_dim
         self.pairwise_mlp = nn.Sequential(
             nn.Linear(pairwise_input_dim, pairwise_hidden),
@@ -219,7 +219,7 @@ class Dist2GNNModel(BaseModel):
             nn.Linear(pairwise_hidden // 2, 2 * (r + s)),
         )
 
-        # Per-epoch cache: first batch has grad, rest use detached
+        # Historical cache retained for API compatibility; training forward bypasses it.
         self._gnn_cache = None
 
         n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
@@ -264,9 +264,9 @@ class Dist2GNNModel(BaseModel):
         else:
             return self.gnn(self.get_raw_features())
 
-    def forward(self, x1, x2):
-        # Gather raw features for source/dest (no GNN)
-        x_all = self.get_raw_features()            # [N, gnn_input_dim]
+    def forward(self, x1, x2, embeddings=None):
+        # Recompute with gradients each training batch. Evaluation may pass a frozen encoding.
+        x_all = self.encode(use_cache=False) if embeddings is None else embeddings
         x_o, x_d = x_all[x1], x_all[x2]
 
         # Pairwise MLP: paper eq(6) — y_od = MLP(x_o, x_d)
@@ -331,22 +331,10 @@ class Dist2GNNModel(BaseModel):
                 d_ij = d_ij.unsqueeze(-1) if d_ij.dim() == 1 else d_ij
                 i, j, d_ij = i.to(device), j.to(device), d_ij.to(device)
 
-                # Landmark 采样（论文特有）
+                # Duplicate complete valid triples; never change an endpoint alone.
                 if landmark_set is not None:
-                    i_np = i.cpu().numpy()
-                    j_np = j.cpu().numpy()
-                    i_mask = torch.tensor([n in landmark_set for n in i_np], device=device)
-                    j_mask = torch.tensor([n in landmark_set for n in j_np], device=device)
-                    current_lm = (i_mask | j_mask).sum().item()
-                    target_lm = int(len(i) * landmark_ratio)
-                    if current_lm < target_lm and len(landmark_set) > 0:
-                        deficit = target_lm - current_lm
-                        non_lm_idx = torch.where(~(i_mask | j_mask))[0]
-                        swap_idx = non_lm_idx[:min(deficit, len(non_lm_idx))]
-                        lm_list = list(landmark_set)
-                        for k, si in enumerate(swap_idx):
-                            if k < len(lm_list):
-                                i[si] = torch.tensor(lm_list[k % len(lm_list)], device=device)
+                    from utils.audit_protocol import resample_landmark_rows
+                    i, j, d_ij = resample_landmark_rows(i, j, d_ij, landmark_set, landmark_ratio)
 
                 loss = self._train_step(i, j, d_ij, criterion, optimizer)
                 running_loss += loss.item()
@@ -420,6 +408,11 @@ class Dist2GNNModel(BaseModel):
         total_time = 0.0
 
         with torch.no_grad():
+            encode_start = time.perf_counter()
+            embeddings = self.encode(use_cache=False)
+            if str(device).startswith('cuda'):
+                torch.cuda.synchronize()
+            self.last_encoding_seconds = time.perf_counter() - encode_start
             for batch in dataloader:
                 if len(batch) >= 4:
                     i, j, d_ij, _ = batch
@@ -429,13 +422,13 @@ class Dist2GNNModel(BaseModel):
                 if profile_time:
                     start = time.perf_counter()
                     i, j = i.to(device), j.to(device)
-                    outputs = self.forward(i, j).cpu().numpy()[:, 0]
+                    outputs = self.forward(i, j, embeddings=embeddings).cpu().numpy()[:, 0]
                     if device.startswith('cuda'):
                         torch.cuda.synchronize()
                     total_time += time.perf_counter() - start
                 else:
                     i, j = i.to(device), j.to(device)
-                    outputs = self.forward(i, j).cpu().numpy()[:, 0]
+                    outputs = self.forward(i, j, embeddings=embeddings).cpu().numpy()[:, 0]
                 predictions.append(outputs)
 
         predictions = np.hstack(predictions)

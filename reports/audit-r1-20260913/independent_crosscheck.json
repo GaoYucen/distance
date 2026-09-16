@@ -1,0 +1,335 @@
+{
+  "classification": "independent structural diagnostic, NOT a learned-model performance result",
+  "split_sha256": "212df844b130ee4f2e85845f76437ff9e647e72c45f87bd2ffd359a4dd1d8943",
+  "training_scope": "frozen training pairs only; no validation/test parameter selection",
+  "independent_module_sha256": "c8d423e9fce4cb14423e33a3562cf5aa39a720feb5fe7d8bf75c4a02debacbc4",
+  "original_solver": "LSQR",
+  "independent_solver": "LSMR",
+  "variants": {
+    "uniform_ls": {
+      "solver": {
+        "method": "scipy.sparse.linalg.lsmr",
+        "istop": 2,
+        "iterations": 13,
+        "atol": 1e-11,
+        "btol": 1e-11,
+        "residual_norm": 31342.116964251014,
+        "normal_residual_norm": 2.7191440804444955e-06,
+        "num_train_nodes": 1901,
+        "num_train_components": 1,
+        "weighting": "uniform"
+      },
+      "splits": {
+        "train": {
+          "all": {
+            "n": 160000,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.00534056780928349,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.00508125,
+            "direction_A_rmse_m": 103.18597312619579,
+            "potential_residual_A_rmse_m": 78.35529241062754,
+            "potential_explained_A_energy": 0.42337251024329836,
+            "potential_explained_relative_A_energy": 0.057345195587304554,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 10647.34505,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.005047674237916554,
+            "true_S_plus_fitted_A_oracle_mre": 0.006153949424745417,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "short_train_q25": {
+            "n": 40005,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.00912032789927735,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.01937257842769654,
+            "direction_A_rmse_m": 94.32692125125736,
+            "potential_residual_A_rmse_m": 87.95433602278192,
+            "potential_explained_A_energy": 0.13055284747876483,
+            "potential_explained_relative_A_energy": -0.0658519389675265,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 8897.568072740907,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.008279359790121624,
+            "true_S_plus_fitted_A_oracle_mre": 0.012740141299407825,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "high_alpha_ge_20pct": {
+            "n": 813,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.1712294051435161,
+            "asymmetry_median": 0.13935185185185187,
+            "fraction_asymmetry_ge_0.10": 1.0,
+            "direction_A_rmse_m": 496.77289885633894,
+            "potential_residual_A_rmse_m": 382.3369003444344,
+            "potential_explained_A_energy": 0.40765239121980845,
+            "potential_explained_relative_A_energy": 0.24093666308106043,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 246783.31303813038,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.1418621901343373,
+            "true_S_plus_fitted_A_oracle_mre": 0.14848662722270875,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          }
+        },
+        "validation": {
+          "all": {
+            "n": 20000,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.005273274289288072,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.00505,
+            "direction_A_rmse_m": 102.87785901252028,
+            "potential_residual_A_rmse_m": 79.31692869000157,
+            "potential_explained_A_energy": 0.4055874872124693,
+            "potential_explained_relative_A_energy": -0.04200480025332243,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 10583.853875,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.005006983548780729,
+            "true_S_plus_fitted_A_oracle_mre": 0.006234246425390092,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "short_train_q25": {
+            "n": 5017,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.0087127579278044,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.019334263504086107,
+            "direction_A_rmse_m": 94.20520574424921,
+            "potential_residual_A_rmse_m": 91.17889096264337,
+            "potential_explained_A_energy": 0.0632174202659016,
+            "potential_explained_relative_A_energy": -0.21966195951985212,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 8874.620789316325,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.007976516927146064,
+            "true_S_plus_fitted_A_oracle_mre": 0.012722399764328908,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "high_alpha_ge_20pct": {
+            "n": 101,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.16292948406114022,
+            "asymmetry_median": 0.14603960396039603,
+            "fraction_asymmetry_ge_0.10": 1.0,
+            "direction_A_rmse_m": 501.5185997952559,
+            "potential_residual_A_rmse_m": 414.596147916062,
+            "potential_explained_A_energy": 0.3165976990102155,
+            "potential_explained_relative_A_energy": 0.22012812926476,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 251520.90594059406,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.13767409139198417,
+            "true_S_plus_fitted_A_oracle_mre": 0.1375514973919713,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          }
+        },
+        "test": {
+          "all": {
+            "n": 20000,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.0052898561612599706,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.0051,
+            "direction_A_rmse_m": 99.83026764213346,
+            "potential_residual_A_rmse_m": 78.15452969088795,
+            "potential_explained_A_energy": 0.38710816303208295,
+            "potential_explained_relative_A_energy": 0.03673371799428371,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 9966.0823375,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.005014036662204632,
+            "true_S_plus_fitted_A_oracle_mre": 0.006186616268597342,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "short_train_q25": {
+            "n": 5061,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.009188425910266737,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.01896858328393598,
+            "direction_A_rmse_m": 91.73768610967016,
+            "potential_residual_A_rmse_m": 86.1942158814866,
+            "potential_explained_A_energy": 0.11720333700168961,
+            "potential_explained_relative_A_energy": -0.08468155152187329,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 8415.803052756371,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.00840957814904939,
+            "true_S_plus_fitted_A_oracle_mre": 0.012735612268705091,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "high_alpha_ge_20pct": {
+            "n": 102,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.16353927700315185,
+            "asymmetry_median": 0.13842000564340712,
+            "fraction_asymmetry_ge_0.10": 1.0,
+            "direction_A_rmse_m": 468.18324822826435,
+            "potential_residual_A_rmse_m": 357.7249291466227,
+            "potential_explained_A_energy": 0.41619653025104364,
+            "potential_explained_relative_A_energy": 0.1308172789627967,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 219195.55392156861,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.13739842844540648,
+            "true_S_plus_fitted_A_oracle_mre": 0.14487164820235146,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          }
+        }
+      },
+      "lsqr_lsmr_max_prediction_difference_m": {
+        "train": 3.439460556364793e-07,
+        "validation": 3.1371356001841377e-07,
+        "test": 3.2797401239292867e-07
+      },
+      "runtime_seconds": 0.2243266929872334
+    },
+    "relative_ls": {
+      "solver": {
+        "method": "scipy.sparse.linalg.lsmr",
+        "istop": 2,
+        "iterations": 204,
+        "atol": 1e-11,
+        "btol": 1e-11,
+        "residual_norm": 6.406601868650418,
+        "normal_residual_norm": 2.3452888987653387e-11,
+        "num_train_nodes": 1901,
+        "num_train_components": 1,
+        "weighting": "1/max(S_uv,1 metre)^2"
+      },
+      "splits": {
+        "train": {
+          "all": {
+            "n": 160000,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.00534056780928349,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.00508125,
+            "direction_A_rmse_m": 103.18597312619579,
+            "potential_residual_A_rmse_m": 85.78864080574719,
+            "potential_explained_A_energy": 0.3087768963308357,
+            "potential_explained_relative_A_energy": 0.25054877790822505,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 10647.34505,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.005047674237916554,
+            "true_S_plus_fitted_A_oracle_mre": 0.006211490915522526,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "short_train_q25": {
+            "n": 40005,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.00912032789927735,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.01937257842769654,
+            "direction_A_rmse_m": 94.32692125125736,
+            "potential_residual_A_rmse_m": 84.6075256605107,
+            "potential_explained_A_energy": 0.19546180036262262,
+            "potential_explained_relative_A_energy": 0.23854954854716393,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 8897.568072740907,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.008279359790121624,
+            "true_S_plus_fitted_A_oracle_mre": 0.011598393775917402,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "high_alpha_ge_20pct": {
+            "n": 813,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.1712294051435161,
+            "asymmetry_median": 0.13935185185185187,
+            "fraction_asymmetry_ge_0.10": 1.0,
+            "direction_A_rmse_m": 496.77289885633894,
+            "potential_residual_A_rmse_m": 382.94842419973065,
+            "potential_explained_A_energy": 0.4057560302936766,
+            "potential_explained_relative_A_energy": 0.40192462806329665,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 246783.31303813038,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.1418621901343373,
+            "true_S_plus_fitted_A_oracle_mre": 0.14077213610290867,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          }
+        },
+        "validation": {
+          "all": {
+            "n": 20000,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.005273274289288072,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.00505,
+            "direction_A_rmse_m": 102.87785901252028,
+            "potential_residual_A_rmse_m": 87.64320539712874,
+            "potential_explained_A_energy": 0.27424059865118877,
+            "potential_explained_relative_A_energy": -0.014140104190685676,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 10583.853875,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.005006983548780729,
+            "true_S_plus_fitted_A_oracle_mre": 0.006410690532550958,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "short_train_q25": {
+            "n": 5017,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.0087127579278044,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.019334263504086107,
+            "direction_A_rmse_m": 94.20520574424921,
+            "potential_residual_A_rmse_m": 89.6783710107584,
+            "potential_explained_A_energy": 0.09379674714385422,
+            "potential_explained_relative_A_energy": -0.12121608708018439,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 8874.620789316325,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.007976516927146064,
+            "true_S_plus_fitted_A_oracle_mre": 0.012145441045122751,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "high_alpha_ge_20pct": {
+            "n": 101,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.16292948406114022,
+            "asymmetry_median": 0.14603960396039603,
+            "fraction_asymmetry_ge_0.10": 1.0,
+            "direction_A_rmse_m": 501.5185997952559,
+            "potential_residual_A_rmse_m": 440.4756467561136,
+            "potential_explained_A_energy": 0.22861761864422803,
+            "potential_explained_relative_A_energy": 0.16424999407918506,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 251520.90594059406,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.13767409139198417,
+            "true_S_plus_fitted_A_oracle_mre": 0.14715428391839488,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          }
+        },
+        "test": {
+          "all": {
+            "n": 20000,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.0052898561612599706,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.0051,
+            "direction_A_rmse_m": 99.83026764213346,
+            "potential_residual_A_rmse_m": 86.95654584217651,
+            "potential_explained_A_energy": 0.24128252118180482,
+            "potential_explained_relative_A_energy": -0.0641973615432534,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 9966.0823375,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.005014036662204632,
+            "true_S_plus_fitted_A_oracle_mre": 0.006548003197039914,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "short_train_q25": {
+            "n": 5061,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.009188425910266737,
+            "asymmetry_median": 0.0,
+            "fraction_asymmetry_ge_0.10": 0.01896858328393598,
+            "direction_A_rmse_m": 91.73768610967016,
+            "potential_residual_A_rmse_m": 87.6850238039804,
+            "potential_explained_A_energy": 0.08640169555935662,
+            "potential_explained_relative_A_energy": -0.17022678091745824,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 8415.803052756371,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.00840957814904939,
+            "true_S_plus_fitted_A_oracle_mre": 0.012837525442151531,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          },
+          "high_alpha_ge_20pct": {
+            "n": 102,
+            "asymmetry_definition": "abs(d_uv-d_vu)/(d_uv+d_vu) = abs(A_uv)/S_uv",
+            "asymmetry_mean": 0.16353927700315185,
+            "asymmetry_median": 0.13842000564340712,
+            "fraction_asymmetry_ge_0.10": 1.0,
+            "direction_A_rmse_m": 468.18324822826435,
+            "potential_residual_A_rmse_m": 396.8088646546611,
+            "potential_explained_A_energy": 0.28165844492967396,
+            "potential_explained_relative_A_energy": 0.047112399176539754,
+            "symmetric_oracle_min_possible_bidirectional_mse_m2": 219195.55392156861,
+            "symmetric_oracle_min_possible_bidirectional_mre": 0.13739842844540648,
+            "true_S_plus_fitted_A_oracle_mre": 0.15711231582265944,
+            "true_S_plus_fitted_A_oracle_negative_rate": 0.0
+          }
+        }
+      },
+      "runtime_seconds": 0.5540272369980812
+    }
+  },
+  "metric_note": "alpha=abs(d_uv-d_vu)/S; alpha>=20% equals rho=abs(d_uv-d_vu)/(d_uv+d_vu)>=10%",
+  "weighting_note": "relative LS minimizes squared A residual divided by max(S,1 metre)^2; this is NOT exact MRE minimization",
+  "oracle_warning": "true S is used for reconstruction; not an attainable deployable-model score",
+  "short_threshold_train_q25_m": 5896.0
+}

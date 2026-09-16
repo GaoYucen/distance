@@ -1,0 +1,22 @@
+{
+  "base_commit": "c4fb4797efbe4485a337cf9ae446e9d28ed14fef",
+  "gnn_bypass": {
+    "gnn_parameters_with_grad": 0,
+    "pairwise_parameters_with_grad": 8,
+    "reproduced": true
+  },
+  "landmark_label_corruption": {
+    "batch_rows": 4,
+    "mismatched_rows": 2,
+    "reproduced": true
+  },
+  "cross_dimension_inversion": {
+    "declared_symmetric_dims": 62,
+    "actual_symmetric_dims": 2,
+    "original_output": -0.046875,
+    "intended_output": 0.046875,
+    "reproduced": true
+  },
+  "test_as_validation_static_check": true,
+  "cross_test_driven_scheduler_static_check": true
+}

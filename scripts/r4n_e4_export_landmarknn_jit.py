@@ -14,6 +14,20 @@ from torch import nn
 
 ROOT=Path(__file__).resolve().parents[1]
 
+def sequential_state_dict(state):
+    """Adapt the saved LandmarkNN wrapper namespace to its inner Sequential namespace only.
+
+    The frozen checkpoint was saved from LandmarkNN, whose weights are keyed as net.0.weight,
+    net.2.weight, ... . This exporter reconstructs only the inner Sequential module, so strip
+    exactly one leading 'net.' when present. Tensor values and model structure are unchanged.
+    """
+    out={}
+    for k,v in state.items():
+        kk=k[4:] if k.startswith('net.') else k
+        if kk in out: raise RuntimeError(f'duplicate state key after namespace normalization: {kk}')
+        out[kk]=v
+    return out
+
 class LandmarkNNEndToEnd(nn.Module):
     def __init__(self,node,coords,input_dim,max_distance,state):
         super().__init__()
@@ -28,7 +42,7 @@ class LandmarkNNEndToEnd(nn.Module):
         self.register_buffer('coord_sd',torch.from_numpy(csd),persistent=True)
         self.max_distance=float(max_distance)
         self.net=nn.Sequential(nn.Linear(input_dim,1024),nn.ReLU(),nn.Linear(1024,512),nn.ReLU(),nn.Linear(512,1))
-        self.net.load_state_dict(state)
+        self.net.load_state_dict(sequential_state_dict(state))
 
     def forward(self,src:torch.Tensor,dst:torch.Tensor)->torch.Tensor:
         u=src.long(); v=dst.long()
@@ -67,10 +81,10 @@ def main():
     z=np.load(args.data); coords=np.asarray(z['coordinates'],dtype=np.float32)
     if len(node)!=len(coords): raise RuntimeError((node.shape,coords.shape))
     if 'landmarks' in ck and 'landmarks' in iz and not np.array_equal(np.asarray(ck['landmarks']),np.asarray(iz['landmarks'])): raise RuntimeError('landmarks mismatch')
-    input_dim=int(ck['input_dim']); maxd=float(ck['max_distance'])
+    input_dim=int(ck['input_dim']); maxd=float(ck['max_distance']); seq_state=sequential_state_dict(ck['state_dict'])
     mod=LandmarkNNEndToEnd(node,coords,input_dim,maxd,ck['state_dict']).eval()
     pairs=np.asarray(z['validation'][:4096,:2],dtype=np.int64); X=numpy_features(node,coords,pairs)
-    refnet=nn.Sequential(nn.Linear(input_dim,1024),nn.ReLU(),nn.Linear(1024,512),nn.ReLU(),nn.Linear(512,1)); refnet.load_state_dict(ck['state_dict']); refnet.eval()
+    refnet=nn.Sequential(nn.Linear(input_dim,1024),nn.ReLU(),nn.Linear(1024,512),nn.ReLU(),nn.Linear(512,1)); refnet.load_state_dict(seq_state); refnet.eval()
     with torch.no_grad():
         ref=(refnet(torch.from_numpy(X)).squeeze(1)*maxd).numpy()
         pred=mod(torch.from_numpy(pairs[:,0]),torch.from_numpy(pairs[:,1])).numpy()
